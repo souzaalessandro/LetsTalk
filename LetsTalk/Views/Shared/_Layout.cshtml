@@ -376,9 +376,6 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END PAGE CONTENT -->
     </div>
     <!-- END PAGE CONTAINER -->
-
-
-
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
     <script src="~/assets/global/plugins/respond.min.js"></script>
@@ -399,21 +396,12 @@ License: You must have a valid license purchased only from themeforest(the above
     @RenderSection("PageLevelPlugins", false)
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    @RenderSection("PageLevelScripts", false)
-    <!-- END PAGE LEVEL SCRIPTS -->
-
     <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
-
-    @*<script>
-        jQuery(document).ready(function () {
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features
-        });
-    </script>*@
-
+    @RenderSection("PageLevelScripts", false)
+    <!-- END PAGE LEVEL SCRIPTS -->
+    @RenderSection("JqueryFinal", true)
     <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

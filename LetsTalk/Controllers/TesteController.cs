@@ -4,15 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MexendoNoTemplate.Controllers
+namespace LetsTalk.Controllers
 {
-    public class HomeController : Controller
+    public class TesteController : Controller
     {
+        // GET: Teste
         public ActionResult Index()
         {
             return View();
         }
-
-       
     }
 }

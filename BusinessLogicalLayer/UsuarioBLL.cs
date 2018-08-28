@@ -14,7 +14,9 @@ namespace BusinessLogicalLayer
         public BLLResponse<Usuario> Insert(Usuario item)
         {
             //Fazer validações
+            item.Nome = FormatarNome(item.Nome);
 
+            //
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
             using (LTContext ctx = new LTContext())
             {
@@ -24,6 +26,17 @@ namespace BusinessLogicalLayer
             response.Sucesso = true;
             response.Mensagem = "Cadastrado com sucesso.";
             return response;
+        }
+
+        public string FormatarNome(string nome)
+        {
+            string lower = nome.ToLower();
+            string[] nomes = lower.Split(' ');
+            for (int i = 0; i < nomes.Length; i++)
+            {
+                nomes[i] = nomes[i].Substring(0, 1).ToUpper() + nomes[i].Substring(1);
+            }
+            return nome;
         }
 
         public BLLResponse<Usuario> Update(Usuario item)

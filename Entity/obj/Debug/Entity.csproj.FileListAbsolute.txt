@@ -4,3 +4,9 @@ C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.csprojResolveAs
 C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
 C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.dll
 C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.pdb
+C:\Users\muka_\Source\Repos\LetsTalk\Entity\bin\Debug\Entity.dll
+C:\Users\muka_\Source\Repos\LetsTalk\Entity\bin\Debug\Entity.pdb
+C:\Users\muka_\Source\Repos\LetsTalk\Entity\obj\Debug\Entity.csprojAssemblyReference.cache
+C:\Users\muka_\Source\Repos\LetsTalk\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+C:\Users\muka_\Source\Repos\LetsTalk\Entity\obj\Debug\Entity.dll
+C:\Users\muka_\Source\Repos\LetsTalk\Entity\obj\Debug\Entity.pdb

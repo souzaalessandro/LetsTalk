@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using DataAccessObject;
+using Entity;
 using Entity.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,42 @@ namespace BusinessLogicalLayer
     {
         public BLLResponse<Tag> Delete(Tag item)
         {
-            throw new NotImplementedException();
+           
+            BLLResponse<Tag> response = new BLLResponse<Tag>();
+            using (LTContext ctx = new LTContext())
+            {
+                ctx.Tags.Remove(item);
+                ctx.SaveChanges();
+            }
+            response.Sucesso = true;
+            return response;
+
         }
 
         public BLLResponse<Tag> Insert(Tag item)
         {
-            throw new NotImplementedException();
+
+            BLLResponse<Tag> response = new BLLResponse<Tag>();
+            using (LTContext ctx = new LTContext())
+            {
+                ctx.Tags.Add(item);
+                ctx.SaveChanges();
+            }
+            response.Sucesso = true;
+            return response;
         }
 
         public BLLResponse<Tag> LerPorId(Tag item)
         {
-            throw new NotImplementedException();
+            BLLResponse<Tag> response = new BLLResponse<Tag>();
+            Tag tag = new Tag();
+            using (LTContext ctx = new LTContext())
+            {
+                tag = ctx.Tags.FirstOrDefault(u => u.ID == item.ID);
+            }
+            response.Sucesso = tag != null;
+            response.Data = tag;
+            return response;
         }
 
         public BLLResponse<Tag> LerTodos()

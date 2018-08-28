@@ -1,0 +1,17 @@
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\BusinessLogicalLayer.dll
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\BusinessLogicalLayer.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.csprojResolveAssemblyReference.cache
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.csproj.CoreCompileInputs.cache
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.dll
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\BusinessLogicalLayer.dll.config
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\DataAccessObject.dll
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\Entity.dll
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\EntityFramework.dll
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\DataAccessObject.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\DataAccessObject.dll.config
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\Entity.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\EntityFramework.xml
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\leofo_000\source\repos\LetsTalk\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.csproj.CopyComplete

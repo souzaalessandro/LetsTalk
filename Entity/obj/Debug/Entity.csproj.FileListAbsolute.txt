@@ -1,0 +1,6 @@
+C:\Users\leofo_000\source\repos\LetsTalk\Entity\bin\Debug\Entity.dll
+C:\Users\leofo_000\source\repos\LetsTalk\Entity\bin\Debug\Entity.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.dll
+C:\Users\leofo_000\source\repos\LetsTalk\Entity\obj\Debug\Entity.pdb

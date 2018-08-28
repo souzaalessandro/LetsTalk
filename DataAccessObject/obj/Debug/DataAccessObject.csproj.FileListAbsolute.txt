@@ -12,3 +12,17 @@ C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessOb
 C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.pdb
 C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\bin\Debug\Entity.dll
 C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\bin\Debug\Entity.pdb
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\DataAccessObject.dll.config
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\DataAccessObject.dll
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\DataAccessObject.pdb
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\Entity.dll
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\EntityFramework.dll
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\Entity.pdb
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\EntityFramework.xml
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.csprojAssemblyReference.cache
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.csproj.CoreCompileInputs.cache
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.csproj.CopyComplete
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.dll
+C:\Users\muka_\Source\Repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.pdb

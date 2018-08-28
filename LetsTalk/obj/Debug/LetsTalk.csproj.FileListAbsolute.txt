@@ -94,3 +94,8 @@ C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\Entity.dll
 C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\BusinessLogicalLayer.pdb
 C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\BusinessLogicalLayer.dll.config
 C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\Entity.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\DataAccessObject.dll
+C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\EntityFramework.dll
+C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\DataAccessObject.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\DataAccessObject.dll.config
+C:\Users\leofo_000\source\repos\LetsTalk\LetsTalk\bin\EntityFramework.xml

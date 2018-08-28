@@ -42,5 +42,13 @@ namespace LetsTalk.Tests
 
             Assert.AreEqual("Fulano Dos Santos", formatado);
         }
+
+        [Test]
+        public void DeveAcertarNomeCompostoMinuscula()
+        {
+            string formatado = _util.FormatarNome("FULANO DOS SANTOS");
+
+            Assert.AreEqual("Fulano Dos Santos", formatado);
+        }
     }
 }

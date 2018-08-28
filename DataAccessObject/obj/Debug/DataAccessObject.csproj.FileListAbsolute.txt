@@ -12,3 +12,5 @@ C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessOb
 C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.pdb
 C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\bin\Debug\Entity.dll
 C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\bin\Debug\Entity.pdb
+C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.Migrations.Primeira.resources
+C:\Users\leofo_000\source\repos\LetsTalk\DataAccessObject\obj\Debug\DataAccessObject.csproj.GenerateResource.cache

@@ -15,6 +15,8 @@ namespace BusinessLogicalLayer
         {
             //Fazer validações
             item.Nome = FormatarNome(item.Nome);
+            item.Sobrenome = FormatarNome(item.Sobrenome);
+
 
             //
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();

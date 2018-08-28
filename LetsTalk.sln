@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessObject", "DataAcc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{7B29194D-7577-412C-A5C3-116C20E4D0AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsTalk.Tests", "LetsTalk.Tests\LetsTalk.Tests.csproj", "{301C5E9F-B6D8-4D9F-ACFC-6F047442F1A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7B29194D-7577-412C-A5C3-116C20E4D0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B29194D-7577-412C-A5C3-116C20E4D0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B29194D-7577-412C-A5C3-116C20E4D0AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{301C5E9F-B6D8-4D9F-ACFC-6F047442F1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{301C5E9F-B6D8-4D9F-ACFC-6F047442F1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{301C5E9F-B6D8-4D9F-ACFC-6F047442F1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{301C5E9F-B6D8-4D9F-ACFC-6F047442F1A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

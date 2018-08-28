@@ -10,6 +10,10 @@ namespace DataAccessObject
 {
     public class LTContext : DbContext
     {
+        public LTContext() : base("LTContext")
+        {
+        }
+
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Diretorio> Diretorios { get; set; }
         public DbSet<Tag> Tags { get; set; }

@@ -15,9 +15,8 @@ namespace Entity
         public DateTime DataNascimento { get; set; }
         public Genero Genero { get; set; }
         public string Email { get; set; }
-        public string Senha { get; set; }
-        public string Hash { get; set; }
-        public string Salt { get; set; }
+        public byte[] Hash { get; set; }
+        public byte[] Salt { get; set; }
         public string FraseApresentacao { get; set; }
         public string Descricao { get; set; }
         public List<Tag> Tags { get; set; }

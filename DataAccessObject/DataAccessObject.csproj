@@ -48,6 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LTContext.cs" />
+    <Compile Include="Migrations\201808281942266_Primeira.cs" />
+    <Compile Include="Migrations\201808281942266_Primeira.Designer.cs">
+      <DependentUpon>201808281942266_Primeira.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +64,11 @@
       <Project>{7b29194d-7577-412c-a5c3-116c20e4d0ab}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808281942266_Primeira.resx">
+      <DependentUpon>201808281942266_Primeira.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

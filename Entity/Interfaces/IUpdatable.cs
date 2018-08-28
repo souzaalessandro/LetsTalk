@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity
+namespace Entity.Interfaces
 {
-    public enum Genero
+    public interface IUpdatable<T> where T : class
     {
-        Masculino, Feminino, Indeterminado
+        BLLResponse<T> Update(T item);
     }
 }

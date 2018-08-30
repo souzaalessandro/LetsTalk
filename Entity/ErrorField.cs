@@ -8,7 +8,14 @@ namespace Entity
 {
     public class ErrorField
     {
+
         public string FieldName { get; set; }
         public string Message { get; set; }
+
+        public ErrorField(string fieldName, string message)
+        {
+            FieldName = fieldName;
+            Message = message;
+        }
     }
 }

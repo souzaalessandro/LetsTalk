@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessObject;
 using Entity;
+using Entity.Extensions;
 using Entity.Interfaces;
 
 namespace BusinessLogicalLayer
@@ -92,6 +93,18 @@ namespace BusinessLogicalLayer
                 response.DataList = ctx.Usuarios.ToList();
             }
             return response;
+        }
+
+        public List<ErrorField> ValidarUsuario(Usuario item) 
+        {
+            List<ErrorField> errors = new List<ErrorField>();
+
+            if (item.Nome.IsNullOrWhiteSpace()) //checa se é nulo ou branco
+            {
+                errors.Add(new ErrorField(nameof(item.Nome), Utilities.MensagemParaCampoNulo(nameof(item.Nome))));
+            }
+
+            return errors;
         }
     }
 }

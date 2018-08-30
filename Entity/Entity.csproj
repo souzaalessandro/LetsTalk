@@ -45,6 +45,7 @@
     <Compile Include="Diretorio.cs" />
     <Compile Include="Enums\Genero.cs" />
     <Compile Include="ErrorField.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\IDeletable.cs" />
     <Compile Include="Interfaces\IInsertable.cs" />
     <Compile Include="Interfaces\ISearchable.cs" />

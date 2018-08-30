@@ -19,6 +19,11 @@ namespace Entity
             nome = String.Join(" ", nomes);
             return nome;
         }
+
+        public static string MensagemParaCampoNulo(string nomeCampo)
+        {
+            return $"{nomeCampo} deve ser informado.";
+        }
     }
 
 }

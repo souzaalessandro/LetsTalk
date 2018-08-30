@@ -16,12 +16,13 @@ namespace LetsTalk.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("RegistrarNovo")]
         public ActionResult Registrar(Usuario usuario)
         {
             //validar
             //se der certo, redirecionar para alguma página
             ModelState.AddModelError("FieldName", "Message");
+            
             //se não
 
 

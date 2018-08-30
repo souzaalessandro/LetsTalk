@@ -3992,6 +3992,7 @@
     <Content Include="Views\Teste\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Registrar\Index.cshtml" />
+    <Content Include="Views\Shared\_BodyHeader.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

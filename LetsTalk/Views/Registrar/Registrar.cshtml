@@ -26,24 +26,24 @@
                 <div class="form-body">
                     <div class="form-group">
                         <label class="control-label">Nome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu nome">
+                        <input type="text" class="form-control" placeholder="Digite seu nome" name="usuario.Nome">
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Sobrenome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu sobrenome">
+                        <input type="text" class="form-control" placeholder="Digite seu sobrenome" name="usuario.Sobrenome">
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label class="control-label">Data de Nascimento</label>
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" name="usuario.DataNascimento">
                         </div>
 
                         <div class="form-group col-md-4">
                             <div class="" style="float: none; padding: unset;">
                                 <label class="control-label">Gênero</label>
-                                <select class="bs-select form-control" style="display: block;">
+                                <select class="bs-select form-control" style="display: block;" name="usuario.Genero">
                                     <option>Feminino</option>
                                     <option>Indefinido</option>
                                     <option>Masculino</option>
@@ -59,19 +59,19 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="email" class="form-control" placeholder="Digite seu E-mail">
+                            <input type="email" class="form-control" placeholder="Digite seu E-mail" name="usuario.Email">
                         </div>
                     </div>
-
+                    @*string senha, string senhaRepetida*@
                     <div class="form-group">
                         <div class="form-group">
-                            <label class="control-label">Frase de Apresentação</label>
-                            <input type="text" class="form-control" placeholder="Digite sua frase">
+                            <label class="control-label">Senha</label>                              
+                            <input type="text" class="form-control" placeholder="Digite sua senha" name="">
                         </div>
 
                         <div class="form-group" style="float: none">
-                            <label class="control-label">Nome</label>
-                            <input type="text" class="form-control" placeholder="Digite seu nome">
+                            <label class="control-label">Confirmar Senha</label>
+                            <input type="text" class="form-control" placeholder="Confirme sua senha" name="">
                         </div>
 
                         <div class="form-actions right">

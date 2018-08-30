@@ -24,6 +24,20 @@ namespace Entity
         {
             return $"{nomeCampo} deve ser informado.";
         }
+
+        public static string  MensagemParaMaxChars(string nomeCampo, byte maxChars)
+        {
+            return $"{nomeCampo} deve conter no máximo {maxChars} caracteres.";
+        }
+
+        public static string MensagemParaMinChars(string nomeCampo, byte minChars)
+        {
+            return $"{nomeCampo} deve conter no mínimo {minChars} caracteres.";
+        }
+        public static string MensagemParaMenor18 (string nomeCampo, byte MinIdade)
+        {
+            return  $"{nomeCampo} deve de ser no mínimo {MinIdade} anos. ";
+        }
     }
 
 }

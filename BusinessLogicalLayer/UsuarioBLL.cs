@@ -95,16 +95,83 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        public List<ErrorField> ValidarUsuario(Usuario item) 
+
+        public List<ErrorField> ValidarUsuario(Usuario item)
         {
+            ///////////////////////////////////////////////////////////////////////////
             List<ErrorField> errors = new List<ErrorField>();
 
-            if (item.Nome.IsNullOrWhiteSpace()) //checa se é nulo ou branco
+            byte MaxCharsInNome = 20;
+            byte MinCharsInNome = 3;
+
+            //Nulo ou espaço em branco
+            if (item.Nome.IsNullOrWhiteSpace())
             {
-                errors.Add(new ErrorField(nameof(item.Nome), Utilities.MensagemParaCampoNulo(nameof(item.Nome))));
+                errors.Add(new ErrorField(nameof(item.Nome),
+                    Utilities.MensagemParaCampoNulo(nameof(item.Nome))));
             }
+            //Máximo de caracteres
+            else if (item.Nome.Length > MaxCharsInNome)
+            {
+                errors.Add(new ErrorField(nameof(item.Nome),
+                    Utilities.MensagemParaMaxChars(nameof(item.Nome), MaxCharsInNome)));
+            }
+            //Mínimo de caracteres
+            else if (item.Nome.Length < MinCharsInNome)
+            {
+                errors.Add(new ErrorField(nameof(item.Nome),
+                    Utilities.MensagemParaMinChars(nameof(item.Nome), MinCharsInNome)));
+            }
+            ///////////////////////////////////////////////////////////////////////////
+
+            byte MaxCharsInSobrenome = 25;
+            byte MinCharsInSobrenome = 3;
+
+            //Nulo ou espaço em branco
+            if (item.Sobrenome.IsNullOrWhiteSpace())
+            {
+                errors.Add(new ErrorField(nameof(item.Sobrenome),
+                    Utilities.MensagemParaCampoNulo(nameof(item.Sobrenome))));
+            }
+            //Máximo de caracteres
+            else if (item.Sobrenome.Length > MaxCharsInSobrenome)
+            {
+                errors.Add(new ErrorField(nameof(item.Sobrenome),
+                    Utilities.MensagemParaMaxChars(nameof(item.Sobrenome), MaxCharsInSobrenome)));
+            }
+            //Mínimo de caracteres
+            else if (item.Sobrenome.Length < MinCharsInSobrenome)
+            {
+                errors.Add(new ErrorField(nameof(item.Sobrenome),
+                    Utilities.MensagemParaMinChars(nameof(item.Sobrenome), MinCharsInSobrenome)));
+            }
+            ///////////////////////////////////////////////////////////////////////////
+
+            // Requisitos de idade mínima e máxima
+            byte MinIdade = 18;
+            byte MaxIdade = 60;
+
+            bool EhMenorIdade = (DateTime.Now - item.DataNascimento).TotalDays / 365 <= 18;
+            
+            //Testar a verificação IsNullOrWhiteSpace
+
+            if (item.DataNascimento.ToString().IsNullOrWhiteSpace())
+            {
+                errors.Add(new ErrorField(nameof(item.Sobrenome),
+                    Utilities.MensagemParaCampoNulo(nameof(item.Sobrenome))));
+            }
+            if (EhMenorIdade)
+            {
+                errors.Add(new ErrorField(nameof(item.DataNascimento),
+                     Utilities.MensagemParaMenor18(nameof(item.DataNascimento), MinIdade)));
+            }
+            //Lembrete para começar a validação de Idade Maxima (ninguém quer velho no site néh)
+
+
 
             return errors;
         }
+
+
     }
 }

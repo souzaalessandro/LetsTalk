@@ -12,5 +12,6 @@ namespace Entity
         public List<T> DataList { get; set; }
         public T Data { get; set; }
         public string Mensagem { get; set; }
+        public List<ErrorField> Erros { get; set; }
     }
 }

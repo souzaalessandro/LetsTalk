@@ -4,9 +4,12 @@
 }
 
 
-
 @section PageLevelPluginStyles{
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/jquery-multi-select/css/multi-select.css" />
 }
 
 <div class="col-md-offset-3 col-md-6">
@@ -17,30 +20,33 @@
                 <div class="form-body">
                     <div class="form-group">
                         <label class="control-label">Nome</label>
-                        <input type="text" class="form-control" placeholder="Enter text">
-                        <span class="help-block">
-                            A block of help text.
-                        </span>
+                        <input type="text" class="form-control" placeholder="Digite seu nome">
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Sobrenome</label>
-                        <input type="text" class="form-control" placeholder="Enter text">
-                        <span class="help-block">
-                            A block of help text.
-                        </span>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Default Datepicker</label>
-                            <div class="col-md-3">
-                                <input class="form-control form-control-inline input-medium date-picker" size="16" type="text" value="">
-                                <span class="help-block">
-                                    Select date
-                                </span>
-                            </div>
-                        </div>
-
+                        <input type="text" class="form-control" placeholder="Digite seu sobrenome">
                     </div>
+
+                    <div class="row">
+                    <div class="form-group col-md-8">
+                        <label class="control-label">Data de Nascimento</label>
+                        <input type="datetime-local" class="form-control" placeholder="Digite seu sobrenome">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <div class="" style="float: none; padding: unset;">
+                            <label class="control-label">Gênero</label>
+                            <select class="bs-select form-control" style="display: block;">
+                                <option>Feminino</option>
+                                <option>Indefinido</option>
+                                <option>Masculino</option>
+                                <option>Outro...</option>
+                            </select>
+                        </div>
+                    </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="control-label">Email Address</label>
                         <div class="input-group">
@@ -50,45 +56,13 @@
                             <input type="email" class="form-control" placeholder="Email Address">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Password">
-                            <span class="input-group-addon">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </div>
+
+                    <div class="form-actions right">
+                        <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
+                            Entrar &thinsp;
+                            <i class="icon-login"></i>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Left Icon</label>
-                        <div class="input-icon">
-                            <i class="fa fa-bell-o"></i>
-                            <input type="text" class="form-control" placeholder="Left icon">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Right Icon</label>
-                        <div class="input-icon right">
-                            <i class="fa fa-microphone"></i>
-                            <input type="text" class="form-control" placeholder="Right icon">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Input With Spinner</label>
-                        <input type="password" class="form-control spinner" placeholder="Password">
-                    </div>
-                    <div class="form-group last">
-                        <label class="control-label">Static Control</label>
-                        <p class="form-control-static">
-                            email@example.com
-                        </p>
-                    </div>
-                </div>
-                <div class="form-actions right">
-                    <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
-                        Entrar &thinsp;
-                        <i class="icon-login"></i>
-                    </button>
                 </div>
             </form>
             <!-- END FORM-->
@@ -100,12 +74,21 @@
 @section  PageLevelPlugins
 {
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
+
+    <script type="text/javascript" src="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 }
 @section PageLevelScripts {
     <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/admin/pages/scripts/form-samples.js"></script>
+
+    <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
+    <script src="~/assets/admin/pages/scripts/components-dropdowns.js"></script>
 }
 @section JqueryFinal{
     <script>
@@ -115,6 +98,15 @@
             Layout.init(); // init current layout
             Demo.init(); // init demo features
             FormSamples.init();
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features
+            ComponentsDropdowns.init();
         });
     </script>
 }

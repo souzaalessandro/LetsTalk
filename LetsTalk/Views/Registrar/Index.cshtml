@@ -3,7 +3,6 @@
     ViewBag.MostrarBarrinha = true;
 }
 
-
 @section PageLevelPluginStyles{
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
 
@@ -29,33 +28,50 @@
 
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
-            <form action="@Url.Action("RegistrarNovo", "Registrar")" method="post" role="form">
+            <form action="@Url.Action("Registrar", "Registrar")" method="post" role="form">
                 <div class="form-body">
                     <div class="form-group">
                         <label>Nome</label>
                         <input type="text" class="form-control" placeholder="Digite seu nome" name="usuario.Nome">
+                        @if (ViewData.ModelState.ContainsKey("Nome"))
+                        {
+                            <span class="font-red-thunderbird"> @ViewData.ModelState["Nome"].Errors[0].ErrorMessage</span>
+                        }
                     </div>
 
                     <div class="form-group">
                         <label>Sobrenome</label>
                         <input type="text" class="form-control" placeholder="Digite seu sobrenome" name="usuario.Sobrenome">
+                        @if (ViewData.ModelState.ContainsKey("Sobrenome"))
+                        {
+                            <span class="font-red-thunderbird"> @ViewData.ModelState["Sobrenome"].Errors[0].ErrorMessage</span>
+                        }
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label>Data de Nascimento</label>
                             <input type="date" class="form-control" name="usuario.DataNascimento">
+                            @if (ViewData.ModelState.ContainsKey("DataNascimento"))
+                            {
+                                <span class="font-red-thunderbird"> @ViewData.ModelState["DataNascimento"].Errors[0].ErrorMessage</span>
+                            }
                         </div>
-
                         <div class="form-group col-md-4">
                             <div class="" style="float: none; padding: unset;">
                                 <label>Gênero</label>
                                 <select class="bs-select form-control" style="display: block;" name="usuario.Genero">
-                                    <option>Feminino</option>
-                                    <option>Indefinido</option>
-                                    <option>Masculino</option>
-                                    <option>Outro...</option>
+                                    @foreach (var item in (Entity.Enums.Genero[])Enum.GetValues(typeof(Entity.Enums.Genero)))
+                                    {
+                                        int val = (int)item;
+                                        <option value="@val">@Enum.GetName(item.GetType(), item)</option>
+                                    }
                                 </select>
+
+                                @if (ViewData.ModelState.ContainsKey("Genero"))
+                                {
+                                    <span class="font-red-thunderbird"> @ViewData.ModelState["Genero"].Errors[0].ErrorMessage</span>
+                                }
                             </div>
                         </div>
                     </div>
@@ -67,22 +83,27 @@
                                 <i class="fa fa-envelope"></i>
                             </span>
                             <input type="email" class="form-control" placeholder="Digite seu E-mail" name="usuario.Email">
-                            @Html.ValidationMessage("Email")
+                            @if (ViewData.ModelState.ContainsKey("Email"))
+                            {
+                                <span class="font-red-thunderbird"> @ViewData.ModelState["Email"].Errors[0].ErrorMessage</span>
+                            }
                         </div>
                     </div>
 
-                    @*string senha, string senhaRepetida*@
                     <div class="form-group">
                         <div class="form-group">
                             <label>Senha</label>
-                            <input type="password" class="form-control" placeholder="Digite sua senha" name="">
+                            <input type="password" class="form-control" placeholder="Digite sua senha" name="senha">
                         </div>
 
                         <div class="form-group" style="float: none">
                             <label>Confirmar Senha</label>
-                            <input type="password" class="form-control" placeholder="Confirme sua senha" name="">
+                            <input type="password" class="form-control" placeholder="Confirme sua senha" name="senhaRepetida">
                         </div>
-
+                        @if (ViewData.ModelState.ContainsKey("SenhasDiferentes"))
+                        {
+                            <span class="font-red-thunderbird"> @ViewData.ModelState["SenhasDiferentes"].Errors[0].ErrorMessage</span>
+                        }
                     </div>
                 </div>
                 <div class="form-actions">
@@ -101,11 +122,9 @@
 @section  PageLevelPlugins
 {
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
-
     <script type="text/javascript" src="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
-
     <script type="text/javascript" src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
@@ -116,6 +135,7 @@
     <script type="text/javascript" src="~/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>
 }
+
 @section PageLevelScripts {
     <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
@@ -125,7 +145,6 @@
     <script src="~/assets/admin/pages/scripts/form-validation.js"></script>
 }
 @section JqueryFinal{
-
     <script>
         jQuery(document).ready(function () {
             // initiate layout and plugins
@@ -135,7 +154,6 @@
             FormSamples.init();
             ComponentsDropdowns.init();
             FormValidation.init();
-
         });
     </script>
 }

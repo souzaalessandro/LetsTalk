@@ -13,11 +13,7 @@ namespace LetsTalk
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Registrar",
-                url: "Registrar",
-                defaults: new { controller = "Registrar", action = "Registrar" }
-            );
+            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "Default",

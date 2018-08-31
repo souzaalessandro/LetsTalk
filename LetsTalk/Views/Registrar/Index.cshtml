@@ -29,6 +29,7 @@
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
             <form action="@Url.Action("Registrar", "Registrar")" method="post" role="form">
+                @Html.AntiForgeryToken()
                 <div class="form-body">
                     <div class="form-group">
                         <label>Nome</label>

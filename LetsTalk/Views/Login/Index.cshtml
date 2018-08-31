@@ -14,6 +14,7 @@
 
         <div class="portlet-body form">
             <form action="@Url.Action("algumacoisa", "algumacoisa")" method="post" role="form">
+                @Html.AntiForgeryToken()
                 <div class="form-body">
                     <div class="form-group">
                         <label>Email</label>

@@ -21,7 +21,7 @@ namespace LetsTalk.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Registrar(Usuario usuario, string senha, string senhaRepetida)
         {
             if (senha == senhaRepetida)

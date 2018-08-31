@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessObject;
 using Entity;
+using Entity.Enums;
 using Entity.Extensions;
 using Entity.Interfaces;
 
@@ -138,27 +139,36 @@ namespace BusinessLogicalLayer
 
             // Requisitos de idade mínima e máxima
             byte MinIdade = 18;
-            byte MaxIdade = 60;
+            byte MaxIdade = 80;
 
-            bool EhMenorIdade = (DateTime.Now - item.DataNascimento).TotalDays / 365 <= 18;
-            
+            bool EhMenorIdade = (DateTime.Now - item.DataNascimento).TotalDays / 365 <= MinIdade;
+            bool IdadeExcedida = (DateTime.Now - item.DataNascimento).TotalDays / 365 > MaxIdade;
+
             //Testar a verificação IsNullOrWhiteSpace
 
-            if (item.DataNascimento.ToString().IsNullOrWhiteSpace())
+            if (item.DataNascimento == DateTime.MinValue)
             {
-                errors.Add(new ErrorField(nameof(item.Sobrenome),
-                    Utilities.MensagemParaCampoNulo(nameof(item.Sobrenome))));
+                errors.Add(new ErrorField(nameof(item.DataNascimento),
+                    Utilities.MensagemParaCampoNulo(nameof(item.DataNascimento))));
             }
-            if (EhMenorIdade)
+            else if (EhMenorIdade)
             {
                 errors.Add(new ErrorField(nameof(item.DataNascimento),
                      Utilities.MensagemParaMenor18(nameof(item.DataNascimento), MinIdade)));
             }
-            //Lembrete para começar a validação de Idade Maxima (ninguém quer velho no site néh)
+            else if (IdadeExcedida)
+            {
+                errors.Add(new ErrorField(nameof(item.DataNascimento),
+                     Utilities.MensagemParaIdadeExcedida(nameof(item.DataNascimento), MaxIdade)));
+            }
 
+            //Verificar se o cara não injetou um novo gênero
 
+            Array todosEnuns = Enum.GetValues(typeof(Genero));
 
+            Genero generoEscolhido = item.Genero;
             return errors;
+
         }
 
 

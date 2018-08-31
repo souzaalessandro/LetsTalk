@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entity.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,16 @@ namespace Entity
         {
             return  $"{nomeCampo} deve de ser no mínimo {MinIdade} anos. ";
         }
+        public static string MensagemParaIdadeExcedida(string nomeCampo, byte MaxIdade)
+        {
+            return $"{nomeCampo} pode ser no máximo {MaxIdade} anos. ";
+        }
+        public static string MensagemParaEnumInvalido(string nomeCampo)
+        {
+            return $"{nomeCampo} deve de ser algum valor do campo selecionado. ";
+        }
+        
+
     }
 
 }

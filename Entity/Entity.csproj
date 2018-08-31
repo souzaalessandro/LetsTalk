@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLResponse.cs" />
-    <Compile Include="ClonerExtension.cs" />
+    <Compile Include="Extensions\ClonerExtension.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="Enums\Genero.cs" />
     <Compile Include="ErrorField.cs" />

@@ -10,60 +10,86 @@
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/jquery-multi-select/css/multi-select.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-datepicker/css/datepicker.css" />
 }
 
 
 <div class="col-md-offset-3 col-md-6">
-    <div class="portlet box purple">
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-share font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Cadastro</span>
+            </div>
+        </div>
+
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
-            <form action="@Url.Action("RegistrarNovo", "Registrar")" method="post">
+            <form action="@Url.Action("RegistrarNovo", "Registrar")" method="post" role="form">
                 <div class="form-body">
                     <div class="form-group">
-                        <label class="control-label">Nome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu nome">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" placeholder="Digite seu nome" name="usuario.Nome">
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Sobrenome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu sobrenome">
+                        <label>Sobrenome</label>
+                        <input type="text" class="form-control" placeholder="Digite seu sobrenome" name="usuario.Sobrenome">
                     </div>
 
                     <div class="row">
-                    <div class="form-group col-md-8">
-                        <label class="control-label">Data de Nascimento</label>
-                        <input type="datetime-local" class="form-control" placeholder="Digite seu sobrenome">
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <div class="" style="float: none; padding: unset;">
-                            <label class="control-label">Gênero</label>
-                            <select class="bs-select form-control" style="display: block;">
-                                <option>Feminino</option>
-                                <option>Indefinido</option>
-                                <option>Masculino</option>
-                                <option>Outro...</option>
-                            </select>
+                        <div class="form-group col-md-8">
+                            <label>Data de Nascimento</label>
+                            <input type="date" class="form-control" name="usuario.DataNascimento">
                         </div>
-                    </div>
+
+                        <div class="form-group col-md-4">
+                            <div class="" style="float: none; padding: unset;">
+                                <label>Gênero</label>
+                                <select class="bs-select form-control" style="display: block;" name="usuario.Genero">
+                                    <option>Feminino</option>
+                                    <option>Indefinido</option>
+                                    <option>Masculino</option>
+                                    <option>Outro...</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Email Address</label>
+                        <label>E-mail</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="email" class="form-control" placeholder="Email Address">
+                            <input type="email" class="form-control" placeholder="Digite seu E-mail" name="usuario.Email">
+                            @Html.ValidationMessage("Email")
                         </div>
                     </div>
 
-                    <div class="form-actions right">
-                        <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
-                            Entrar &thinsp;
-                            <i class="icon-login"></i>
-                        </button>
+                    @*string senha, string senhaRepetida*@
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-control" placeholder="Digite sua senha" name="">
+                        </div>
+
+                        <div class="form-group" style="float: none">
+                            <label>Confirmar Senha</label>
+                            <input type="password" class="form-control" placeholder="Confirme sua senha" name="">
+                        </div>
+
                     </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
+                        Entrar &thinsp;
+                        <i class="icon-login"></i>
+                    </button>
                 </div>
             </form>
             <!-- END FORM-->
@@ -79,19 +105,27 @@
     <script type="text/javascript" src="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+
+    <script type="text/javascript" src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>
 }
 @section PageLevelScripts {
     <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/admin/pages/scripts/form-samples.js"></script>
-
-    <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
-    <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
-    <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/admin/pages/scripts/components-dropdowns.js"></script>
+    <script src="~/assets/admin/pages/scripts/form-validation.js"></script>
 }
 @section JqueryFinal{
+
     <script>
         jQuery(document).ready(function () {
             // initiate layout and plugins
@@ -100,15 +134,8 @@
             Demo.init(); // init demo features
             FormSamples.init();
             ComponentsDropdowns.init();
+            FormValidation.init();
+
         });
     </script>
-    @*<script>
-        jQuery(document).ready(function () {
-            // initiate layout and plugins
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features
-            ComponentsDropdowns.init();
-        });
-    </script>*@
 }

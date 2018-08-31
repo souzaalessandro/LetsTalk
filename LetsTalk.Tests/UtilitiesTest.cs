@@ -11,18 +11,12 @@ namespace LetsTalk.Tests
     [TestFixture]
     public class UtilitiesTest
     {
-        private Utilities _util;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _util = new Utilities();
-        }
+    
 
         [Test]
         public void DeveAcertarNomeMaiuscula()
         {
-            string formatado =  _util.FormatarNome("FULANO");
+            string formatado = Utilities.FormatarNome("FULANO");
 
             Assert.AreEqual("Fulano", formatado);
         }
@@ -30,7 +24,7 @@ namespace LetsTalk.Tests
         [Test]
         public void DeveAcertarNomeMinuscula()
         {
-            string formatado = _util.FormatarNome("fulano");
+            string formatado = Utilities.FormatarNome("fulano");
 
             Assert.AreEqual("Fulano", formatado);
         }
@@ -38,7 +32,7 @@ namespace LetsTalk.Tests
         [Test]
         public void DeveAcertarNomeCompostoMaiuscula()
         {
-            string formatado = _util.FormatarNome("FULANO DOS SANTOS");
+            string formatado = Utilities.FormatarNome("FULANO DOS SANTOS");
 
             Assert.AreEqual("Fulano Dos Santos", formatado);
         }
@@ -46,7 +40,7 @@ namespace LetsTalk.Tests
         [Test]
         public void DeveAcertarNomeCompostoMinuscula()
         {
-            string formatado = _util.FormatarNome("FULANO DOS SANTOS");
+            string formatado = Utilities.FormatarNome("FULANO DOS SANTOS");
 
             Assert.AreEqual("Fulano Dos Santos", formatado);
         }

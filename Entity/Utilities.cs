@@ -8,7 +8,7 @@ namespace Entity
 {
     public class Utilities
     {
-        public string FormatarNome(string nome)
+        public static string FormatarNome(string nome)
         {
             string lower = nome.ToLower();
             string[] nomes = lower.Split(' ');

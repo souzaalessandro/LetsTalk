@@ -19,30 +19,37 @@
 
 
 <div class="col-md-offset-3 col-md-6">
-    <div class="portlet box purple">
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-share font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Cadastro</span>
+            </div>
+        </div>
+
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
-            <form action="@Url.Action("RegistrarNovo", "Registrar")" method="post">
+            <form action="@Url.Action("RegistrarNovo", "Registrar")" method="post" role="form">
                 <div class="form-body">
                     <div class="form-group">
-                        <label class="control-label">Nome</label>
+                        <label>Nome</label>
                         <input type="text" class="form-control" placeholder="Digite seu nome" name="usuario.Nome">
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Sobrenome</label>
+                        <label>Sobrenome</label>
                         <input type="text" class="form-control" placeholder="Digite seu sobrenome" name="usuario.Sobrenome">
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-8">
-                            <label class="control-label">Data de Nascimento</label>
+                            <label>Data de Nascimento</label>
                             <input type="date" class="form-control" name="usuario.DataNascimento">
                         </div>
 
                         <div class="form-group col-md-4">
                             <div class="" style="float: none; padding: unset;">
-                                <label class="control-label">Gênero</label>
+                                <label>Gênero</label>
                                 <select class="bs-select form-control" style="display: block;" name="usuario.Genero">
                                     <option>Feminino</option>
                                     <option>Indefinido</option>
@@ -54,33 +61,35 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">E-mail</label>
+                        <label>E-mail</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
                             <input type="email" class="form-control" placeholder="Digite seu E-mail" name="usuario.Email">
+                            @Html.ValidationMessage("Email")
                         </div>
                     </div>
+
                     @*string senha, string senhaRepetida*@
                     <div class="form-group">
                         <div class="form-group">
-                            <label class="control-label">Senha</label>                              
-                            <input type="text" class="form-control" placeholder="Digite sua senha" name="">
+                            <label>Senha</label>
+                            <input type="password" class="form-control" placeholder="Digite sua senha" name="">
                         </div>
 
                         <div class="form-group" style="float: none">
-                            <label class="control-label">Confirmar Senha</label>
-                            <input type="text" class="form-control" placeholder="Confirme sua senha" name="">
+                            <label>Confirmar Senha</label>
+                            <input type="password" class="form-control" placeholder="Confirme sua senha" name="">
                         </div>
 
-                        <div class="form-actions right">
-                            <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
-                                Entrar &thinsp;
-                                <i class="icon-login"></i>
-                            </button>
-                        </div>
                     </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
+                        Entrar &thinsp;
+                        <i class="icon-login"></i>
+                    </button>
                 </div>
             </form>
             <!-- END FORM-->

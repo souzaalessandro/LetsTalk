@@ -37,6 +37,7 @@ namespace LetsTalk.Controllers
                 };
 
                 //Validação
+                //Teste
                 /*
                 int valueOptionQueVeio = (int)usuario.Genero;
                 bool valid = false;

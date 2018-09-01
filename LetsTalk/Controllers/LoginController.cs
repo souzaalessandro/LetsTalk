@@ -5,6 +5,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessLogicalLayer;
 using Entity;
 
 namespace MexendoNoTemplate.Controllers
@@ -18,15 +19,20 @@ namespace MexendoNoTemplate.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Logar(Usuario usuario, string senha, bool lembrar = false)
+        public ActionResult Logar(Usuario usuario, bool lembrar = false)
         {
             //Vai no banco e se funcionar roda esta treta
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, usuario.ID.ToString());
-            string cookieEncriptado = FormsAuthentication.Encrypt(ticket);
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieEncriptado);
-            Response.Cookies.Add(cookie);
-
-            return RedirectToAction("Algumlugar");
+            BLLResponse<Usuario> response = new UsuarioBLL().IsLoginValido(usuario);
+            if (response.Sucesso)
+            {
+                //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, usuario.ID.ToString());
+                //string cookieEncriptado = FormsAuthentication.Encrypt(ticket);
+                //HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieEncriptado);
+                //Response.Cookies.Add(cookie);
+            }
+            string hash = String.Join("", response.Data.Hash);
+            return Content($"<h1>O login para usuario de email {usuario.Email} resultou em {response.Sucesso}. \nSeu hash é {hash}");
+          //  return RedirectToAction("Algumlugar");
         }
     }
 

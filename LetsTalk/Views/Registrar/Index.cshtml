@@ -54,7 +54,14 @@
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label>Data de Nascimento</label>
-                            <input value="@Model.DataNascimento.Date" type="date" class="form-control" name="usuario.DataNascimento">
+                            @{ 
+                                DateTime now = DateTime.Now;
+                                string dateMin = $"{now.Year - 80}-{now.Month.ToString("00")}-{now.Day.ToString("00")}";
+                                string dateMax = $"{now.Year - 18}-{now.Month.ToString("00")}-{now.Day.ToString("00")}";
+                                string dataNasc = Model.DataNascimento != DateTime.MinValue ? Model.DataNascimento.ToString("yyyy-MM-dd") : null;
+                            }
+                            <input value="@dataNasc"  type="date" class="form-control" 
+                               min="@dateMin" max="@dateMax" name="usuario.DataNascimento">
                             @if (ViewData.ModelState.ContainsKey("DataNascimento"))
                             {
                                 <span class="font-red-thunderbird"> @ViewData.ModelState["DataNascimento"].Errors[0].ErrorMessage</span>

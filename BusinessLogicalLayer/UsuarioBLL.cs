@@ -36,6 +36,22 @@ namespace BusinessLogicalLayer
             return response;
         }
 
+        public BLLResponse<Usuario> IsLoginValido(Usuario item)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+                Usuario userDoBanco = ctx.Usuarios.FirstOrDefault(u => u.Email == item.Email);
+                if (userDoBanco == null)
+                {
+                    return response;
+                }
+                response.Sucesso = Criptografia.Verificar(item.Senha, userDoBanco.Salt, userDoBanco.Hash);
+            }
+            return response;
+        }
+
         private void EncriptografarEGuardarSalt(Usuario item)
         {
             byte[] salt;
@@ -117,6 +133,7 @@ namespace BusinessLogicalLayer
             return errors;
         }
 
+        #region validacoes
         private void ValidarString(Usuario user, PropertyInfo prop, List<ErrorField> errors, byte minCaracteres = 3, byte maxCaracteres = 20)
         {
             string valorCampo = user.GetType().GetProperty(prop.Name).GetValue(user) as string;
@@ -226,20 +243,7 @@ namespace BusinessLogicalLayer
                 return;
             }
         }
+        #endregion
+
     }
 }
-//byte maxCharsInNome = 20;
-//byte minCharsInNome = 3;
-
-//if (item.Nome.IsNullOrWhiteSpace())
-//{
-//    errors.Add(new ErrorField(nameof(item.Nome), Utilities.CampoNuloMessage(nameof(item.Nome))));
-//}
-//else if (item.Nome.Length < minCharsInNome)
-//{
-//    errors.Add(new ErrorField(nameof(item.Nome), Utilities.MinCharsMessage(nameof(item.Nome), minCharsInNome)));
-//}
-//else if (item.Nome.Length > maxCharsInNome)
-//{
-//    errors.Add(new ErrorField(nameof(item.Nome), Utilities.MaxCharsMessage(nameof(item.Nome), maxCharsInNome)));
-//}

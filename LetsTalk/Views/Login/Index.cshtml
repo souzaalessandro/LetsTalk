@@ -15,21 +15,23 @@
         <div class="portlet-body form">
             <form action="@Url.Action("Logar", "Login")" method="post" role="form">
                 @Html.AntiForgeryToken()
+
                 <div class="form-body">
+
                     <div class="form-group">
                         <label>Email</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="Endereço de Email" name="usuario.Nome">
+                            <input type="text" class="form-control" placeholder="Endereço de Email" name="usuario.Email">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Senha</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Senha" name="senha">
+                            <input type="password" class="form-control" placeholder="Senha" name="usuario.Senha">
                             <span class="input-group-addon">
                                 <i class="icon-key"></i>
                             </span>

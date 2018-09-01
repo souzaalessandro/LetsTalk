@@ -9,15 +9,25 @@ namespace BusinessLogicalLayer
 {
     public sealed class Criptografia
     {
+        /// <summary>
+        /// Gera um salt aleatório e usa para encriptografar a <paramref name="senha"/>.
+        /// </summary>
+        /// <param name="senha">Senha a ser encriptografada.</param>
+        /// <param name="salt">Salt que é gerado. Deve-se guardá-lo no banco.</param>
+        /// <returns>O hash gerado</returns>
         public static byte[] Encriptar(string senha, out byte[] salt)
         {
-            //Gerar salt random
             salt = PWDTK.GetRandomSalt();
-
-            //Usar salt e senha para hashear
             return PWDTK.PasswordToHash(salt, senha);
         }
 
+        /// <summary>
+        /// Verifica se uma senha informada é a senha encriptografada armazenada no banco.
+        /// </summary>
+        /// <param name="senha">A senha usada na tentativa de login</param>
+        /// <param name="salt">O salt recuperado do banco para o usuario</param>
+        /// <param name="hashedSenha">O hash recuperado do banco para o usuario</param>
+        /// <returns>Se a senha é a mesma</returns>
         public static bool Verificar(string senha, byte[] salt, byte[] hashedSenha)
         {
             return PWDTK.ComparePasswordToHash(

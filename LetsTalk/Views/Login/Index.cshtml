@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Login";
     ViewBag.MostrarBarrinha = false;
 }
 <div class="col-md-offset-3 col-md-6" style="margin-top: 10%">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="portlet-body form">
-            <form action="@Url.Action("algumacoisa", "algumacoisa")" method="post" role="form">
+            <form action="@Url.Action("Logar", "Login")" method="post" role="form">
                 @Html.AntiForgeryToken()
                 <div class="form-body">
                     <div class="form-group">
@@ -22,24 +22,27 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="Endereço de Email">
+                            <input type="text" class="form-control" placeholder="Endereço de Email" name="usuario.Nome">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Senha</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Senha">
+                            <input type="password" class="form-control" placeholder="Senha" name="senha">
                             <span class="input-group-addon">
                                 <i class="icon-key"></i>
                             </span>
                         </div>
                     </div>
+
+                    <label><input id="lembrar-me" type="checkbox" name="lembrar">Lembrar-me</label>
+
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn purple-customizado-fraco default-roxocustomizadofraco btn-circle">Registrar</button>
                     <button type="button" class="btn purple-customizado-fraco default-roxocustomizadofraco btn-circle">Esqueci minha senha</button>
-                    <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
+                    <button id="botao" type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
                         Entrar &thinsp;
                         <i class="icon-login"></i>
                     </button>
@@ -49,7 +52,25 @@
     </div>
 </div>
 
+@section JqueryFinal{
+    <script>
+        document.getElementById("botao").addEventListener("click", PegarBoolDoLembrarme);
+        function PegarBoolDoLembrarme() {
+            var chk = document.getElementById("lembrar-me");
+            if (chk.checked) {
+                chk.setAttribute("value", "true");
+            }
+        }
+    </script>
 
-@section JqueryFinal{}
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features
+        });
+    </script>
+}
 @*assets/admin/layout3/css/themes/default.css*@
 @*assets/global/css/components-rounded.css*@

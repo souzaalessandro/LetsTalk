@@ -1,35 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogicalLayer.Interfaces;
 using DataAccessObject;
 using Entity;
 using Entity.Enums;
 using Entity.Extensions;
-using Entity.Interfaces;
 
 namespace BusinessLogicalLayer
 {
-    public class UsuarioBLL : IInsertable<Usuario>, IUpdatable<Usuario>, ISearchable<Usuario>, IDeletable<Usuario>
+    public class UsuarioBLL : IUpdatable<Usuario>, ISearchable<Usuario>, IDeletable<Usuario>
     {
-        public BLLResponse<Usuario> Insert(Usuario item)
+        public BLLResponse<Usuario> Registrar(Usuario item, string senhaRepetida)
         {
-            //Fazer validações
-            item.Nome = Utilities.FormatarNome(item.Nome);
-            item.Sobrenome = Utilities.FormatarNome(item.Sobrenome);
-
-
-            //
+            List<ErrorField> erros = ValidarUsuarioParaRegistro(item, senhaRepetida);
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+            response.Erros = erros;
+            if (response.HasErros)
+            {
+                response.Sucesso = false;
+                return response;
+            }
+
+            EncriptografarEGuardarSalt(item);
+
             using (LTContext ctx = new LTContext())
             {
                 ctx.Usuarios.Add(item);
                 ctx.SaveChanges();
             }
             response.Sucesso = true;
-            response.Mensagem = "Cadastrado com sucesso.";
             return response;
+        }
+
+        private void EncriptografarEGuardarSalt(Usuario item)
+        {
+            byte[] salt;
+            item.Hash = Criptografia.Encriptar(item.Senha, out salt);
+            item.Salt = salt;
         }
 
         public BLLResponse<Usuario> Update(Usuario item)
@@ -85,92 +96,150 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-
-        public List<ErrorField> ValidarUsuario(Usuario item)
+        private List<ErrorField> ValidarUsuarioParaRegistro(Usuario item, string senhaRepetida)
         {
-            ///////////////////////////////////////////////////////////////////////////
             List<ErrorField> errors = new List<ErrorField>();
 
-            byte MaxCharsInNome = 20;
-            byte MinCharsInNome = 3;
+            var property = item.GetType().GetProperty(nameof(item.Nome));
+            ValidarString(item, property, errors, 3, 20);
 
-            //Nulo ou espaço em branco
-            if (item.Nome.IsNullOrWhiteSpace())
-            {
-                errors.Add(new ErrorField(nameof(item.Nome),
-                    Utilities.MensagemParaCampoNulo(nameof(item.Nome))));
-            }
-            //Máximo de caracteres
-            else if (item.Nome.Length > MaxCharsInNome)
-            {
-                errors.Add(new ErrorField(nameof(item.Nome),
-                    Utilities.MensagemParaMaxChars(nameof(item.Nome), MaxCharsInNome)));
-            }
-            //Mínimo de caracteres
-            else if (item.Nome.Length < MinCharsInNome)
-            {
-                errors.Add(new ErrorField(nameof(item.Nome),
-                    Utilities.MensagemParaMinChars(nameof(item.Nome), MinCharsInNome)));
-            }
-            ///////////////////////////////////////////////////////////////////////////
+            property = item.GetType().GetProperty(nameof(item.Sobrenome));
+            ValidarString(item, property, errors, 3, 25);
 
-            byte MaxCharsInSobrenome = 25;
-            byte MinCharsInSobrenome = 3;
+            ValidarIdade(item, errors);
 
-            //Nulo ou espaço em branco
-            if (item.Sobrenome.IsNullOrWhiteSpace())
-            {
-                errors.Add(new ErrorField(nameof(item.Sobrenome),
-                    Utilities.MensagemParaCampoNulo(nameof(item.Sobrenome))));
-            }
-            //Máximo de caracteres
-            else if (item.Sobrenome.Length > MaxCharsInSobrenome)
-            {
-                errors.Add(new ErrorField(nameof(item.Sobrenome),
-                    Utilities.MensagemParaMaxChars(nameof(item.Sobrenome), MaxCharsInSobrenome)));
-            }
-            //Mínimo de caracteres
-            else if (item.Sobrenome.Length < MinCharsInSobrenome)
-            {
-                errors.Add(new ErrorField(nameof(item.Sobrenome),
-                    Utilities.MensagemParaMinChars(nameof(item.Sobrenome), MinCharsInSobrenome)));
-            }
-            ///////////////////////////////////////////////////////////////////////////
+            ValidarGenero(item, errors);
 
-            // Requisitos de idade mínima e máxima
-            byte MinIdade = 18;
-            byte MaxIdade = 80;
+            ValidarEmail(item, errors);
 
-            bool EhMenorIdade = (DateTime.Now - item.DataNascimento).TotalDays / 365 <= MinIdade;
-            bool IdadeExcedida = (DateTime.Now - item.DataNascimento).TotalDays / 365 > MaxIdade;
+            ValidarSenha(item, errors, senhaRepetida);
 
-            //Testar a verificação IsNullOrWhiteSpace
-
-            if (item.DataNascimento == DateTime.MinValue)
-            {
-                errors.Add(new ErrorField(nameof(item.DataNascimento),
-                    Utilities.MensagemParaCampoNulo(nameof(item.DataNascimento))));
-            }
-            else if (EhMenorIdade)
-            {
-                errors.Add(new ErrorField(nameof(item.DataNascimento),
-                     Utilities.MensagemParaMenor18(nameof(item.DataNascimento), MinIdade)));
-            }
-            else if (IdadeExcedida)
-            {
-                errors.Add(new ErrorField(nameof(item.DataNascimento),
-                     Utilities.MensagemParaIdadeExcedida(nameof(item.DataNascimento), MaxIdade)));
-            }
-
-            //Verificar se o cara não injetou um novo gênero
-
-            Array todosEnuns = Enum.GetValues(typeof(Genero));
-
-            Genero generoEscolhido = item.Genero;
             return errors;
-
         }
 
+        private void ValidarString(Usuario user, PropertyInfo prop, List<ErrorField> errors, byte minCaracteres = 3, byte maxCaracteres = 20)
+        {
+            string valorCampo = user.GetType().GetProperty(prop.Name).GetValue(user) as string;
 
+            if (valorCampo.IsNullOrWhiteSpace())
+            {
+                errors.Add(new ErrorField(fieldName: prop.Name,
+                    message: Utilities.CampoNuloMessage(prop.Name)));
+                return;
+            }
+            else if (valorCampo.Length < minCaracteres)
+            {
+                errors.Add(new ErrorField(fieldName: prop.Name,
+                    message: Utilities.MinCharsMessage(prop.Name, minCaracteres)));
+                return;
+            }
+            else if (valorCampo.Length > maxCaracteres)
+            {
+                errors.Add(new ErrorField(fieldName: prop.Name,
+                    message: Utilities.MaxCharsMessage(prop.Name, maxCaracteres)));
+                return;
+            }
+            string formatado = Utilities.FormatarNome(valorCampo);
+            prop.SetValue(user, formatado);
+        }
+
+        private void ValidarIdade(Usuario user, List<ErrorField> errors, byte idadeMinima = 18, byte idadeMaxima = 80)
+        {
+            if (user.DataNascimento == DateTime.MinValue)
+            {
+                errors.Add(new ErrorField(fieldName: nameof(user.DataNascimento),
+                    message: Utilities.CampoNuloMessage("Data de nascimento")));
+                return;
+            }
+
+            bool ehMenorIdade = (DateTime.Now - user.DataNascimento).TotalDays / 365 <= idadeMinima;
+            bool idadeExcedida = (DateTime.Now - user.DataNascimento).TotalDays / 365 > idadeMaxima;
+
+            if (ehMenorIdade)
+            {
+                errors.Add(new ErrorField(fieldName: nameof(user.DataNascimento),
+                    message: Utilities.IdadeMinimaMessage(idadeMinima)));
+            }
+            else if (idadeExcedida)
+            {
+                errors.Add(new ErrorField(fieldName: nameof(user.DataNascimento),
+                    message: Utilities.IdadeExcedidaMessage(idadeMaxima)));
+            }
+        }
+
+        private void ValidarGenero(Usuario item, List<ErrorField> errors)
+        {
+            int valueDaCmb = (int)item.Genero;
+            bool valid = false;
+            Genero[] generos = (Genero[])Enum.GetValues(typeof(Genero));
+            foreach (Genero g in generos)
+            {
+                valid = valueDaCmb == (int)g;
+                if (valid)
+                {
+                    break;
+                }
+            }
+            if (!valid)
+            {
+                errors.Add(new ErrorField(nameof(item.Genero), Utilities.EnumInvalidoMessage("Gênero")));
+            }
+        }
+
+        private void ValidarEmail(Usuario item, List<ErrorField> errors)
+        {
+            if (item.Email.IsNullOrWhiteSpace())
+            {
+                errors.Add(new ErrorField(fieldName: nameof(item.Email),
+                    message: Utilities.CampoNuloMessage(nameof(item.Email))));
+            }
+            else if (!Utilities.IsEmailValido(item.Email))
+            {
+                errors.Add(new ErrorField(fieldName: nameof(item.Email),
+                    message: Utilities.EmailInvalidoMessage()));
+            }
+        }
+
+        private void ValidarSenha(Usuario item, List<ErrorField> errors, string senhaRepetida, byte minCaracteres = 5, byte maxCaracteres = 12)
+        {
+            if (item.Senha.IsNullOrWhiteSpace())
+            {
+                errors.Add(new ErrorField(fieldName: nameof(item.Senha),
+                    message: Utilities.CampoNuloMessage(nameof(item.Senha))));
+                return;
+            }
+            else if (item.Senha.Length < minCaracteres)
+            {
+                errors.Add(new ErrorField(fieldName: nameof(item.Senha),
+                   message: Utilities.MinCharsMessage(nameof(item.Senha), minCaracteres)));
+            }
+            else if (item.Senha.Length > maxCaracteres)
+            {
+                errors.Add(new ErrorField(fieldName: nameof(item.Senha),
+                    message: Utilities.MaxCharsMessage(nameof(item.Senha), maxCaracteres)));
+            }
+
+            if (item.Senha != senhaRepetida)
+            {
+                errors.Add(new ErrorField(fieldName: "SenhasDiferentes",
+                   message: "Senhas digitadas não batem"));
+                return;
+            }
+        }
     }
 }
+//byte maxCharsInNome = 20;
+//byte minCharsInNome = 3;
+
+//if (item.Nome.IsNullOrWhiteSpace())
+//{
+//    errors.Add(new ErrorField(nameof(item.Nome), Utilities.CampoNuloMessage(nameof(item.Nome))));
+//}
+//else if (item.Nome.Length < minCharsInNome)
+//{
+//    errors.Add(new ErrorField(nameof(item.Nome), Utilities.MinCharsMessage(nameof(item.Nome), minCharsInNome)));
+//}
+//else if (item.Nome.Length > maxCharsInNome)
+//{
+//    errors.Add(new ErrorField(nameof(item.Nome), Utilities.MaxCharsMessage(nameof(item.Nome), maxCharsInNome)));
+//}

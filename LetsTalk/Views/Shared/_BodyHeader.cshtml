@@ -1,7 +1,7 @@
 ﻿<div class="page-header">
 
     <!-- checa se tem alguém logado pra carregar o menu certo-->
-    @if (false)
+    @if (@*HttpContext.Current.User == null*@ true) 
     {
         @Html.Partial("_UserDeslogado")
     }

@@ -17,5 +17,10 @@ namespace DataAccessObject
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Diretorio> Diretorios { get; set; }
         public DbSet<Tag> Tags { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Usuario>().Ignore(s => s.Senha);
+        }
     }
 }

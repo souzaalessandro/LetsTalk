@@ -1,7 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Registrar";
     ViewBag.MostrarBarrinha = true;
 }
+
+@model Entity.Usuario
 
 @section PageLevelPluginStyles{
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
@@ -33,7 +35,7 @@
                 <div class="form-body">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu nome" name="usuario.Nome">
+                        <input value="@Model.Nome" type="text" class="form-control" placeholder="Digite seu nome" name="usuario.Nome">
                         @if (ViewData.ModelState.ContainsKey("Nome"))
                         {
                             <span class="font-red-thunderbird"> @ViewData.ModelState["Nome"].Errors[0].ErrorMessage</span>
@@ -42,7 +44,7 @@
 
                     <div class="form-group">
                         <label>Sobrenome</label>
-                        <input type="text" class="form-control" placeholder="Digite seu sobrenome" name="usuario.Sobrenome">
+                        <input value="@Model.Sobrenome" type="text" class="form-control" placeholder="Digite seu sobrenome" name="usuario.Sobrenome">
                         @if (ViewData.ModelState.ContainsKey("Sobrenome"))
                         {
                             <span class="font-red-thunderbird"> @ViewData.ModelState["Sobrenome"].Errors[0].ErrorMessage</span>
@@ -52,12 +54,13 @@
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label>Data de Nascimento</label>
-                            <input type="date" class="form-control" name="usuario.DataNascimento">
+                            <input value="@Model.DataNascimento.Date" type="date" class="form-control" name="usuario.DataNascimento">
                             @if (ViewData.ModelState.ContainsKey("DataNascimento"))
                             {
                                 <span class="font-red-thunderbird"> @ViewData.ModelState["DataNascimento"].Errors[0].ErrorMessage</span>
                             }
                         </div>
+
                         <div class="form-group col-md-4">
                             <div class="" style="float: none; padding: unset;">
                                 <label>Gênero</label>
@@ -65,10 +68,10 @@
                                     @foreach (var item in (Entity.Enums.Genero[])Enum.GetValues(typeof(Entity.Enums.Genero)))
                                     {
                                         int val = (int)item;
-                                        <option value="@val">@Enum.GetName(item.GetType(), item)</option>
+                                        string selec = (int)Model.Genero == val ? "selected=\"selected\"" : null;
+                                        <option @selec value="@val">@Enum.GetName(item.GetType(), item)</option>
                                     }
                                 </select>
-
                                 @if (ViewData.ModelState.ContainsKey("Genero"))
                                 {
                                     <span class="font-red-thunderbird"> @ViewData.ModelState["Genero"].Errors[0].ErrorMessage</span>
@@ -83,20 +86,23 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="email" class="form-control" placeholder="Digite seu E-mail" name="usuario.Email">
-                            @if (ViewData.ModelState.ContainsKey("Email"))
-                            {
-                                <span class="font-red-thunderbird"> @ViewData.ModelState["Email"].Errors[0].ErrorMessage</span>
-                            }
+                            <input value="@Model.Email" type="email" class="form-control" placeholder="Digite seu E-mail" name="usuario.Email">
                         </div>
+                        @if (ViewData.ModelState.ContainsKey("Email"))
+                        {
+                            <span class="font-red-thunderbird"> @ViewData.ModelState["Email"].Errors[0].ErrorMessage</span>
+                        }
                     </div>
 
                     <div class="form-group">
                         <div class="form-group">
                             <label>Senha</label>
-                            <input type="password" class="form-control" placeholder="Digite sua senha" name="senha">
+                            <input value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha" name="usuario.Senha">
+                            @if (ViewData.ModelState.ContainsKey("Senha"))
+                            {
+                                <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
+                            }
                         </div>
-
                         <div class="form-group" style="float: none">
                             <label>Confirmar Senha</label>
                             <input type="password" class="form-control" placeholder="Confirme sua senha" name="senhaRepetida">
@@ -109,7 +115,7 @@
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
-                        Entrar &thinsp;
+                        Registrar &thinsp;
                         <i class="icon-login"></i>
                     </button>
                 </div>

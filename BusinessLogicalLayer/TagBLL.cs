@@ -1,6 +1,6 @@
-﻿using DataAccessObject;
+﻿using BusinessLogicalLayer.Interfaces;
+using DataAccessObject;
 using Entity;
-using Entity.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

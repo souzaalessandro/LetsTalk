@@ -40,7 +40,7 @@ namespace LetsTalk.Controllers
                 TempData["CamposInformados"] = usuario;
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("ConhecerPessoas", "ConhecerController");//nao existe ainda
+            return RedirectToAction("index", "Conhecer");
         }
     }
 }

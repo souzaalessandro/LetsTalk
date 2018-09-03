@@ -8,6 +8,7 @@ using Entity;
 
 namespace LetsTalk.Controllers
 {
+    [AllowAnonymous]
     public class RegistrarController : Controller
     {
         // GET: Registrar

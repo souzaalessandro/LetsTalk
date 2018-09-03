@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LetsTalk.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         // GET: Home

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LetsTalk.Controllers
 {
+    //UISliders
     public class TesteController : Controller
     {
         // GET: Teste

@@ -209,6 +209,7 @@ namespace BusinessLogicalLayer
 
         private void ValidarEmail(Usuario item, List<ErrorField> errors)
         {
+            
             if (item.Email.IsNullOrWhiteSpace())
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),
@@ -218,6 +219,11 @@ namespace BusinessLogicalLayer
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),
                     message: Utilities.EmailInvalidoMessage()));
+            }
+            else if (EmailJaExiste(item, errors))
+            {
+                errors.Add(new ErrorField(fieldName: nameof(item.Email),
+                    message: Utilities.EmailExistenteMessage()));
             }
         }
 
@@ -256,7 +262,6 @@ namespace BusinessLogicalLayer
                 {
                     return false;
                 }
-                errors.Add(new ErrorField(fieldName: nameof(item.Email), message: Utilities.EmailExistenteMessage()
                 return true;
             }
         }

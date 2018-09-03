@@ -22,6 +22,7 @@ namespace MexendoNoTemplate.Controllers
         public ActionResult Logar(Usuario usuario, bool lembrar = false)
         {
             BLLResponse<Usuario> response = new UsuarioBLL().IsLoginValido(usuario);
+;
             if (response.Sucesso)
             {
                 CriarCookie(lembrar, response);

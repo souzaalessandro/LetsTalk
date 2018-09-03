@@ -247,7 +247,22 @@ namespace BusinessLogicalLayer
                 return;
             }
         }
+        private bool EmailJaExiste(Usuario item, List<ErrorField> errors)
+        {
+            using (LTContext context = new LTContext())
+            {
+                Usuario usuario = context.Usuarios.FirstOrDefault(u => u.Email == item.Email);
+                if (usuario == null)
+                {
+                    return false;
+                }
+                errors.Add(new ErrorField(fieldName: nameof(item.Email), message: Utilities.EmailExistenteMessage()
+                return true;
+            }
+        }
         #endregion
+
+
 
     }
 }

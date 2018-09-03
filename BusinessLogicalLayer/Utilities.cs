@@ -109,6 +109,12 @@ namespace BusinessLogicalLayer
                 return false;
             }
         }
+
+        internal static string EmailExistenteMessage()
+        {
+            return $"Email já cadastrado!";
+
+        }
     }
 
 }

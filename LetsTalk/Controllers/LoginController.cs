@@ -44,7 +44,8 @@ namespace MexendoNoTemplate.Controllers
                 new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, response.Data.ID.ToString());
             string cookieEncriptado = FormsAuthentication.Encrypt(ticket);
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieEncriptado);
-            cookie.Expires.AddDays(1);
+            //cookie.Expires.AddDays(1);
+            cookie.Expires.AddSeconds(20.0);
             Response.Cookies.Add(cookie);
         }
     }

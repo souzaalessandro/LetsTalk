@@ -48,6 +48,10 @@ namespace BusinessLogicalLayer
                     return response;
                 }
                 response.Sucesso = Criptografia.Verificar(item.Senha, userDoBanco.Salt, userDoBanco.Hash);
+                if (response.Sucesso)
+                {
+                    response.Data = userDoBanco;
+                }
             }
             return response;
         }

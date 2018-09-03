@@ -21,29 +21,31 @@ namespace MexendoNoTemplate.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Logar(Usuario usuario, bool lembrar = false)
         {
-            //Vai no banco e se funcionar roda esta treta
             BLLResponse<Usuario> response = new UsuarioBLL().IsLoginValido(usuario);
             if (response.Sucesso)
             {
-                //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, usuario.ID.ToString());
-                //string cookieEncriptado = FormsAuthentication.Encrypt(ticket);
-                //HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieEncriptado);
-                //Response.Cookies.Add(cookie);
+                CriarCookie(lembrar, response);
             }
-            string hash = String.Join("", response.Data.Hash);
-            return Content($"<h1>O login para usuario de email {usuario.Email} resultou em {response.Sucesso}. \nSeu hash é {hash}");
-          //  return RedirectToAction("Algumlugar");
+            return RedirectToAction("Index", "Conhecer");
         }
-    }
 
-    class User : GenericPrincipal
-    {
-        public User(IIdentity identity, string[] roles) : base(identity, roles)
+        [Authorize]
+        public ActionResult Logout()
         {
-
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
 
-        public int ID { get; set; }
-        public string UserName { get; set; }
+
+        private void CriarCookie(bool lembrar, BLLResponse<Usuario> response)
+        {
+            FormsAuthenticationTicket ticket =
+                new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, response.Data.ID.ToString());
+            string cookieEncriptado = FormsAuthentication.Encrypt(ticket);
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieEncriptado);
+            cookie.Expires.AddDays(1);
+            Response.Cookies.Add(cookie);
+        }
     }
 }

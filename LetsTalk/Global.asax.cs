@@ -33,6 +33,7 @@ namespace LetsTalk
 
                 //MVCUser user = new MVCUser(identity, new string[] {"Adm","FInanceiro" });
                 MvcUser user = new MvcUser(identity, null);
+
                 HttpContext.Current.User = user;
             }
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
@@ -46,19 +48,29 @@ namespace MexendoNoTemplate.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 
 
         private void CriarCookie(bool lembrar, BLLResponse<Usuario> response)
         {
+            string userData = null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bf.Serialize(stream, response.Data);
+                stream.Position = 0;
+                byte[] buffer = new byte[stream.Length];
+                stream.Read(buffer, 0, (int)stream.Length);
+                userData = Convert.ToBase64String(buffer);
+            }
+
             FormsAuthenticationTicket ticket =
-                new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, response.Data.ID.ToString());
+                new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, userData);
             string cookieEncriptado = FormsAuthentication.Encrypt(ticket);
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieEncriptado);
-            //cookie.Expires.AddDays(1);
-            cookie.Expires.AddSeconds(20.0);
+            cookie.HttpOnly = true;
+            cookie.Expires = DateTime.Now.AddDays(1);
             Response.Cookies.Add(cookie);
         }
     }

@@ -21,6 +21,7 @@ namespace Entity
         public string FraseApresentacao { get; set; }
         public string Descricao { get; set; }
         public List<Tag> Tags { get; set; }
+        public string FullPathFotoPerfil { get; set; }
         public List<Diretorio> DiretoriosImagens { get; set; }
 
     }

@@ -1,7 +1,8 @@
 ﻿@{
     ViewBag.Title = "Login";
-    ViewBag.MostrarBarrinha = false;
 }
+
+@model Entity.Usuario
 <div class="col-md-offset-3 col-md-6" style="margin-top: 10%">
     <!-- BEGIN SAMPLE FORM PORTLET-->
     <div class="portlet light ">
@@ -11,7 +12,20 @@
                 <span class="caption-subject font-green-sharp bold uppercase">Login</span>
             </div>
         </div>
+        @{
+            bool isInvalid = ViewData.ModelState.ContainsKey("Invalido");
+            string mensagem = ViewData?.ModelState["Invalido"]?.Errors[0]?.ErrorMessage;
 
+            if (isInvalid)
+            {
+                <div class="alert alert-danger">
+                    <button class="close" data-close="alert"></button>
+                    <span>
+                        @mensagem
+                    </span>
+                </div>
+            }
+        }
         <div class="portlet-body form">
             <form action="@Url.Action("Logar", "Login")" method="post" role="form">
                 @Html.AntiForgeryToken()
@@ -23,7 +37,11 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="Endereço de Email" name="usuario.Email">
+                            <input value="@Model.Email" type="text" class="form-control" placeholder="Endereço de Email" name="usuario.Email">
+                            @if (ViewData.ModelState.ContainsKey("Email"))
+                            {
+                                <span class="font-red-thunderbird"> @ViewData.ModelState["Email"].Errors[0].ErrorMessage</span>
+                            }
                         </div>
                     </div>
 
@@ -34,6 +52,10 @@
                             <span class="input-group-addon">
                                 <i class="icon-key"></i>
                             </span>
+                            @if (ViewData.ModelState.ContainsKey("Senha"))
+                            {
+                                <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
+                            }
                         </div>
                     </div>
 

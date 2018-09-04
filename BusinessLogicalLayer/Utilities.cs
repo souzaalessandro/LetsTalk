@@ -54,6 +54,11 @@ namespace BusinessLogicalLayer
             return $"{campoEnum} deve ser algum valor do campo selecionado";
         }
 
+        internal static string UserOuSenhaInvalidosMessage()
+        {
+            return "Email ou senha inválidos";
+        }
+
         public static string EmailInvalidoMessage()
         {
             return $"Este email não é válido";

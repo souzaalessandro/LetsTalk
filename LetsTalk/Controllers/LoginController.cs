@@ -14,21 +14,33 @@ namespace MexendoNoTemplate.Controllers
     {
 
         // GET: Login
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            Usuario user = new Usuario();
+            if (TempData["ViewData"] != null)
+            {
+                ViewData = (ViewDataDictionary)TempData["ViewData"];
+                user = (Usuario)TempData["login"];
+            }
+            return View(user);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, AllowAnonymous]
         public ActionResult Logar(Usuario usuario, bool lembrar = false)
         {
             BLLResponse<Usuario> response = new UsuarioBLL().IsLoginValido(usuario);
-;
+
             if (response.Sucesso)
             {
                 CriarCookie(lembrar, response);
+                return RedirectToAction("Index", "Conhecer");
             }
-            return RedirectToAction("Index", "Conhecer");
+            else
+            {
+                ModelState.AddModelError("Invalido", "Usuário ou senha inválidos");
+                return View("Index", usuario);
+            }
         }
 
         [Authorize]

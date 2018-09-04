@@ -39,12 +39,15 @@ namespace BusinessLogicalLayer
         public BLLResponse<Usuario> IsLoginValido(Usuario item)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+            response.Erros = new List<ErrorField>();
 
             using (LTContext ctx = new LTContext())
             {
                 Usuario userDoBanco = ctx.Usuarios.FirstOrDefault(u => u.Email == item.Email);
                 if (userDoBanco == null)
                 {
+                    response.Erros.Add(new ErrorField(fieldName: nameof(userDoBanco.Email), 
+                        message: Utilities.UserOuSenhaInvalidosMessage()));
                     return response;
                 }
                 response.Sucesso = Criptografia.Verificar(item.Senha, userDoBanco.Salt, userDoBanco.Hash);
@@ -209,7 +212,7 @@ namespace BusinessLogicalLayer
 
         private void ValidarEmail(Usuario item, List<ErrorField> errors)
         {
-            
+
             if (item.Email.IsNullOrWhiteSpace())
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),

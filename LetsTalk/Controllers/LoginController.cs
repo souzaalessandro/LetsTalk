@@ -14,6 +14,7 @@ namespace MexendoNoTemplate.Controllers
 {
     public class LoginController : Controller
     {
+
         // GET: Login
         [AllowAnonymous]
         public ActionResult Index()

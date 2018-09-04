@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BusinessLogicalLayer;
 using Entity;
+using LetsTalk.Models;
 
 namespace MexendoNoTemplate.Controllers
 {
@@ -55,16 +56,14 @@ namespace MexendoNoTemplate.Controllers
 
         private void CriarCookie(bool lembrar, BLLResponse<Usuario> response)
         {
-            string userData = null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream stream = new MemoryStream())
+            UserLogado user = new UserLogado
             {
-                bf.Serialize(stream, response.Data);
-                stream.Position = 0;
-                byte[] buffer = new byte[stream.Length];
-                stream.Read(buffer, 0, (int)stream.Length);
-                userData = Convert.ToBase64String(buffer);
-            }
+                ID = response.Data.ID,
+                Nome = response.Data.Nome,
+                FullPathFotoPerfil = response.Data.FullPathFotoPerfil
+            };
+
+            string userData = SerializarUser(user);
 
             FormsAuthenticationTicket ticket =
                 new FormsAuthenticationTicket(1, FormsAuthentication.FormsCookieName, DateTime.Now, DateTime.Now.AddDays(1), lembrar, userData);
@@ -73,6 +72,22 @@ namespace MexendoNoTemplate.Controllers
             cookie.HttpOnly = true;
             cookie.Expires = DateTime.Now.AddDays(1);
             Response.Cookies.Add(cookie);
+        }
+
+        private static string SerializarUser(UserLogado user)
+        {
+            string userData = null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bf.Serialize(stream, user);
+                stream.Position = 0;
+                byte[] buffer = new byte[stream.Length];
+                stream.Read(buffer, 0, (int)stream.Length);
+                userData = Convert.ToBase64String(buffer);
+            }
+
+            return userData;
         }
     }
 }

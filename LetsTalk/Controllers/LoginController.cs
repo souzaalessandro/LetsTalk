@@ -36,6 +36,8 @@ namespace MexendoNoTemplate.Controllers
 
             if (response.Sucesso)
             {
+                response.Data.FullPathFotoPerfil = "/Content/40862160.jpg";
+                
                 CriarCookie(lembrar, response);
                 return RedirectToAction("Index", "Conhecer");
             }

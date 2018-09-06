@@ -36,7 +36,7 @@ namespace MexendoNoTemplate.Controllers
 
             if (response.Sucesso)
             {
-                response.Data.FullPathFotoPerfil = "/Content/40862160.jpg";
+                response.Data.FullPathFotoPerfil = Server.MapPath("~/Content/40862160.jpg");
                 
                 CriarCookie(lembrar, response);
                 return RedirectToAction("Index", "Conhecer");
@@ -55,6 +55,17 @@ namespace MexendoNoTemplate.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+
+        [Authorize]
+        public ActionResult MetodoTemporarioParaTratarESalvarImagens(HttpPostedFileBase basef, Usuario user)
+        {
+            //recebe a imagem
+            string pastaUser = "";
+            string path = "~/UserImages/";
+            basef.SaveAs(Server.MapPath("~/Content/"));
+            return RedirectToAction("Index", "Home");
+        }
 
         private void CriarCookie(bool lembrar, BLLResponse<Usuario> response)
         {

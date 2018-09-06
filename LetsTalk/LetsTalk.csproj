@@ -4014,7 +4014,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserImages\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicalLayer\BusinessLogicalLayer.csproj">
       <Project>{051d02de-6dc2-4811-8117-da10d4db0c99}</Project>

@@ -14,5 +14,10 @@ namespace LetsTalk.Controllers
         {
             return View();
         }
+
+        public ActionResult VisualizarPerfil()
+        {
+            return View();
+        }
     }
 }

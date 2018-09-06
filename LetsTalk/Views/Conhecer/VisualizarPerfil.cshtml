@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<h2>Perfil</h2>
+
+@{
+    ViewBag.MostrarBarrinha = true;
+}
+
+
+
+@section PageLevelPluginStyles{
+    <link href="../../assets/admin/pages/css/news.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css" />
+}
+
+
+
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12 news-page blog-page">
+                <div class="row">
+                    <div class="col-md-9 blog-tag-data">
+                        <h3 style="margin-top:0">Nome da pesssoa do perfil</h3>
+                        <img src="../../assets/admin/pages/media/gallery/item_img1.jpg" class="img-responsive" alt="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-inline blog-tags">
+                                    <li>
+                                        <i class="fa fa-tags"></i>
+                                        <a href="javascript:;">
+                                            Jogos
+                                        </a>
+                                        <i class="fa fa-tags"></i>
+                                        <a href="javascript:;">
+                                            Rock
+                                        </a>
+                                        <i class="fa fa-tags"></i>
+                                        <a href="javascript:;">
+                                            C#
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="news-item-page">
+                            <p>
+                                Frase que o cara cadastrou e outras informações
+                            </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="post-comment">
+                            <h2>LET'S TALK</h2>
+                            <form role="form" action="javascript:;">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Nome <span class="required">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Email <span class="required">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Mensagem <span class="required">
+                                            *
+                                        </span>
+                                    </label>
+                                    <textarea class="col-md-10 form-control" rows="8"></textarea>
+                                </div>
+                                <button class="margin-top-20 btn blue" type="submit">Enviar mensagem</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="space20">
+                        </div>
+                        <h3 style="margin-top:0">Fotos</h3>
+                        <ul class="list-inline blog-images">
+                            <li>
+                                <a class="fancybox-button" data-rel="fancybox-button" title="390 x 220 - keenthemes.com" href="../../assets/admin/pages/media/blog/1.jpg">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/1.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/2.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/3.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/4.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/5.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/6.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/8.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/10.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/11.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/1.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/2.jpg">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <img alt="" src="../../assets/admin/pages/media/blog/7.jpg">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section  PageLevelPlugins
+{
+    <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
+
+
+}
+@section PageLevelScripts {
+
+
+
+
+}
+@section JqueryFinal{
+    <script>
+    jQuery(document).ready(function () {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+        Demo.init(); // init demo features
+    });
+    </script>
+}
+
+
+

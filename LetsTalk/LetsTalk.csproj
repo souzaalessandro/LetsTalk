@@ -3727,6 +3727,7 @@
     <Content Include="Content\40862160.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\SimpleChat.css" />
     <Content Include="LtIcon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -4007,6 +4008,7 @@
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Conhecer\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Conhecer\VisualizarPerfil.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

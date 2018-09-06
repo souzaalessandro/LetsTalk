@@ -39,6 +39,8 @@ namespace BusinessLogicalLayer
             prop.SetValue(user, formatado);
         }
 
+       
+
         private void ValidarIdade(Usuario user, List<ErrorField> errors, byte idadeMinima = 18, byte idadeMaxima = 80)
         {
             if (user.DataNascimento == DateTime.MinValue)

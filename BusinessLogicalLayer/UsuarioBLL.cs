@@ -46,7 +46,7 @@ namespace BusinessLogicalLayer
                 Usuario userDoBanco = ctx.Usuarios.FirstOrDefault(u => u.Email == item.Email);
                 if (userDoBanco == null)
                 {
-                    response.Erros.Add(new ErrorField(fieldName: nameof(userDoBanco.Email), 
+                    response.Erros.Add(new ErrorField(fieldName: nameof(userDoBanco.Email),
                         message: Utilities.UserOuSenhaInvalidosMessage()));
                     return response;
                 }
@@ -96,13 +96,31 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        public BLLResponse<Usuario> LerPorId(Usuario item)
+        public BLLResponse<Usuario> AtualizarFotoPerfil(int id, string pathRelativo)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
             Usuario user = new Usuario();
             using (LTContext ctx = new LTContext())
             {
-                user = ctx.Usuarios.FirstOrDefault(u => u.ID == item.ID);
+                user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+
+                if (user != null)
+                {
+                    response.Sucesso = true;
+                    user.PathFotoPerfil = pathRelativo;
+                    ctx.SaveChanges();
+                }
+                return response;
+            }
+        }
+
+        public BLLResponse<Usuario> LerPorId(int id)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+            Usuario user = new Usuario();
+            using (LTContext ctx = new LTContext())
+            {
+                user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
             }
             response.Sucesso = user != null;
             response.Data = user;

@@ -9,6 +9,6 @@ namespace BusinessLogicalLayer.Interfaces
     public interface ISearchable<T> where T : class
     {
         BLLResponse<T> LerTodos();
-        BLLResponse<T> LerPorId(T item);
+        BLLResponse<T> LerPorId(int id);
     }
 }

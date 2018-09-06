@@ -38,13 +38,13 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        public BLLResponse<Tag> LerPorId(Tag item)
+        public BLLResponse<Tag> LerPorId(int id)
         {
             BLLResponse<Tag> response = new BLLResponse<Tag>();
             Tag tag = new Tag();
             using (LTContext ctx = new LTContext())
             {
-                tag = ctx.Tags.FirstOrDefault(u => u.ID == item.ID);
+                tag = ctx.Tags.FirstOrDefault(u => u.ID == id);
             }
             response.Sucesso = tag != null;
             response.Data = tag;

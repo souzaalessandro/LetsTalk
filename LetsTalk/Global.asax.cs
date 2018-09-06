@@ -45,7 +45,7 @@ namespace LetsTalk
                 {
                     ID = userLog.ID,
                     Nome = userLog.Nome,
-                    FullPathFotoPerfil = userLog.FullPathFotoPerfil
+                    PathFotoPerfil = userLog.PathFotoPerfil
                 };
 
                 HttpContext.Current.User = user;

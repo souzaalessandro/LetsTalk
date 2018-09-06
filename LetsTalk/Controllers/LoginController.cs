@@ -53,32 +53,13 @@ namespace MexendoNoTemplate.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult testeparafoto()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult MetodoTemporarioParaTratarESalvarImagens(HttpPostedFileBase foto)
-        {
-            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            if (foto != null)
-            {
-                string folder = Path.Combine(Server.MapPath("~/UserImages"), $"userperfil-{user.ID}");
-                Directory.CreateDirectory(folder);
-                string path = Path.Combine(folder, Path.GetFileName(foto.FileName));
-                foto.SaveAs(path);
-            }
-            return Content("Foto salva com sucesso. Checar a pasta");
-        }
-
         private void CriarCookie(bool lembrar, BLLResponse<Usuario> response)
         {
             UserLogado user = new UserLogado
             {
                 ID = response.Data.ID,
                 Nome = response.Data.Nome,
-                FullPathFotoPerfil = response.Data.PathFotoPerfil
+                PathFotoPerfil = response.Data.PathFotoPerfil
             };
 
             string userData = SerializarUser(user);

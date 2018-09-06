@@ -124,44 +124,48 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Nome</label>
-                                                    <input type="text" placeholder="Digite seu nome" class="form-control" name="usuario.Nome">
+                                                    <input type="text" placeholder="Digite seu nome" class="form-control" name="usuario.Nome" disabled>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label class="control-label">Data de Nascimento</label>
-                                                    <input class="form-control" id="mask_date" type="text">
+                                                    <input class="form-control" id="mask_date" type="text" disabled>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label class="control-label">Gênero</label>
                                                     <select class="bs-select form-control" style="display: none;">
-                                                        <option>Mustard</option>
-                                                        <option>Ketchup</option>
-                                                        <option>Relish</option>
+                                                        @foreach (var item in (Entity.Enums.Genero[])Enum.GetValues(typeof(Entity.Enums.Genero)))
+                                                        {
+                                                            int val = (int)item;
+                                                            string selec = (int)Model.Genero == val ? "selected=\"selected\"" : null;
+                                                            <option @selec value="@val">@Enum.GetName(item.GetType(), item)</option>
+                                                        }
                                                     </select><div class="btn-group bootstrap-select bs-select form-control"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" title="Mustard" aria-expanded="false"><span class="filter-option pull-left">Mustard</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="max-height: 271px; overflow: hidden; min-height: 0px;"><ul class="dropdown-menu inner selectpicker" role="menu" style="max-height: 269px; overflow-y: auto; min-height: 0px;"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Mustard</span>"><span class="text">Mustard</span><span class="fa fa-check check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Ketchup</span>"><span class="text">Ketchup</span><span class="fa fa-check check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Relish</span>"><span class="text">Relish</span><span class="fa fa-check check-mark"></span></a></li></ul></div></div>
+                                                    @if (ViewData.ModelState.ContainsKey("Genero"))
+                                                    {
+                                                        <span class="font-red-thunderbird"> @ViewData.ModelState["Genero"].Errors[0].ErrorMessage</span>
+                                                    }
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Sobrenome</label>
-                                                    <input type="text" placeholder="Digite seu sobrenome" class="form-control">
+                                                    <input type="text" placeholder="Digite seu sobrenome" class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group form-group col-md-6">
                                                     <label class="control-label">Telefone</label>
                                                     <input type="text" placeholder="Digite seu telefone" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label class="control-label">Telefone</label>
-                                                    <input type="text" placeholder="Digite seu telefone" class="form-control">
+                                                    <label class="control-label">Frase de Apresentação</label>
+                                                    <input type="text" placeholder="Digite sua frase" class="form-control">
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="control-label">Telefone</label>
+                                                    <label class="control-label">Tags</label>
                                                     <input id="tags_2" type="text" class="form-control tags medium" style="display: none;">
                                                 </div>
 
                                             </div>
-
-                                            
-
                                             <div class="margiv-top-10">
                                                 <a href="javascript:;" class="btn green-haze">
                                                     Salvar

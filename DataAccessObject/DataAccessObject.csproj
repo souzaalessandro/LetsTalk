@@ -52,6 +52,10 @@
     <Compile Include="Migrations\201808281942266_Primeira.Designer.cs">
       <DependentUpon>201808281942266_Primeira.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809041934452_PropriedadeFotoClasseUsuario.cs" />
+    <Compile Include="Migrations\201809041934452_PropriedadeFotoClasseUsuario.Designer.cs">
+      <DependentUpon>201809041934452_PropriedadeFotoClasseUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808281942266_Primeira.resx">
       <DependentUpon>201808281942266_Primeira.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041934452_PropriedadeFotoClasseUsuario.resx">
+      <DependentUpon>201809041934452_PropriedadeFotoClasseUsuario.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

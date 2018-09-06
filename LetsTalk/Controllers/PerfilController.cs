@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace MexendoNoTemplate.Controllers
 {
     //[Authorize(Roles = "Adm")]
-    [Authorize]
+    //[Authorize]
     public class PerfilController : Controller
     {
         public ActionResult Index()

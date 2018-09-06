@@ -9,7 +9,7 @@ namespace Entity
     public class Diretorio
     {
         public int ID { get; set; }
-        public string FullPath { get; set; }
+        public string PathRelativo { get; set; }
         public Usuario Usuario { get; set; }
     }
 }

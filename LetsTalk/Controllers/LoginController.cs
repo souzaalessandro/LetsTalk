@@ -36,8 +36,6 @@ namespace MexendoNoTemplate.Controllers
 
             if (response.Sucesso)
             {
-                response.Data.FullPathFotoPerfil = Server.MapPath("~/Content/40862160.jpg");
-                
                 CriarCookie(lembrar, response);
                 return RedirectToAction("Index", "Conhecer");
             }
@@ -55,16 +53,23 @@ namespace MexendoNoTemplate.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        public ActionResult testeparafoto()
+        {
+            return View();
+        }
 
         [Authorize]
-        public ActionResult MetodoTemporarioParaTratarESalvarImagens(HttpPostedFileBase basef, Usuario user)
+        public ActionResult MetodoTemporarioParaTratarESalvarImagens(HttpPostedFileBase foto)
         {
-            //recebe a imagem
-            string pastaUser = "";
-            string path = "~/UserImages/";
-            basef.SaveAs(Server.MapPath("~/Content/"));
-            return RedirectToAction("Index", "Home");
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            if (foto != null)
+            {
+                string folder = Path.Combine(Server.MapPath("~/UserImages"), $"userperfil-{user.ID}");
+                Directory.CreateDirectory(folder);
+                string path = Path.Combine(folder, Path.GetFileName(foto.FileName));
+                foto.SaveAs(path);
+            }
+            return Content("Foto salva com sucesso. Checar a pasta");
         }
 
         private void CriarCookie(bool lembrar, BLLResponse<Usuario> response)
@@ -73,7 +78,7 @@ namespace MexendoNoTemplate.Controllers
             {
                 ID = response.Data.ID,
                 Nome = response.Data.Nome,
-                FullPathFotoPerfil = response.Data.FullPathFotoPerfil
+                FullPathFotoPerfil = response.Data.PathFotoPerfil
             };
 
             string userData = SerializarUser(user);

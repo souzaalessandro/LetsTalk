@@ -32,7 +32,6 @@ namespace LetsTalk
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
                 FormsIdentity identity = new FormsIdentity(ticket);
 
-
                 byte[] buffer = Convert.FromBase64String(ticket.UserData); 
                 UserLogado userLog = new UserLogado();
                 using (Stream myStream = new MemoryStream(buffer))

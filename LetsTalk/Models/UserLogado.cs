@@ -5,6 +5,7 @@ using System.Web;
 
 namespace LetsTalk.Models
 {
+    [Serializable]
     public class UserLogado
     {
         public int ID { get; set; }

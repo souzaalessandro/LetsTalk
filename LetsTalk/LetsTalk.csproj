@@ -3724,6 +3724,7 @@
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\metronic.js" />
     <Content Include="assets\logo\Logo.png" />
+    <Content Include="Content\40862160.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="LtIcon.ico" />
@@ -4013,7 +4014,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserImages\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicalLayer\BusinessLogicalLayer.csproj">
       <Project>{051d02de-6dc2-4811-8117-da10d4db0c99}</Project>

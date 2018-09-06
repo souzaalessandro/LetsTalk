@@ -4007,6 +4007,7 @@
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Conhecer\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Login\testeparafoto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

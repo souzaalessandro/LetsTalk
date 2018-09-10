@@ -106,7 +106,7 @@
                 <i class="fa fa-search"></i> Filtrar
             </a>
 
-          
+
         </div>
         <!-- fim do codido-->
 
@@ -124,16 +124,15 @@
     <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/admin/pages/scripts/components-jqueryui-sliders.js"></script>
     <script src="~/assets/global/plugins/icheck/icheck.min.js"></script>
-
-
 }
-@section PageLevelScripts {
 
+@section PageLevelScripts {
     <script src="~/assets/admin/pages/scripts/components-jqueryui-sliders.js"></script>
     <script src="~/assets/admin/pages/scripts/form-icheck.js"></script>
-
-
+    <script src="~/assets/global/plugins/gmaps/gmaps.js"></script>
+    <script src="~/assets/global/plugins/gmaps/gmaps.min.js"></script>
 }
+
 @section JqueryFinal{
     <script>
         jQuery(document).ready(function () {
@@ -142,9 +141,21 @@
             Demo.init(); // init demo features  // set current page
             ComponentsjQueryUISliders.init();
             FormiCheck.init(); // init page demo
-            });
+        });
 
-
+        var x = document.getElementById("demo");
+        getLocation();
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+            //x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+        }
     </script>
 }
 

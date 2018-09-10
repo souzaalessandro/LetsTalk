@@ -3724,7 +3724,6 @@
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\metronic.js" />
     <Content Include="assets\logo\Logo.png" />
-    <Content Include="Content\40862160.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\SimpleChat.css" />

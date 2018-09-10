@@ -12,6 +12,10 @@ namespace Entity
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
+        public Coordenada()
+        {
+
+        }
 
         public Coordenada(double latitude, double longitude)
         {

@@ -110,9 +110,6 @@
         </div>
         <!-- fim do codido-->
 
-
-
-
     </div>
 </div>
 
@@ -135,16 +132,17 @@
 
 @section JqueryFinal{
     <script>
+        var x;
         jQuery(document).ready(function () {
             Metronic.init(); // init metronic core components
             Layout.init(); // init current layout
             Demo.init(); // init demo features  // set current page
             ComponentsjQueryUISliders.init();
             FormiCheck.init(); // init page demo
+            getLocation();
+            x = document.getElementById("demo");
         });
 
-        var x = document.getElementById("demo");
-        getLocation();
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -153,8 +151,23 @@
             }
         }
         function showPosition(position) {
-            alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
-            //x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            console.log(position);
+            $.ajax({
+                url: '/Conhecer/SalvarCoordenadas',
+                type: 'POST',
+                data: JSON.stringify({ Latitude: lat, Longitude: lon }),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (request, status, error) {
+                    alert('oh, errors here. The call to the server is not working.')
+                }
+            });
+
         }
     </script>
 }

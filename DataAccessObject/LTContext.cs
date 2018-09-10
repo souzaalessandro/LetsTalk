@@ -17,6 +17,7 @@ namespace DataAccessObject
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Diretorio> Diretorios { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Coordenada> Coordenadas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

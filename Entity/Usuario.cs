@@ -22,7 +22,7 @@ namespace Entity
         public string Descricao { get; set; }
         public List<Tag> Tags { get; set; }
         public string PathFotoPerfil { get; set; }
+        public Coordenada UltimaCoordenada { get; set; }
         public List<Diretorio> DiretoriosImagens { get; set; }
-
     }
 }

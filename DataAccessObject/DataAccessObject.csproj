@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201809061745332_NomeFullPath.Designer.cs">
       <DependentUpon>201809061745332_NomeFullPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809101713354_Coordenada.cs" />
+    <Compile Include="Migrations\201809101713354_Coordenada.Designer.cs">
+      <DependentUpon>201809101713354_Coordenada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809061745332_NomeFullPath.resx">
       <DependentUpon>201809061745332_NomeFullPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809101713354_Coordenada.resx">
+      <DependentUpon>201809101713354_Coordenada.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    LetsTalk.Models.MvcUser user = (LetsTalk.Models.MvcUser)HttpContext.Current.User;
 }
 
 @model Entity.Usuario
@@ -58,13 +59,13 @@
                 <div class="portlet light profile-sidebar-portlet">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="~/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+                        <img src="@user.PathFotoPerfil" class="img-responsive" alt="">
                     </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
-                            Marcus Doe
+                            @user.Nome
                         </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
@@ -130,13 +131,10 @@
 
                                             </div>
                                             <div class="margiv-top-10">
-                                                @*<a href="@Url.Action("SalvarInformacoesPessoais","Perfil")" class="btn purple-customizado">
-                                                        Salvar
-                                                    </a>*@
                                                 <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
-                                                <a href="javascript:;" class="btn default">
+                                                @*<a href="javascript:;" class="btn default">
                                                     Cancelar
-                                                </a>
+                                                </a>*@
                                             </div>
                                         </form>
                                     </div>
@@ -144,7 +142,7 @@
                                     <!-- CHANGE AVATAR TAB -->
                                     <div class="tab-pane" id="tab_1_2">
                                         <form action="#" role="form">
-                                            <div class="form-group" ">
+                                            <div class="form-group">
                                                 <div class="col-md-9" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <label>Fotos para seu álbum</label>
@@ -177,7 +175,7 @@
                                     </div>
                                     <div class="tab-pane" id="tab_1_4">
                                         <form action="#" role="form">
-                                            <div class="form-group" ">
+                                            <div class="form-group">
                                                 <div class="col-md-9" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <label>Foto de Perfil</label>
@@ -278,7 +276,7 @@
 
     <script src="~/assets/admin/pages/scripts/components-form-tools.js"></script>
 
-    <script src="~/Scripts/Perfil.js"></script>
+    <script src="~/Scripts/Specifics/Perfil.js"></script>
 }
 
 @section JqueryFinal{
@@ -291,40 +289,6 @@
             Profile.init(); // init page demo
             ComponentsFormTools.init();
             ComponentsDropdowns.init();
-
         });
-
-        function salvar() {
-            var frase = $("#fraseApresentacao").val();
-            var tags = "";
-
-            $("#tags_2_tagsinput").find("span.tag").each(function (i) {
-                var temp = $(this).text();
-                tags += temp.substring(0, temp.length - 1);
-            });
-
-            $.ajax({
-                url: 'SalvarInformacoesPessoais',
-                type: 'POST',
-                data: JSON.stringify({ Frase: frase, Tags: tags }),
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    alert("foi!");
-                },
-                error: function (request, status, error) {
-                    alert('oh, errors here. The call to the server is not working.')
-                }
-            });
-        }
-
     </script>
-    <!-- BEGIN GOOGLE RECAPTCHA -->
-    <script type="text/javascript">
-        var RecaptchaOptions = {
-            theme: 'custom',
-            custom_theme_widget: 'recaptcha_widget'
-        };
-    </script>
-    <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LcrK9cSAAAAALEcjG9gTRPbeA0yAVsKd8sBpFpR"></script>
-    <script src="~/Scripts/Perfil.js"></script>
 }

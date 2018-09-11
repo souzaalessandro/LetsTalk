@@ -3726,6 +3726,7 @@
     <Content Include="assets\logo\Logo.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\De5RwT1XkAAfgS8.jpg" />
     <Content Include="Content\Perfil.css" />
     <Content Include="Content\SimpleChat.css" />
     <Content Include="LtIcon.ico" />
@@ -3985,7 +3986,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Perfil.js" />
+    <Content Include="Scripts\Specifics\Perfil.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Specifics\FiltersOfUserName.js" />

@@ -47,9 +47,10 @@ namespace MexendoNoTemplate.Controllers
 
         private bool IsImagemValida(HttpPostedFileBase file)
         {
+            byte tamanhoMega = 2;
             string[] formats = new string[] { ".jpg", ".png", ".jpeg" };
             bool validType = file.ContentType.Contains("image");
-            bool validSize = file.ContentLength <= 2 * 1024 * 1024;
+            bool validSize = file.ContentLength <= tamanhoMega * 1024 * 1024;
             bool validExtension = formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
 
             return validType && validSize && validExtension;
@@ -59,12 +60,12 @@ namespace MexendoNoTemplate.Controllers
         public ActionResult SalvarInformacoesPessoais(UsuarioViewModel usuaviewModel)
         {
             Usuario user = new Usuario();
-            List<Tag> tags = new List<Tag>();
+           // List<Tag> tags = new List<Tag>();
 
-            usuaviewModel.Tags.Split(' ').ToList().ForEach(t => tags.Add(new Tag()
-            {
-                Nome = t
-            }));
+            //usuaviewModel.Tags.Split(' ').ToList().ForEach(t => tags.Add(new Tag()
+            //{
+            //    Nome = t
+            //}));
             //UsuarioBLL usuarioBLL = new UsuarioBLL();
             //MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             //BLLResponse<Usuario> usuarioAtual = usuarioBLL.LerPorID(usuario.ID);
@@ -77,5 +78,6 @@ namespace MexendoNoTemplate.Controllers
     {
         public string Frase { get; set; }
         public string Tags{ get; set; }
+        public string Descricao{ get; set; }
     }
 }

@@ -9,15 +9,15 @@ namespace Entity
     public class Coordenada
     {
         public int ID { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public Coordenada()
         {
 
         }
 
-        public Coordenada(double latitude, double longitude)
+        public Coordenada(decimal latitude, decimal longitude)
         {
             this.Latitude = latitude;
             this.Longitude = longitude;

@@ -30,12 +30,13 @@ namespace LetsTalk.Controllers
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             using (LTContext ctx = new LTContext())
             {
-                Usuario userDoDb = ctx.Usuarios.Include(u => u.UltimaCoordenada).FirstOrDefault(u => u.ID == user.ID);
+                Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == user.ID);
                 if (userDoDb == null)
                 {
                     //return
                 }
-                userDoDb.UltimaCoordenada = new Coordenada(coordenada.Latitude, coordenada.Longitude);
+                userDoDb.Latitude = coordenada.Latitude;
+                userDoDb.Longitude = coordenada.Longitude;
                 ctx.SaveChanges();
             }
             return Content("Coordenadas salvas no usuário");

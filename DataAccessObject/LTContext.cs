@@ -16,12 +16,13 @@ namespace DataAccessObject
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Diretorio> Diretorios { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<Coordenada> Coordenadas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().Ignore(s => s.Senha);
+
+            modelBuilder.Entity<Usuario>().Property(p => p.Latitude).HasPrecision(18, 6);
+            modelBuilder.Entity<Usuario>().Property(p => p.Longitude).HasPrecision(18, 6);
         }
     }
 }

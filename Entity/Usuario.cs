@@ -10,6 +10,7 @@ namespace Entity
     public class Usuario
     {
         public int ID { get; set; }
+
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public DateTime DataNascimento { get; set; }
@@ -18,11 +19,16 @@ namespace Entity
         public string Senha { get; set; }
         public byte[] Hash { get; set; }
         public byte[] Salt { get; set; }
+
+
         public string FraseApresentacao { get; set; }
         public string Descricao { get; set; }
-        public List<Tag> Tags { get; set; }
+        public string Tags { get; set; }
         public string PathFotoPerfil { get; set; }
-        public Coordenada UltimaCoordenada { get; set; }
+
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
+
         public List<Diretorio> DiretoriosImagens { get; set; }
     }
 }

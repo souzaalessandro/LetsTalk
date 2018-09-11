@@ -64,6 +64,22 @@
     <Compile Include="Migrations\201809101713354_Coordenada.Designer.cs">
       <DependentUpon>201809101713354_Coordenada.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809101953496_CoordenadaNoUser.cs" />
+    <Compile Include="Migrations\201809101953496_CoordenadaNoUser.Designer.cs">
+      <DependentUpon>201809101953496_CoordenadaNoUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809101958171_DoubleToDecimal.cs" />
+    <Compile Include="Migrations\201809101958171_DoubleToDecimal.Designer.cs">
+      <DependentUpon>201809101958171_DoubleToDecimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809102005180_PrecisaoSeisDecimal.cs" />
+    <Compile Include="Migrations\201809102005180_PrecisaoSeisDecimal.Designer.cs">
+      <DependentUpon>201809102005180_PrecisaoSeisDecimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809111701058_RefeitoTags.cs" />
+    <Compile Include="Migrations\201809111701058_RefeitoTags.Designer.cs">
+      <DependentUpon>201809111701058_RefeitoTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,6 +105,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809101713354_Coordenada.resx">
       <DependentUpon>201809101713354_Coordenada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809101953496_CoordenadaNoUser.resx">
+      <DependentUpon>201809101953496_CoordenadaNoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809101958171_DoubleToDecimal.resx">
+      <DependentUpon>201809101958171_DoubleToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809102005180_PrecisaoSeisDecimal.resx">
+      <DependentUpon>201809102005180_PrecisaoSeisDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809111701058_RefeitoTags.resx">
+      <DependentUpon>201809111701058_RefeitoTags.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

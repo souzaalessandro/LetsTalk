@@ -74,15 +74,9 @@
                     <div class="profile-usermenu">
                         <ul class="nav">
                             <li>
-                                <a href="extra_profile.html">
+                                <a href="">
                                     <i class="icon-home"></i>
                                     Perfil
-                                </a>
-                            </li>
-                            <li class="active">
-                                <a href="extra_profile_account.html">
-                                    <i class="icon-settings"></i>
-                                    Configuração
                                 </a>
                             </li>
                         </ul>
@@ -123,11 +117,11 @@
                                 <div class="tab-content">
                                     <!-- PERSONAL INFO TAB -->
                                     <div class="tab-pane active" id="tab_1_1">
-                                        <form role="form" action="#">
+                                        <form role="form" action="@Url.Action("SalvarInformacoesPessoais", "Perfil")">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Frase de Apresentação</label>
-                                                    <input type="text" placeholder="Digite sua frase" class="form-control" name="usuario.FraseApresetacao">
+                                                    <input id="fraseApresentacao" type="text" placeholder="Digite sua frase" class="form-control" name="usuario.FraseApresetacao">
                                                 </div>
                                                 <div class="col-md-6" style="margin-bottom: 20px;">
                                                     <label class="control-label">Tags</label>
@@ -136,9 +130,10 @@
 
                                             </div>
                                             <div class="margiv-top-10">
-                                                <a href="javascript:;" class="btn purple-customizado">
-                                                    Salvar
-                                                </a>
+                                                @*<a href="@Url.Action("SalvarInformacoesPessoais","Perfil")" class="btn purple-customizado">
+                                                        Salvar
+                                                    </a>*@
+                                                <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
                                                 <a href="javascript:;" class="btn default">
                                                     Cancelar
                                                 </a>
@@ -296,7 +291,32 @@
             Profile.init(); // init page demo
             ComponentsFormTools.init();
             ComponentsDropdowns.init();
+
         });
+
+        function salvar() {
+            var frase = $("#fraseApresentacao").val();
+            var tags = "";
+
+            $("#tags_2_tagsinput").find("span.tag").each(function (i) {
+                var temp = $(this).text();
+                tags += temp.substring(0, temp.length - 1);
+            });
+
+            $.ajax({
+                url: 'SalvarInformacoesPessoais',
+                type: 'POST',
+                data: JSON.stringify({ Frase: frase, Tags: tags }),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    alert("foi!");
+                },
+                error: function (request, status, error) {
+                    alert('oh, errors here. The call to the server is not working.')
+                }
+            });
+        }
+
     </script>
     <!-- BEGIN GOOGLE RECAPTCHA -->
     <script type="text/javascript">

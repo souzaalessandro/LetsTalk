@@ -24,5 +24,9 @@ namespace Entity
         public string PathFotoPerfil { get; set; }
         public List<Diretorio> DiretoriosImagens { get; set; }
 
+        public Usuario()
+        {
+            this.Tags = new List<Tag>();
+        }
     }
 }

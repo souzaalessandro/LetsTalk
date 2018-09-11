@@ -9,10 +9,11 @@ using DataAccessObject;
 using Entity;
 using Entity.Enums;
 using Entity.Extensions;
+using Entity.ViewModels;
 
 namespace BusinessLogicalLayer
 {
-    public partial class UsuarioBLL : IUpdatable<Usuario>, ISearchable<Usuario>, IDeletable<Usuario>
+    public partial class UsuarioBLL
     {
         public BLLResponse<Usuario> Registrar(Usuario item, string senhaRepetida)
         {
@@ -64,22 +65,6 @@ namespace BusinessLogicalLayer
             byte[] salt;
             item.Hash = Criptografia.Encriptar(item.Senha, out salt);
             item.Salt = salt;
-        }
-
-        public BLLResponse<Usuario> Update(Usuario item)
-        {
-            //Fazer validações
-
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            Usuario user = new Usuario();
-            using (LTContext ctx = new LTContext())
-            {
-                user = ctx.Usuarios.FirstOrDefault(u => u.ID == item.ID);
-                response.Sucesso = user != null;
-                user.ClonarDe(item);
-                ctx.SaveChanges();
-            }
-            return response;
         }
 
         public BLLResponse<Usuario> Delete(Usuario item)
@@ -137,16 +122,6 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        //public BLLResponse<Usuario> LerPorID(int id)
-        //{
-        //    BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-        //    using (LTContext ctx = new LTContext())
-        //    {
-        //        response.DataList = ctx.Usuarios.Where(u => u.ID == id).ToList();
-        //    }
-        //    return response;
-        //}
-
         private List<ErrorField> ValidarUsuarioParaRegistro(Usuario item, string senhaRepetida)
         {
             List<ErrorField> errors = new List<ErrorField>();
@@ -166,6 +141,43 @@ namespace BusinessLogicalLayer
             ValidarSenha(item, errors, senhaRepetida);
 
             return errors;
+        }
+
+        public BLLResponse<Usuario> Update(UsuarioViewModel userVM)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+            Usuario user = new Usuario();
+
+            using (LTContext ctx = new LTContext())
+            {
+                user = ctx.Usuarios.FirstOrDefault(u => u.ID == userVM.ID);
+                if (user != null)
+                {
+                    response.Sucesso = true;
+                    CopiarInformacoes(userVM, user);
+                    ctx.SaveChanges();
+                    return response;
+                }
+            }
+            return response;
+        }
+
+        private void CopiarInformacoes(UsuarioViewModel userVM, Usuario user)
+        {
+            if (!userVM.Frase.IsNullOrWhiteSpace())
+            {
+                user.FraseApresentacao = userVM.Frase;
+            }
+            if (!userVM.Descricao.IsNullOrWhiteSpace())
+            {
+                user.Descricao = userVM.Descricao;
+            }
+            if (!userVM.Tags.IsNullOrWhiteSpace())
+            {
+                string[] arraysTags = userVM.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string tagsJuntas = String.Join(",", arraysTags);
+                user.Tags = tagsJuntas;
+            }
         }
     }
 }

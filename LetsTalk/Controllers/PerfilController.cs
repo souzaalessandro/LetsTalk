@@ -1,5 +1,6 @@
 ﻿using BusinessLogicalLayer;
 using Entity;
+using Entity.ViewModels;
 using LetsTalk.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MexendoNoTemplate.Controllers
+namespace LetsTalk.Controllers
 {
     //[Authorize(Roles = "Adm")]
     [Authorize]
@@ -57,27 +58,16 @@ namespace MexendoNoTemplate.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalvarInformacoesPessoais(UsuarioViewModel usuaviewModel)
+        public ActionResult SalvarInformacoesPessoais(UsuarioViewModel userVM)
         {
-            Usuario user = new Usuario();
-           // List<Tag> tags = new List<Tag>();
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            userVM.ID = user.ID;
 
-            //usuaviewModel.Tags.Split(' ').ToList().ForEach(t => tags.Add(new Tag()
-            //{
-            //    Nome = t
-            //}));
-            //UsuarioBLL usuarioBLL = new UsuarioBLL();
-            //MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            //BLLResponse<Usuario> usuarioAtual = usuarioBLL.LerPorID(usuario.ID);
-            //usuario.Descricao = user.ClonarDe()
-            //usuarioBLL.Update(usuario);
+            BLLResponse<Usuario> response = new UsuarioBLL().Update(userVM);
+
             return RedirectToAction("Index");
         }
+
     }
-    public class UsuarioViewModel
-    {
-        public string Frase { get; set; }
-        public string Tags{ get; set; }
-        public string Descricao{ get; set; }
-    }
+ 
 }

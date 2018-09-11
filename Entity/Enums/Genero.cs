@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entity.Enums
 {
+    [Flags]
     public enum Genero
     {
-        Masculino, Feminino, Indeterminado
+        Masculino = 1,
+        Feminino = 2,
+        Indeterminado = 4
     }
 }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LetsTalk.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ChatController : Controller
     {
         // GET: Chat

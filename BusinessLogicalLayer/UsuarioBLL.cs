@@ -137,6 +137,16 @@ namespace BusinessLogicalLayer
             return response;
         }
 
+        //public BLLResponse<Usuario> LerPorID(int id)
+        //{
+        //    BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+        //    using (LTContext ctx = new LTContext())
+        //    {
+        //        response.DataList = ctx.Usuarios.Where(u => u.ID == id).ToList();
+        //    }
+        //    return response;
+        //}
+
         private List<ErrorField> ValidarUsuarioParaRegistro(Usuario item, string senhaRepetida)
         {
             List<ErrorField> errors = new List<ErrorField>();

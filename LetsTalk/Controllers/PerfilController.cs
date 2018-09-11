@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace MexendoNoTemplate.Controllers
 {
     //[Authorize(Roles = "Adm")]
-    //[Authorize]
+    [Authorize]
     public class PerfilController : Controller
     {
         public ActionResult Index()
@@ -54,6 +54,28 @@ namespace MexendoNoTemplate.Controllers
 
             return validType && validSize && validExtension;
         }
-    }
 
+        [HttpPost]
+        public ActionResult SalvarInformacoesPessoais(UsuarioViewModel usuaviewModel)
+        {
+            Usuario user = new Usuario();
+            List<Tag> tags = new List<Tag>();
+
+            usuaviewModel.Tags.Split(' ').ToList().ForEach(t => tags.Add(new Tag()
+            {
+                Nome = t
+            }));
+            //UsuarioBLL usuarioBLL = new UsuarioBLL();
+            //MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            //BLLResponse<Usuario> usuarioAtual = usuarioBLL.LerPorID(usuario.ID);
+            //usuario.Descricao = user.ClonarDe()
+            //usuarioBLL.Update(usuario);
+            return RedirectToAction("Index");
+        }
+    }
+    public class UsuarioViewModel
+    {
+        public string Frase { get; set; }
+        public string Tags{ get; set; }
+    }
 }

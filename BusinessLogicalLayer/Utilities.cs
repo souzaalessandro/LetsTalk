@@ -14,7 +14,7 @@ namespace BusinessLogicalLayer
     {
         public static string FormatarNome(string nome)
         {
-            string lower = nome.ToLower();
+            string lower = nome.ToLower().Trim();
             string[] nomes = lower.Split(' ');
             for (int i = 0; i < nomes.Length; i++)
             {

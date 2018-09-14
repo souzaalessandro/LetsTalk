@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "TesteCheckboxesView";
+}
+@using Entity.Enums
+@{
+    Genero[] generos = (Genero[])Enum.GetValues(typeof(Genero));
+}
+
+@using (Html.BeginForm("TesteCheckboxes", "Teste", new { onsubmit = "event.preventDefault(); botaoSalvar();" }))
+{
+    <div id="checkboxes">
+        @foreach (Genero g in generos)
+        {
+            int valor = (int)g;
+            <input type="checkbox" value="@valor">@Enum.GetName(typeof(Genero), g) <br />
+        }
+    </div>
+    <input id="botao" type="submit" value="Submit now" />
+
+}
+@section JqueryFinal{
+    <script>
+        function botaoSalvar() {
+            var chks = $("#checkboxes");
+            var soma = 0;
+            for (var i = 0; i < chks.length; i++) {
+                if (chks[i].checked) {
+                    soma += chks[i].value;
+                }
+            }
+            var nova = $("<input>").attr("type", "checkbox").attr("name", "generos").attr("value", soma);
+            var nova2 = $("#checkboxes").append(nova);
+            console.log(nova2);
+            return false;
+        };
+
+    </script>
+}

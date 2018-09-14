@@ -133,8 +133,8 @@
                                             <div class="margiv-top-10">
                                                 <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
                                                 @*<a href="javascript:;" class="btn default">
-                                                    Cancelar
-                                                </a>*@
+                                                        Cancelar
+                                                    </a>*@
                                             </div>
                                         </form>
                                     </div>
@@ -152,15 +152,15 @@
                                                         <div>
                                                             <span class="btn default btn-file">
                                                                 <span class="fileinput-new">
-                                                                    Select image
+                                                                    Selecionar
                                                                 </span>
                                                                 <span class="fileinput-exists">
-                                                                    Change
+                                                                    Alterar
                                                                 </span>
                                                                 <input type="hidden"><input type="file" name="...">
                                                             </span>
                                                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                                                Remove
+                                                                Remover
                                                             </a>
                                                         </div>
                                                     </div>
@@ -168,13 +168,13 @@
                                             </div>
                                             <div class="margin-top-10">
                                                 <a href="javascript:;" class="btn purple-customizado">
-                                                    Submit
+                                                    Salvar
                                                 </a>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="tab_1_4">
-                                        <form action="#" role="form">
+                                        <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data"  role="form" method="post">
                                             <div class="form-group">
                                                 <div class="col-md-9" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -185,24 +185,25 @@
                                                         <div>
                                                             <span class="btn default btn-file">
                                                                 <span class="fileinput-new">
-                                                                    Select image
+                                                                    Selecionar
                                                                 </span>
                                                                 <span class="fileinput-exists">
-                                                                    Change
+                                                                    Alterar
                                                                 </span>
-                                                                <input type="hidden"><input type="file" name="...">
+                                                                <input type="hidden"><input type="file" name="foto">
                                                             </span>
                                                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                                                Remove
+                                                                Remover
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn purple-customizado">
-                                                    Submit
-                                                </a>
+                                                <button type="submit" class="btn purple-customizado">Salvar</button>
+                                                @*<a href="javascript:;" class="btn purple-customizado">
+                                                    Salvar
+                                                </a>*@
                                             </div>
                                         </form>
                                     </div>
@@ -224,7 +225,7 @@
                                             </div>
                                             <div class="margin-top-10">
                                                 <a href="javascript:;" class="btn purple-customizado">
-                                                    Alterar Senha
+                                                    Salvar
                                                 </a>
                                             </div>
                                         </form>

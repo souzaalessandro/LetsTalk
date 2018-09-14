@@ -39,8 +39,6 @@ namespace BusinessLogicalLayer
             prop.SetValue(user, formatado);
         }
 
-       
-
         private void ValidarIdade(Usuario user, List<ErrorField> errors, byte idadeMinima = 18, byte idadeMaxima = 80)
         {
             if (user.DataNascimento == DateTime.MinValue)
@@ -83,6 +81,8 @@ namespace BusinessLogicalLayer
                 errors.Add(new ErrorField(nameof(item.Genero), Utilities.EnumInvalidoMessage("Gênero")));
             }
         }
+
+      
 
         private void ValidarEmail(Usuario item, List<ErrorField> errors)
         {

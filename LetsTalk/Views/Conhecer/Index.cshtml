@@ -11,6 +11,9 @@
 
     <link href="~/assets/global/plugins/icheck/skins/all.css" rel="stylesheet" />
 
+    <link href="~/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
+
 }
 
 
@@ -57,20 +60,89 @@
             <div class="input-group">
                 <div class="icheck-list">
                     <label class="">
-                        <div class="icheckbox_flat-purple" style="position: relative;"><input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-grey" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Homem
+                        <div class="icheckbox_flat-purple" style="position: relative;">
+                            <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div> Homem
                     </label>
                     <label class="">
-                        <div class="icheckbox_flat-purple" style="position: relative;"><input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-grey" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Mulher
+                        <div class="icheckbox_flat-purple" style="position: relative;">
+                            <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div> Mulher
                     </label>
                     <label class="">
-                        <div class="icheckbox_flat-purple checked" style="position: relative;"><input type="checkbox" checked="" class="icheck" data-checkbox="icheckbox_flat-grey" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Indefinido
+                        <div class="icheckbox_flat-purple checked" style="position: relative;">
+                            <input type="checkbox" checked="" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div> Indefinido
                     </label>
                 </div>
             </div>
         </div>
 
         <div class="btn-group">
-            <a href=" javascript:;" class="btn btn-lg purple-studio">
+            <a href=" javascript:;" class="btn purple-customizado">
+
+                <i class="fa fa-search"></i> Filtrar
+            </a>
+
+
+        </div>
+        <!-- fim do codido-->
+
+    </div>
+</div>
+
+<div class="portlet solid purple">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-sliders fa-4x"></i>Filtros
+        </div>
+
+        <div class="tools">
+            <a href="javascript:;" class="expand" data-original-title="" title="">
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body" style="display: none;">
+        <!-- inicio do codigo aqui -->
+        <!-- para alterar sliders --é necessario alterar ComponentsjQueryUISliders = function () -->
+
+        <div class="space20">
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="input-group">
+                <div class="icheck-list">
+                    <label class="">
+                        <div class="icheckbox_flat-purple" style="position: relative;">
+                            <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div> Homem
+                    </label>
+                    <label class="">
+                        <div class="icheckbox_flat-purple" style="position: relative;">
+                            <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div> Mulher
+                    </label>
+                    <label class="">
+                        <div class="icheckbox_flat-purple checked" style="position: relative;">
+                            <input type="checkbox" checked="" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div> Indefinido
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href=" javascript:;" class="btn purple-customizado">
 
                 <i class="fa fa-search"></i> Filtrar
             </a>
@@ -83,6 +155,162 @@
 </div>
 
 
+
+<!--pessoas encontradas -->
+<div class="margin-top-10">
+    <!--3 colunas -->
+    <div class="row mix-grid thumbnails">
+        <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
+            <div class="mix-inner">
+                <img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
+                <div class="mix-details">
+                    <a class="list-inline blog-tags" href="@Url.Action("Index", "Perfil")">
+                        Nome, Idade
+                    </a>
+
+                    <p>
+                        Descrição cadastrada pelo user.  Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user.
+                    </p>
+
+                    <ul class="list-inline blog-tags">
+                        <li>
+                            <i class="fa fa-tags"></i>
+                            Tag1
+                            <i class="fa fa-tags"></i>
+                            Tag2
+                            <i class="fa fa-tags"></i>
+                            Tag3
+                            <i class="fa fa-tags"></i>
+                            Tag4
+                            <i class="fa fa-tags"></i>
+                            Tag5
+                            <i class="fa fa-tags"></i>
+                            Tag6
+                            <i class="fa fa-tags"></i>
+                            Tag7
+                            <i class="fa fa-tags"></i>
+                            Tag8
+                            <i class="fa fa-tags"></i>
+                            Tag9
+                            <i class="fa fa-tags"></i>
+                            Tag10
+
+                        </li>
+                    </ul>
+
+                    @*<a class="mix-link">
+                            <i class="fa fa-link"></i>
+                        </a>
+                        <a class="mix-preview fancybox-button" href="../../assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
+                            <i class="fa fa-search"></i>
+                        </a>*@
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
+            <div class="mix-inner">
+                <img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
+                <div class="mix-details">
+                    <h3>Nome, idade </h3>
+                    <p>
+                        Descrição cadastrada pelo user.
+                    </p>
+
+                    <ul class="list-inline blog-tags">
+                        <li>
+                            <i class="fa fa-tags"></i>
+                            Tags cadastradas
+                            <i class="fa fa-tags"></i>
+                            Tag2
+                            <i class="fa fa-tags"></i>
+                            Tag3
+                            <i class="fa fa-tags"></i>
+                            Tag4
+                            <i class="fa fa-tags"></i>
+                            Tag5
+                            <i class="fa fa-tags"></i>
+                            Tag6
+                            <i class="fa fa-tags"></i>
+                            Tag7
+                            <i class="fa fa-tags"></i>
+                            Tag8
+                            <i class="fa fa-tags"></i>
+                            Tag9
+                            <i class="fa fa-tags"></i>
+                            Tag10
+                            <i class="fa fa-tags"></i>
+                            Tag11
+                        </li>
+                    </ul>
+
+                    <a class="mix-link">
+                        <i class="fa fa-link"></i>
+                    </a>
+                    <a class="mix-preview fancybox-button" href="../../assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
+                        <i class="fa fa-search"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
+            <div class="mix-inner">
+                <img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
+                <div class="mix-details">
+                    <h3>Nome, idade </h3>
+                    <p>
+                        Descrição cadastrada pelo user.
+                    </p>
+
+                    <ul class="list-inline blog-tags">
+                        <li>
+                            <i class="fa fa-tags"></i>
+                            Tags cadastradas
+                            <i class="fa fa-tags"></i>
+                            Tag2
+                            <i class="fa fa-tags"></i>
+                            Tag3
+                            <i class="fa fa-tags"></i>
+                            Tag4
+                            <i class="fa fa-tags"></i>
+                            Tag5
+                            <i class="fa fa-tags"></i>
+                            Tag6
+                            <i class="fa fa-tags"></i>
+                            Tag7
+                            <i class="fa fa-tags"></i>
+                            Tag8
+                            <i class="fa fa-tags"></i>
+                            Tag9
+                            <i class="fa fa-tags"></i>
+                            Tag10
+                            <i class="fa fa-tags"></i>
+                            Tag11
+                        </li>
+                    </ul>
+
+                    <a class="mix-link">
+                        <i class="fa fa-link"></i>
+                    </a>
+                    <a class="mix-preview fancybox-button" href="../../assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
+                        <i class="fa fa-search"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
 @section  PageLevelPlugins
 {
     <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
@@ -90,13 +318,19 @@
     <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/admin/pages/scripts/components-jqueryui-sliders.js"></script>
     <script src="~/assets/global/plugins/icheck/icheck.min.js"></script>
+    <script src="~/assets/admin/pages/scripts/portfolio.js"></script>
 }
 
 @section PageLevelScripts {
     <script src="~/assets/admin/pages/scripts/components-jqueryui-sliders.js"></script>
     <script src="~/assets/admin/pages/scripts/form-icheck.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js"></script>
+    <script type="text/javascript" src="~/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
     <script src="~/assets/global/plugins/gmaps/gmaps.js"></script>
     <script src="~/assets/global/plugins/gmaps/gmaps.min.js"></script>
+
+
+
 }
 
 @section JqueryFinal{
@@ -108,6 +342,7 @@
             Demo.init(); // init demo features  // set current page
             ComponentsjQueryUISliders.init();
             FormiCheck.init(); // init page demo
+            Portfolio.init();
             getLocation();
             x = document.getElementById("demo");
         });

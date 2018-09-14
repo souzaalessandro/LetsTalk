@@ -5,37 +5,6 @@
 
 <h2>Index</h2>
 
-@*
-    ComponentsjQueryUISliders
-               // range slider PRECISA ALTERAR
-                $("#slider-range").slider({
-                    isRTL: Metronic.isRTL(),
-                    range: true,
-                    min: 18,
-                    max: 80,
-                    values: [25, 50],
-                    slide: function (event, ui) {
-                        $("#slider-range-amount").text(ui.values[0] + " a " + ui.values[1] + " anos ");
-                    }
-                });
-
-                $("#slider-range-amount").text( $("#slider-range").slider("values", 0) + " a " +  $("#slider-range").slider("values", 1) + " anos");
-
-                //range max PRECISA ALTERAR
-
-                $("#slider-range-max").slider({
-                    isRTL: Metronic.isRTL(),
-                    range: "max",
-                    min: 1,
-                    max: 5,
-                    value: 2,
-                    slide: function (event, ui) {
-                        $("#slider-range-max-amount").text(ui.value);
-                    }
-                });
-
-                $("#slider-range-max-amount").text($("#slider-range-max").slider("value"));*@
-
 
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -58,7 +27,7 @@
     </div>
     <div class="portlet-body" style="display: none;">
         <!-- inicio do codigo aqui -->
-        <!-- é necessario alterar ComponentsjQueryUISliders = function ()   ESTA NO INICIO DASTA PAGINA COMENTADO-->
+        <!-- para alterar sliders --é necessario alterar ComponentsjQueryUISliders = function () -->
 
         <div class="space20">
         </div>

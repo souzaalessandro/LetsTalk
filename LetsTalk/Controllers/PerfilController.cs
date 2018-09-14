@@ -19,7 +19,7 @@ namespace LetsTalk.Controllers
         {
             return View(new Usuario());
         }
-
+        [HttpPost]
         public ActionResult SalvarFoto(HttpPostedFileBase foto)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;

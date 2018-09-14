@@ -31,32 +31,34 @@ var ComponentsjQueryUISliders = function () {
 
             $("#slider-snap-inc-amount").text("$" + $("#slider-snap-inc").slider("value"));
 
-            // range slider
+            // range slider ALTERADO
             $("#slider-range").slider({
                 isRTL: Metronic.isRTL(),
                 range: true,
-                min: 0,
-                max: 500,
-                values: [75, 300],
+                min: 18,
+                max: 80,
+                values: [25, 50],
                 slide: function (event, ui) {
-                    $("#slider-range-amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#slider-range-amount").text(ui.values[0] + " a " + ui.values[1] + " anos ");
                 }
             });
 
-            $("#slider-range-amount").text("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+            $("#slider-range-amount").text($("#slider-range").slider("values", 0) + " a " + $("#slider-range").slider("values", 1) + " anos");
 
-            //range max
+            //range max ALTERADO
 
             $("#slider-range-max").slider({
                 isRTL: Metronic.isRTL(),
                 range: "max",
                 min: 1,
-                max: 10,
+                max: 5,
                 value: 2,
                 slide: function (event, ui) {
                     $("#slider-range-max-amount").text(ui.value);
                 }
             });
+
+            $("#slider-range-max-amount").text($("#slider-range-max").slider("value"));
 
             $("#slider-range-max-amount").text($("#slider-range-max").slider("value"));
 

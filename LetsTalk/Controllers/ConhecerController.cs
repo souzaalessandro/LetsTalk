@@ -24,6 +24,11 @@ namespace LetsTalk.Controllers
             return View();
         }
 
+        public ActionResult GetUsuarios()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult SalvarCoordenadas(Coordenada coordenada)
         {

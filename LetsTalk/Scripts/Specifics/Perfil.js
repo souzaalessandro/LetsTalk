@@ -1,5 +1,6 @@
 ﻿function salvar() {
     var frase = $("#fraseApresentacao").val();
+    var descricao = $("#maxlength_textarea").val();
     var tags = "";
 
     $("#tags_2_tagsinput").find("span.tag").each(function (i) {
@@ -10,7 +11,7 @@
     $.ajax({
         url: 'SalvarInformacoesPessoais',
         type: 'POST',
-        data: JSON.stringify({ Frase: frase, Tags: tags }),
+        data: JSON.stringify({ Frase: frase, Tags: tags, Descricao: descricao }),
         contentType: "application/json;charset=utf-8",
         success: function (data) {
             alert("foi!");

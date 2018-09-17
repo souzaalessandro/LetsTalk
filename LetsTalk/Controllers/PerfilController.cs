@@ -19,6 +19,16 @@ namespace LetsTalk.Controllers
         {
             return View(new Usuario());
         }
+
+        public ActionResult MostrarDadosExistente()
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(user.ID);
+
+
+            return View(response.Data);
+        }
+
         [HttpPost]
         public ActionResult SalvarFoto(HttpPostedFileBase foto)
         {

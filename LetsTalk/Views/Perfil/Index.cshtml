@@ -120,10 +120,13 @@
                                     <div class="tab-pane active" id="tab_1_1">
                                         <form role="form" action="@Url.Action("SalvarInformacoesPessoais", "Perfil")">
                                             <div class="row">
+                                                
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Frase de Apresentação</label>
-                                                    <input id="fraseApresentacao" type="text" placeholder="Digite sua frase" class="form-control" name="usuario.FraseApresetacao">
+                                                    <input id="fraseApresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control" 
+                                                           name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
                                                 </div>
+
                                                 <div class="col-md-6" style="margin-bottom: 20px;">
                                                     <label class="control-label">Tags</label>
                                                     <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" name="usuario.Tags">

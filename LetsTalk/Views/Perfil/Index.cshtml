@@ -131,11 +131,11 @@
 
                                                 <div class="col-md-6" style="margin-bottom: 20px;">
                                                     <label class="control-label">Tags</label>
-                                                    <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" name="usuario.Tags">
+                                                    <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" name="usuario.Tags" value="@Model.Tags">
                                                 </div>
                                                 <div class="col-md-11">
                                                     <label class="control-label">Descrição</label>
-                                                    <textarea id="maxlength_textarea" class="form-control" maxlength="200" rows="3" name="usuario.Descricao" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres"></textarea>
+                                                    <textarea id="maxlength_textarea" class="form-control" maxlength="200" rows="3" name="usuario.Descricao" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres">@Model.Descricao</textarea>
                                                 </div>
                                             </div>
                                             <div class="margiv-top-12">
@@ -151,8 +151,9 @@
                                     <!-- CHANGE album TAB -->
                                     <div class="tab-pane" id="tab_1_2">
                                         <form action="#" role="form">
-                                            <div class="form-group">
-                                                <div class="col-md-9" id="SelecaoDeImagem">
+                                            
+                                            <div class="row" >
+                                                <div class="form-group col-md-6" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <label>Fotos para seu álbum</label>
                                                         <br />
@@ -172,6 +173,17 @@
                                                                 Remover
                                                             </a>
                                                         </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 pull-right">
+                                                        <ul class="list-inline blog-images">
+                                                            <li>
+                                                                <a class="fancybox-button" data-rel="fancybox-button" title="390 x 220 - keenthemes.com" href="assets/img/blog/1.jpg">
+                                                                    <img alt="" src="../../assets/admin/pages/media/blog/1.jpg">
+                                                                </a>
+                                                            </li>
+
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>

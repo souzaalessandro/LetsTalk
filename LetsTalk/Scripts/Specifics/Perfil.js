@@ -11,7 +11,7 @@
     $.ajax({
         url: 'SalvarInformacoesPessoais',
         type: 'POST',
-        data: JSON.stringify({ Frase: frase, Tags: tags, Descricao: descricao }),
+        data: JSON.stringify({ Frase: frase, Descricao: descricao, Tags: tags }),
         contentType: "application/json;charset=utf-8",
         success: function (data) {
             alert("foi!");

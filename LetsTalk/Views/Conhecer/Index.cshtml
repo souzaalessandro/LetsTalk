@@ -4,7 +4,8 @@
 }
 
 <h2>Index</h2>
-
+@using Entity
+@model List<Usuario>
 
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -13,7 +14,6 @@
 
     <link href="~/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
-
 }
 
 
@@ -155,6 +155,7 @@
 </div>
 
 
+@Html.Partial("CardsUsuarios", Model)
 
 <!--pessoas encontradas -->
 <div class="margin-top-10">

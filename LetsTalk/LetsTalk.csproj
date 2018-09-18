@@ -4012,6 +4012,7 @@
     <Content Include="Views\Conhecer\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Conhecer\VisualizarPerfil.cshtml" />
+    <Content Include="Views\Conhecer\CardsUsuarios.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

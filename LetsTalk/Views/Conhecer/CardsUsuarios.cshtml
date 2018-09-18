@@ -1,0 +1,35 @@
+﻿@using Entity
+@model List<Usuario>
+
+@foreach (Usuario user in Model)
+{
+    int idade = DateTime.Now.Year - user.DataNascimento.Year;
+    string[] tags = user.Tags.Split(',');
+
+    <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
+        <div class="mix-inner">
+            <img class="img-responsive" src="@user.PathFotoPerfil" alt="">
+            <div class="mix-details">
+
+                <h3>@user.Nome, @idade </h3>
+                <p>
+                    @user.FraseApresentacao
+                </p>
+
+
+                <ul class="list-inline blog-tags">
+                    <li>
+                        @foreach (string tag in tags)
+                        {
+                            <i class="fa fa-tags"></i>@tag
+                        }
+                    </li>
+                </ul>
+
+                <a class="mix-preview fancybox-button" href="~/assets/admin/pages/media/works/img2.jpg" title="Ver mais" data-rel="fancybox-button">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+}

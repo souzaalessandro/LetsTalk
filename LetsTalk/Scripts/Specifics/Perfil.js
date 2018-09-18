@@ -33,7 +33,7 @@ $('#atualizar-senha').click(function () {
             type: 'POST',
             contentType: 'application/json;charset=utf-8',
             dataType: 'json',
-            data: JSON.stringify({ senhaNova: nova}),
+            data: JSON.stringify({ senhaNova: nova }),
             success: function (result) {
                 if (result.sucesso) {
                     mostrarAlerta(result.mensagem, 'success');
@@ -42,7 +42,7 @@ $('#atualizar-senha').click(function () {
                 }
             },
             error: function (xmlresponse, status, error) {
-                    mostrarAlerta('Algo de errado ocorreu.', 'danger');
+                mostrarAlerta('Algo de errado ocorreu.', 'danger');
             }
         })
     } else {
@@ -79,4 +79,20 @@ function mostrarAlerta(mensagem, tipoAlerta) {
         allow_dismiss: true, // If true then will display a cross to close the popup.
         stackup_spacing: 10 // spacing between consecutively stacked growls.
     });
+}
+
+
+
+function gerarFotoPequena() {
+    var li = $("<li>");
+
+    var a = $("<a>").addClass("fancybox-button").attr("data-rel", "fancybox-button").attr("href", "#");
+
+    var img = $("<img>").attr("src", "");
+
+    a.append(img);
+
+    li.append(a);
+
+    return li;
 }

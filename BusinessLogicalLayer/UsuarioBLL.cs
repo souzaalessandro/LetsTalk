@@ -161,6 +161,28 @@ namespace BusinessLogicalLayer
             return response;
         }
 
+        public BLLResponse<Usuario> UpdatePassword(Usuario usuario)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+               Usuario userDoDb =  ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
+                if (userDoDb != null)
+                {
+                    userDoDb.Senha = usuario.Senha;
+                    EncriptografarEGuardarSalt(userDoDb);
+                    ctx.SaveChanges();
+                    response.Sucesso = true;
+                    response.Mensagem = "Senha atualizada com sucesso!";
+                    response.Data = userDoDb;
+                    return response;
+                }
+                response.Mensagem = "Algo de errado ocorreu. Tente novamente";
+                return response;
+            }
+        }
+
         private void CopiarInformacoes(UsuarioViewModel userVM, Usuario user)
         {
             if (!userVM.Frase.IsNullOrWhiteSpace())

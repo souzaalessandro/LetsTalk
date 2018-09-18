@@ -141,8 +141,8 @@
                                             <div class="margiv-top-12">
                                                 <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
                                                 @*<a href="javascript:;" class="btn default">
-                        Cancelar
-                    </a>*@
+                                                        Cancelar
+                                                    </a>*@
                                             </div>
 
                                         </form>
@@ -213,8 +213,8 @@
                                             <div class="margin-top-10">
                                                 <button type="submit" class="btn purple-customizado">Salvar</button>
                                                 @*<a href="javascript:;" class="btn purple-customizado">
-                        Salvar
-                    </a>*@
+                                                        Salvar
+                                                    </a>*@
                                             </div>
                                         </form>
                                     </div>
@@ -223,43 +223,24 @@
                                     <!-- ÑÃO ESTA FUNCIONANDO-->
 
                                     <div class="tab-pane" id="tab_1_3">
-                                        <form role="form" action="@Url.Action("AtualizarSenha", "Perfil")">
-                                            @*<div class="form-group">
-                    <label>Senha Atual</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" placeholder="Digite sua senha atual" name="usuario.Senha">
-                        <span class="input-group-addon">
-                        </span>
-                        @if (ViewData.ModelState.ContainsKey("Senha"))
-                        {
-                            <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
-                        }
-                    </div>
-                </div>*@
-
+                                        <div class="form-group">
                                             <div class="form-group">
-                                                <div class="form-group">
-                                                    <label>Senha</label>
-                                                    <input id="novasenha" value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha" name="usuario.Senha">
-                                                    @if (ViewData.ModelState.ContainsKey("Senha"))
-                                                    {
-                                                        <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
-                                                    }
-                                                </div>
-                                                <div class="form-group" style="float: none">
-                                                    <label>Confirmar Senha</label>
-                                                    <input type="password" class="form-control" placeholder="Confirme sua senha" name="senhaRepetida">
-                                                </div>
-                                                @if (ViewData.ModelState.ContainsKey("SenhasDiferentes"))
-                                                {
-                                                    <span class="font-red-thunderbird"> @ViewData.ModelState["SenhasDiferentes"].Errors[0].ErrorMessage</span>
-                                                }
+                                                <label>Senha</label>
+                                                <input id="senha-atual" type="password" class="form-control" placeholder="Digite sua senha atual">
                                             </div>
+                                            <div class="form-group">
+                                                <label>Nova senha</label>
+                                                <input id="nova-senha" type="password" class="form-control" placeholder="Informe sua nova senha">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Confirmar nova senha</label>
+                                                <input id="nova-senha-repetido" type="password" class="form-control" placeholder="Confirme sua nova senha">
+                                            </div>
+                                        </div>
 
-                                            <div class="margin-top-10">
-                                                <button type="button" onclick="atualizarSenha();" class="btn purple-customizado">Salvar</button>
-                                            </div>
-                                        </form>
+                                        <div class="margin-top-10">
+                                            <button id="atualizar-senha" type="button" class="btn purple-customizado">Salvar</button>
+                                        </div>
                                     </div>
                                     <!-- END CHANGE PASSWORD TAB -->
                                     <!-- PRIVACY SETTINGS TAB -->
@@ -298,6 +279,10 @@
     <script type="text/javascript" src="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+
+    <script src="~/assets/admin/pages/scripts/ui-blockui.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+    <script src="~/assets/admin/pages/scripts/ui-bootstrap-growl.js"></script>
 }
 
 @section PageLevelScripts {
@@ -308,7 +293,6 @@
 
     <script src="~/assets/admin/pages/scripts/components-form-tools.js"></script>
 
-    <script src="~/Scripts/Specifics/Perfil.js"></script>
 }
 
 @section JqueryFinal{
@@ -321,6 +305,8 @@
             Profile.init(); // init page demo
             ComponentsFormTools.init();
             ComponentsDropdowns.init();
+            UIBlockUI.init();
         });
     </script>
+    <script src="~/Scripts/Specifics/Perfil.js"></script>
 }

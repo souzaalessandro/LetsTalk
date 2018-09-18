@@ -81,19 +81,25 @@ namespace LetsTalk.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult AtualizarSenha(string senhaNova)
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            Usuario usuario = new Usuario
+            {
+                ID = user.ID,
+                Senha = senhaNova
+            };
 
-        //[HttpPost]
-        //public ActionResult AtualizarSenha(UsuarioViewModel userVM)
-        //{
-        //    MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-        //    userVM.ID = user.ID;
-
-        //    BLLResponse<Usuario> response = new UsuarioBLL().Update(userVM);
-
-        //    return RedirectToAction("Index");
-        //}
-
-
+            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario);
+            if (response.Sucesso)
+            {
+                return Json(new { sucesso = true, mensagem = response.Mensagem });
+            }
+            else
+            {
+                return Json(new { sucesso = false, mensagem = response.Mensagem });
+            }
+        }
     }
- 
 }

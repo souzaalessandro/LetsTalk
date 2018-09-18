@@ -120,22 +120,29 @@
                                     <div class="tab-pane active" id="tab_1_1">
                                         <form role="form" action="@Url.Action("SalvarInformacoesPessoais", "Perfil")">
                                             <div class="row">
+                                                
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Frase de Apresentação</label>
-                                                    <input id="fraseApresentacao" type="text" placeholder="Digite sua frase" class="form-control" name="usuario.FraseApresetacao">
+                                                    <input id="fraseApresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control" 
+                                                           name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
                                                 </div>
+
                                                 <div class="col-md-6" style="margin-bottom: 20px;">
                                                     <label class="control-label">Tags</label>
                                                     <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" name="usuario.Tags">
                                                 </div>
-
+                                                <div class="col-md-11">
+                                                    <label class="control-label">Descrição</label>
+                                                    <textarea id="maxlength_textarea" class="form-control" maxlength="200" rows="3" name="usuario.Descricao" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres"></textarea>
+                                                </div>          
                                             </div>
-                                            <div class="margiv-top-10">
+                                            <div class="margiv-top-12">
                                                 <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
                                                 @*<a href="javascript:;" class="btn default">
                                                         Cancelar
                                                     </a>*@
                                             </div>
+
                                         </form>
                                     </div>
                                     <!-- END PERSONAL INFO TAB -->

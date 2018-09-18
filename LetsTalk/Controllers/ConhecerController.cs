@@ -7,6 +7,8 @@ using DataAccessObject;
 using Entity;
 using LetsTalk.Models;
 using System.Data.Entity;
+using BusinessLogicalLayer;
+
 
 namespace LetsTalk.Controllers
 {
@@ -22,7 +24,9 @@ namespace LetsTalk.Controllers
 
         public ActionResult VisualizarPerfil()
         {
-            return View();
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(user.ID);
+            return View(response.Data);
         }
 
         public ActionResult GetUsuarios()

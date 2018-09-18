@@ -70,3 +70,19 @@ function mostrarAlerta(mensagem, tipoAlerta) {
         stackup_spacing: 10 // spacing between consecutively stacked growls.
     });
 }
+
+
+
+function gerarFotoPequena() {
+    var li = $("<li>");
+
+    var a = $("<a>").addClass("fancybox-button").attr("data-rel", "fancybox-button").attr("href", "#");
+
+    var img = $("<img>").attr("src", "");
+
+    a.append(img);
+
+    li.append(a);
+
+    return li;
+}

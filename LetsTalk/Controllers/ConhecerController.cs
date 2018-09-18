@@ -16,6 +16,7 @@ namespace LetsTalk.Controllers
         // GET: Conhecer
         public ActionResult Index()
         {
+           
             return View();
         }
 

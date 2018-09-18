@@ -155,10 +155,13 @@ namespace BusinessLogicalLayer
                     response.Sucesso = true;
                     CopiarInformacoes(userVM, user);
                     ctx.SaveChanges();
+                    response.Sucesso = true;
+                    response.Mensagem = "Dados atualizados com sucesso!";
                     return response;
                 }
+                response.Mensagem = "Algo de errado ocorreu";
+                return response;
             }
-            return response;
         }
 
         public BLLResponse<Usuario> UpdatePassword(Usuario usuario)
@@ -167,7 +170,7 @@ namespace BusinessLogicalLayer
 
             using (LTContext ctx = new LTContext())
             {
-               Usuario userDoDb =  ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
+                Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
                 if (userDoDb != null)
                 {
                     userDoDb.Senha = usuario.Senha;
@@ -195,9 +198,7 @@ namespace BusinessLogicalLayer
             }
             if (!userVM.Tags.IsNullOrWhiteSpace())
             {
-                string[] arraysTags = userVM.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                string tagsJuntas = String.Join(",", arraysTags);
-                user.Tags = tagsJuntas;
+                user.Tags = userVM.Tags;
             }
         }
     }

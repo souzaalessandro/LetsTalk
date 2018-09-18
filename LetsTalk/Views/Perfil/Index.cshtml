@@ -120,39 +120,33 @@
                                 <div class="tab-content">
                                     <!-- PERSONAL INFO TAB -->
                                     <div class="tab-pane active" id="tab_1_1">
-                                        <form role="form" action="@Url.Action("SalvarInformacoesPessoais", "Perfil")">
-                                            <div class="row">
-
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label">Frase de Apresentação</label>
-                                                    <input id="fraseApresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control"
-                                                           name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
-                                                </div>
-
-                                                <div class="col-md-6" style="margin-bottom: 20px;">
-                                                    <label class="control-label">Tags</label>
-                                                    <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" name="usuario.Tags" value="@Model.Tags">
-                                                </div>
-                                                <div class="col-md-11">
-                                                    <label class="control-label">Descrição</label>
-                                                    <textarea id="maxlength_textarea" class="form-control" maxlength="200" rows="3" name="usuario.Descricao" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres">@Model.Descricao</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="margiv-top-12">
-                                                <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
-                                                @*<a href="javascript:;" class="btn default">
-                                                        Cancelar
-                                                    </a>*@
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">Frase de Apresentação</label>
+                                                <input id="frase-apresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control"
+                                                       name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
                                             </div>
 
-                                        </form>
+                                            <div class="col-md-6" style="margin-bottom: 20px;">
+                                                <label class="control-label">Tags</label>
+                                                @{ string[] tags = Model.Tags.Split(',');}
+                                                <input id="tags_2" type="text" class="form-control tags medium" style="display: none;"  value="@String.Join(",", tags)">
+                                            </div>
+                                            <div class="col-md-11">
+                                                <label class="control-label">Descrição</label>
+                                                <textarea id="descricao" class="form-control" maxlength="200" rows="3" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres">@Model.Descricao</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix margin-top-15"></div>
+                                        <button type="button" id="salvar-informacoes" class="btn purple-customizado">Salvar</button>
+
                                     </div>
                                     <!-- END PERSONAL INFO TAB -->
                                     <!-- CHANGE album TAB -->
                                     <div class="tab-pane" id="tab_1_2">
                                         <form action="#" role="form">
-                                            
-                                            <div class="row" >
+
+                                            <div class="row">
                                                 <div class="form-group col-md-6" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <label>Fotos para seu álbum</label>
@@ -304,7 +298,6 @@
     <script src="~/assets/admin/pages/scripts/profile.js" type="text/javascript"></script>
 
     <script src="~/assets/admin/pages/scripts/components-form-tools.js"></script>
-
 }
 
 @section JqueryFinal{
@@ -316,7 +309,7 @@
             Demo.init(); // init demo features\
             Profile.init(); // init page demo
             ComponentsFormTools.init();
-            ComponentsDropdowns.init();
+            //ComponentsDropdowns.init();
             UIBlockUI.init();
         });
     </script>

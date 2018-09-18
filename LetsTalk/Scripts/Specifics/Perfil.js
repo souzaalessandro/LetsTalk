@@ -1,26 +1,33 @@
-﻿function salvar() {
-    var frase = $("#fraseApresentacao").val();
-    var descricao = $("#maxlength_textarea").val();
-    var tags = "";
-
-    $("#tags_2_tagsinput").find("span.tag").each(function (i) {
-        var temp = $(this).text();
-        tags += temp.substring(0, temp.length - 1);
+﻿$('#salvar-informacoes').click(function () {
+    var frase = $('#frase-apresentacao').val();
+    var descricao = $("#descricao").val();
+    var tags = [];
+    if ($('#tags_2_tagsinput > span.tag >span').length < 3) {
+        mostrarAlerta('Insira pelo menos 3 tags', 'info');
+        return;
+    }
+    $('#tags_2_tagsinput > span.tag >span').each(function (tag) {
+        tags.push($.trim(this.textContent));
     });
-
+    tags = tags.join(',');
     $.ajax({
-        url: 'SalvarInformacoesPessoais',
+        url: '/Perfil/SalvarInformacoesPessoais',
         type: 'POST',
         data: JSON.stringify({ Frase: frase, Descricao: descricao, Tags: tags }),
         contentType: "application/json;charset=utf-8",
-        success: function (data) {
-            alert("foi!");
+        dataType: 'json',
+        success: function (result) {
+            if (result.sucesso) {
+                mostrarAlerta(result.mensagem, 'success');
+            } else {
+                mostrarAlerta(result.mensagem, 'danger');
+            }
         },
         error: function (request, status, error) {
-            alert('oh, errors here. The call to the server is not working.')
+            mostrarAlerta('Algo de errado ocorreu.', 'danger');
         }
     });
-}
+});
 
 $('#atualizar-senha').click(function () {
     var atual = $('#senha-atual').val();
@@ -33,7 +40,7 @@ $('#atualizar-senha').click(function () {
             type: 'POST',
             contentType: 'application/json;charset=utf-8',
             dataType: 'json',
-            data: JSON.stringify({ senhaNova: nova}),
+            data: JSON.stringify({ senhaNova: nova }),
             success: function (result) {
                 if (result.sucesso) {
                     mostrarAlerta(result.mensagem, 'success');
@@ -42,7 +49,7 @@ $('#atualizar-senha').click(function () {
                 }
             },
             error: function (xmlresponse, status, error) {
-                    mostrarAlerta('Algo de errado ocorreu.', 'danger');
+                mostrarAlerta('Algo de errado ocorreu.', 'danger');
             }
         })
     } else {
@@ -50,7 +57,6 @@ $('#atualizar-senha').click(function () {
     }
 
 })
-
 
 function mostrarAlerta(mensagem, tipoAlerta) {
     $.bootstrapGrowl(mensagem, {

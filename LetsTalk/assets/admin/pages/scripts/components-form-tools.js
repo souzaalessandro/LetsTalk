@@ -336,6 +336,11 @@ var ComponentsFormTools = function () {
             alwaysShow: true
         });
 
+        $('#descricao').maxlength({
+            limitReachedClass: "label label-danger",
+            alwaysShow: true
+        });
+
         $('#maxlength_placement').maxlength({
             limitReachedClass: "label label-danger",
             alwaysShow: true,

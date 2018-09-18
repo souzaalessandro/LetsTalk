@@ -76,10 +76,8 @@ namespace LetsTalk.Controllers
             userVM.ID = user.ID;
 
             BLLResponse<Usuario> response = new UsuarioBLL().Update(userVM);
-
-            return RedirectToAction("Index");
+            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
         }
-
 
         [HttpPost]
         public ActionResult AtualizarSenha(string senhaNova)

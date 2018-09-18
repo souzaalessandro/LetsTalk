@@ -2,7 +2,8 @@
 
 @{ 
     LetsTalk.Models.MvcUser user = (LetsTalk.Models.MvcUser)HttpContext.Current.User;
-
+    BusinessLogicalLayer.BLLResponse<Entity.Usuario> response = new BusinessLogicalLayer.UsuarioBLL().LerPorId(user.ID);
+    Entity.Usuario usuario = response.Data;
 }
 
 <div class="page-header-top">
@@ -30,8 +31,8 @@
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         @*<img alt="" class="img-circle" src="~/assets/admin/layout3/img/avatar9.jpg">*@
                         @*<img alt="" class="img-circle" src="~/assets/admin/layout3/img/Marcelindo.png">*@
-                        <img alt="" class="img-circle" width="70" src="@user.PathFotoPerfil">
-                        <span class="username username-hide-mobile"> @user.Nome </span>
+                        <img alt="" class="img-circle" width="70" src="@usuario.PathFotoPerfil">
+                        <span class="username username-hide-mobile"> @usuario.Nome </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>

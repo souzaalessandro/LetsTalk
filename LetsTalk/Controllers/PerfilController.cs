@@ -17,7 +17,9 @@ namespace LetsTalk.Controllers
     {
         public ActionResult Index()
         {
-            return View(new Usuario());
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(user.ID);
+            return View(response.Data);
         }
 
         public ActionResult MostrarDadosExistente()
@@ -40,7 +42,7 @@ namespace LetsTalk.Controllers
                 if (result.Sucesso)
                 {
                     //se precisar retornar algum aviso que funcionou ou recarregar a página
-                    return View("Index");
+                    return RedirectToAction("Index");
                 }
             }
             return View("Index");
@@ -77,6 +79,20 @@ namespace LetsTalk.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+
+        //[HttpPost]
+        //public ActionResult AtualizarSenha(UsuarioViewModel userVM)
+        //{
+        //    MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+        //    userVM.ID = user.ID;
+
+        //    BLLResponse<Usuario> response = new UsuarioBLL().Update(userVM);
+
+        //    return RedirectToAction("Index");
+        //}
+
 
     }
  

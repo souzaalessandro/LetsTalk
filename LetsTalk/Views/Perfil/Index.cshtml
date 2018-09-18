@@ -1,7 +1,9 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+
     LetsTalk.Models.MvcUser user = (LetsTalk.Models.MvcUser)HttpContext.Current.User;
+
 }
 
 @model Entity.Usuario
@@ -59,13 +61,13 @@
                 <div class="portlet light profile-sidebar-portlet">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="@user.PathFotoPerfil" class="img-responsive" alt="">
+                        <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
                     </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
-                            @user.Nome
+                            @Model.Nome
                         </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
@@ -120,10 +122,10 @@
                                     <div class="tab-pane active" id="tab_1_1">
                                         <form role="form" action="@Url.Action("SalvarInformacoesPessoais", "Perfil")">
                                             <div class="row">
-                                                
+
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Frase de Apresentação</label>
-                                                    <input id="fraseApresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control" 
+                                                    <input id="fraseApresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control"
                                                            name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
                                                 </div>
 
@@ -134,19 +136,19 @@
                                                 <div class="col-md-11">
                                                     <label class="control-label">Descrição</label>
                                                     <textarea id="maxlength_textarea" class="form-control" maxlength="200" rows="3" name="usuario.Descricao" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres"></textarea>
-                                                </div>          
+                                                </div>
                                             </div>
                                             <div class="margiv-top-12">
                                                 <button type="button" onclick="salvar();" class="btn purple-customizado">Salvar</button>
                                                 @*<a href="javascript:;" class="btn default">
-                                                        Cancelar
-                                                    </a>*@
+                        Cancelar
+                    </a>*@
                                             </div>
 
                                         </form>
                                     </div>
                                     <!-- END PERSONAL INFO TAB -->
-                                    <!-- CHANGE AVATAR TAB -->
+                                    <!-- CHANGE album TAB -->
                                     <div class="tab-pane" id="tab_1_2">
                                         <form action="#" role="form">
                                             <div class="form-group">
@@ -180,8 +182,10 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <!-- CHANGE AVATAR TAB -->
+
                                     <div class="tab-pane" id="tab_1_4">
-                                        <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data"  role="form" method="post">
+                                        <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data" role="form" method="post">
                                             <div class="form-group">
                                                 <div class="col-md-9" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -209,31 +213,51 @@
                                             <div class="margin-top-10">
                                                 <button type="submit" class="btn purple-customizado">Salvar</button>
                                                 @*<a href="javascript:;" class="btn purple-customizado">
-                                                    Salvar
-                                                </a>*@
+                        Salvar
+                    </a>*@
                                             </div>
                                         </form>
                                     </div>
                                     <!-- END CHANGE AVATAR TAB -->
                                     <!-- CHANGE PASSWORD TAB -->
+                                    <!-- ÑÃO ESTA FUNCIONANDO-->
+
                                     <div class="tab-pane" id="tab_1_3">
-                                        <form action="#">
+                                        <form role="form" action="@Url.Action("AtualizarSenha", "Perfil")">
+                                            @*<div class="form-group">
+                    <label>Senha Atual</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="Digite sua senha atual" name="usuario.Senha">
+                        <span class="input-group-addon">
+                        </span>
+                        @if (ViewData.ModelState.ContainsKey("Senha"))
+                        {
+                            <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
+                        }
+                    </div>
+                </div>*@
+
                                             <div class="form-group">
-                                                <label class="control-label">Sua Senha</label>
-                                                <input type="password" class="form-control" placeholder="Digite sua senha">
+                                                <div class="form-group">
+                                                    <label>Senha</label>
+                                                    <input id="novasenha" value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha" name="usuario.Senha">
+                                                    @if (ViewData.ModelState.ContainsKey("Senha"))
+                                                    {
+                                                        <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
+                                                    }
+                                                </div>
+                                                <div class="form-group" style="float: none">
+                                                    <label>Confirmar Senha</label>
+                                                    <input type="password" class="form-control" placeholder="Confirme sua senha" name="senhaRepetida">
+                                                </div>
+                                                @if (ViewData.ModelState.ContainsKey("SenhasDiferentes"))
+                                                {
+                                                    <span class="font-red-thunderbird"> @ViewData.ModelState["SenhasDiferentes"].Errors[0].ErrorMessage</span>
+                                                }
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Nova Senha</label>
-                                                <input type="password" class="form-control" placeholder="Digite sua nova senha">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Repita a nova senha</label>
-                                                <input type="password" class="form-control" placeholder="Digite sua nova senha novamente">
-                                            </div>
+
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn purple-customizado">
-                                                    Salvar
-                                                </a>
+                                                <button type="button" onclick="atualizarSenha();" class="btn purple-customizado">Salvar</button>
                                             </div>
                                         </form>
                                     </div>

@@ -21,3 +21,21 @@
         }
     });
 }
+
+//function atualizarSenha() {
+//    var senhaNova = $("#fraseApresentacao").val();
+ 
+
+//    $.ajax({
+//        url: 'AtualizarSenha',
+//        type: 'POST',
+//        data: JSON.stringify({ Frase: senhaNova, novasenha }),
+//        contentType: "application/json;charset=utf-8",
+//        success: function (data) {
+//            alert("foi!");
+//        },
+//        error: function (request, status, error) {
+//            alert('oh, errors here. The call to the server is not working.')
+//        }
+//    });
+//}

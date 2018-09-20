@@ -3,6 +3,9 @@
     ViewBag.Title = "Perfil";
     LetsTalk.Models.MvcUser user = (LetsTalk.Models.MvcUser)HttpContext.Current.User;
 
+    //int idade = DateTime.Now.Year - user.DataNascimento.Year;
+    //string[] tags = user.Tags.Split(',');
+
 }
 
 <h2>Perfil</h2>
@@ -18,8 +21,6 @@
     <link href="~/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
 }
 
-
-
 <tr>
     <td>
         <a class="btn default" data-target="#stack1" data-toggle="modal">
@@ -27,247 +28,106 @@
         </a>
     </td>
 </tr>
-
-
 <!-- stackable -->
+@{ 
+    int idade = DateTime.Now.Year - Model.DataNascimento.Year;
+    string[] tags = Model.Tags.Split(',');
+ }
+
 <div id="stack1" class="modal fade" tabindex="-1" data-focus-on="input:first">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h3 class="modal-title bold" > @Model.Nome @Model.Sobrenome</h3>
+        <h2 class="modal-title bold"> @Model.Nome @Model.Sobrenome, @idade </h2>
     </div>
 
     <div class="modal-body col-md-12 ">
-            <div class="row">
-                    <div class="row">
-                        <div class="col-md-7 blog-tag-data">
-                            <img src="@Model.PathFotoPerfil" class="img-responsive"alt="">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="list-inline blog-tags">
-                                        <li>
-                                            <i class="fa fa-tags"></i>
-                                            @Model.Tags
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <p>
-                                    @Model.FraseApresentacao
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="col-md-12">
-                                <p>
-                                    @Model.Descricao
-                                </p>
-                            </div>
-                            <hr>
-
-
-                        </div>
-                    </div>
+        <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <h3> @Model.FraseApresentacao </h3>
+                </p>
             </div>
 
+            <hr>
+            <div class="col-md-12">
+                <p>
+                    <h4> @Model.Descricao </h4>
+                </p>
+            </div>
+
+            <hr>
+            <div class="col-md-12">
+                <ul class="list-inline blog-tags">
+                    <li>
+                        @foreach (string tag in tags)
+                        {
+                            <i class="fa fa-tags"></i>@tag
+                        }
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-        <button type="button" class="btn btn-primary">Ok</button>
-        <button class="btn blue" data-toggle="modal" href="#stack2">Launch modal</button>
+        <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
+        <button class="btn blue" data-toggle="modal" href="#stack2">Álbum de Fotos</button>
     </div>
 </div>
 <div id="stack2" class="modal fade" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Stack Two</h4>
-    </div>
-    <div class="modal-body">
-        <div class="col-md-12">
-            <div class="space20">
+    <div id="myCarousel" class="carousel image-carousel slide">
+        <div class="carousel-inner">
+
+            <div class="item">
+                <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
             </div>
-            <h3 style="margin-top:0">Fotos</h3>
-            <ul class="list-inline blog-images">
-                <li>
-                    <a class="fancybox-button" data-rel="fancybox-button" title="Fotos" href="@Model.PathFotoPerfil">
-                        <img alt="" src="@Model.PathFotoPerfil">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/2.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/3.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/4.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/5.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/6.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/8.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/10.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/11.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/1.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/2.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img alt="" src="../../assets/admin/pages/media/blog/7.jpg">
-                    </a>
-                </li>
-            </ul>
-        </div>  
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-        <button type="button" class="btn red">Ok</button>
-    </div>
-</div>
 
-
-
-
-<div class="col-md-12 ">
-    <div class="portlet-body">
-        <div class="row">
-            <div class="col-md-6 news-page blog-page">
-                <div class="row">
-                    <div class="col-md-7 blog-tag-data">
-                        <div class="profile-usertitle-name">
-                            @Model.Nome @Model.Sobrenome
-                        </div>
-                        <img src="@Model.PathFotoPerfil" class="img-responsive" width="300px" alt="">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="list-inline blog-tags">
-                                    <li>
-                                        <i class="fa fa-tags"></i>
-                                        @Model.Tags
-
-                                    </li>
-                                </ul>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-12">
-                            <p>
-                                @Model.FraseApresentacao
-                            </p>
-                        </div>
-                        <hr>
-                        <div class="col-md-12">
-                            <p>
-                                @Model.Descricao
-                            </p>
-                        </div>
-                        <hr>
-
-
-                    </div>
-                    <div class="col-md-3">
-                        <div class="space20">
-                        </div>
-                        <h3 style="margin-top:0">Fotos</h3>
-                        <ul class="list-inline blog-images">
-                            <li>
-                                <a class="fancybox-button" data-rel="fancybox-button" title="390 x 220 - keenthemes.com" href="../../assets/admin/pages/media/blog/1.jpg">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/1.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/2.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/3.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/4.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/5.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/6.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/8.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/10.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/11.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/1.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/2.jpg">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="../../assets/admin/pages/media/blog/7.jpg">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="item">
+                <img src="../../assets/admin/pages/media/gallery/image5.jpg" class="img-responsive" alt="">
             </div>
+
+            <div class="item">
+                <img src="../../assets/admin/pages/media/gallery/image2.jpg" class="img-responsive" alt="">
+            </div>
+
+            <div class="item">
+                <img src="../../assets/admin/pages/media/gallery/image5.jpg" class="img-responsive" alt="">
+            </div>
+
+            <div class="item active">
+                <img src="../../assets/admin/pages/media/gallery/image1.jpg" class="img-responsive" alt="">
+            </div>
+
+
+
         </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            <i class="m-icon-big-swapleft m-icon-white"></i>
+        </a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+            <i class="m-icon-big-swapright m-icon-white"></i>
+        </a>
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="">
+            </li>
+            <li data-target="#myCarousel" data-slide-to="1" class="">
+            </li>
+            <li data-target="#myCarousel" data-slide-to="2" class="">
+            </li>
+            <li data-target="#myCarousel" data-slide-to="3" class="">
+            </li>
+            <li data-target="#myCarousel" data-slide-to="4" class="active">
+            </li>
+        </ol>
+    </div>
+
+
+
+
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
     </div>
 </div>
 

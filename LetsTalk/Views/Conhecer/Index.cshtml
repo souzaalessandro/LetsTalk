@@ -3,9 +3,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-
+@using Entity
+@model List<Usuario>
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
 
@@ -15,10 +14,6 @@
     <link href="~/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
 }
 
-
-
-
-<!--filtro -->
 <div class="portlet solid purple">
     <div class="portlet-title">
         <div class="caption">
@@ -31,18 +26,15 @@
         </div>
     </div>
     <div class="portlet-body" style="display: none;">
-        <!-- inicio do codigo aqui -->
-        <!-- para alterar sliders --é necessario alterar ComponentsjQueryUISliders = function () -->
-
         <div class="col-md-4">
             <div>
                 Mínimo de Tags em comum
-                <select class="form-control" name="select" style="width: 48%">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
+                <select class="form-control" name="PREENCHER" style="width: 48%">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
             </div>
         </div>
@@ -50,337 +42,30 @@
         <div class="col-md-4">
             <div>
                 Idade mínima
-                <select class="form-control" name="select" style="width: 25%">
-                    <option value="">18</option>
-                    <option value="">19</option>
-                    <option value="">20</option>
-                    <option value="">21</option>
-                    <option value="">22</option>
-                    <option value="">23</option>
-                    <option value="">24</option>
-                    <option value="">25</option>
-                    <option value="">26</option>
-                    <option value="">27</option>
-                    <option value="">28</option>
-                    <option value="">29</option>
-                    <option value="">30</option>
-                    <option value="">31</option>
-                    <option value="">32</option>
-                    <option value="">33</option>
-                    <option value="">34</option>
-                    <option value="">35</option>
-                    <option value="">36</option>
-                    <option value="">37</option>
-                    <option value="">38</option>
-                    <option value="">39</option>
-                    <option value="">40</option>
-                    <option value="">41</option>
-                    <option value="">42</option>
-                    <option value="">43</option>
-                    <option value="">44</option>
-                    <option value="">45</option>
-                    <option value="">46</option>
-                    <option value="">47</option>
-                    <option value="">48</option>
-                    <option value="">49</option>
-                    <option value="">50</option>
-                    <option value="">51</option>
-                    <option value="">52</option>
-                    <option value="">53</option>
-                    <option value="">54</option>
-                    <option value="">55</option>
-                    <option value="">56</option>
-                    <option value="">57</option>
-                    <option value="">58</option>
-                    <option value="">59</option>
-                    <option value="">60</option>
-                    <option value="">61</option>
-                    <option value="">62</option>
-                    <option value="">63</option>
-                    <option value="">64</option>
-                    <option value="">65</option>
-                    <option value="">66</option>
-                    <option value="">67</option>
-                    <option value="">68</option>
-                    <option value="">69</option>
-                    <option value="">70</option>
-                    <option value="">71</option>
-                    <option value="">72</option>
-                    <option value="">73</option>
-                    <option value="">74</option>
-                    <option value="">75</option>
-                    <option value="">76</option>
-                    <option value="">77</option>
-                    <option value="">78</option>
-                    <option value="">79</option>
-                    <option value="">80</option>
-
-
-
-
-
+                <select id="seletor-idade-minima" class="form-control" style="width: 25%" name="PREENCHER">
+                    @for (int i = 18; i <= 79; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
                 </select>
             </div>
             <div>
                 Idade máxima
-                <select class="form-control" name="select" style="width: 25%">
-                    <option value="">18</option>
-                    <option value="">19</option>
-                    <option value="">20</option>
-                    <option value="">21</option>
-                    <option value="">22</option>
-                    <option value="">23</option>
-                    <option value="">24</option>
-                    <option value="">25</option>
-                    <option value="">26</option>
-                    <option value="">27</option>
-                    <option value="">28</option>
-                    <option value="">29</option>
-                    <option value="">30</option>
-                    <option value="">31</option>
-                    <option value="">32</option>
-                    <option value="">33</option>
-                    <option value="">34</option>
-                    <option value="">35</option>
-                    <option value="">36</option>
-                    <option value="">37</option>
-                    <option value="">38</option>
-                    <option value="">39</option>
-                    <option value="">40</option>
-                    <option value="">41</option>
-                    <option value="">42</option>
-                    <option value="">43</option>
-                    <option value="">44</option>
-                    <option value="">45</option>
-                    <option value="">46</option>
-                    <option value="">47</option>
-                    <option value="">48</option>
-                    <option value="">49</option>
-                    <option value="">50</option>
-                    <option value="">51</option>
-                    <option value="">52</option>
-                    <option value="">53</option>
-                    <option value="">54</option>
-                    <option value="">55</option>
-                    <option value="">56</option>
-                    <option value="">57</option>
-                    <option value="">58</option>
-                    <option value="">59</option>
-                    <option value="">60</option>
-                    <option value="">61</option>
-                    <option value="">62</option>
-                    <option value="">63</option>
-                    <option value="">64</option>
-                    <option value="">65</option>
-                    <option value="">66</option>
-                    <option value="">67</option>
-                    <option value="">68</option>
-                    <option value="">69</option>
-                    <option value="">70</option>
-                    <option value="">71</option>
-                    <option value="">72</option>
-                    <option value="">73</option>
-                    <option value="">74</option>
-                    <option value="">75</option>
-                    <option value="">76</option>
-                    <option value="">77</option>
-                    <option value="">78</option>
-                    <option value="">79</option>
-                    <option value="">80</option>
-
-                </select>
+                <select id="seletor-idade-maxima" class="form-control" style="width: 25%" name="PREENCHER"></select>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="input-group">
-                <div class="icheck-list">
-                    <label class="">
-                        <div class="icheckbox_flat-purple" style="position: relative;">
-                            <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
-                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                        </div> Homem
-                    </label>
-                    <label class="">
-                        <div class="icheckbox_flat-purple" style="position: relative;">
-                            <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
-                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                        </div> Mulher
-                    </label>
-                    <label class="">
-                        <div class="icheckbox_flat-purple checked" style="position: relative;">
-                            <input type="checkbox" checked="" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
-                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                        </div> Indefinido
-                    </label>
-                </div>
-            </div>
+        <div class="btn-group">
+            <a href=" javascript:;" class="btn purple-customizado">
+                <i class="fa fa-search"></i> Filtrar
+            </a>
         </div>
-
-            <div class="btn-group">
-                <a href=" javascript:;" class="btn purple-customizado">
-                    <i class="fa fa-search"></i> Filtrar
-                </a>
-            </div>
-            <!-- fim do codido-->
     </div>
 </div>
 
 
 <!--pessoas encontradas -->
-<div class="margin-top-10">
-    <!--3 colunas -->
-    <div class="row mix-grid thumbnails">
-        <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
-            <div class="mix-inner">
-                <img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
-                <div class="mix-details">
-                    <a class="list-inline blog-tags" href="@Url.Action("Index", "Perfil")">
-                        Nome, Idade
-                    </a>
-
-                    <p>
-                        Descrição cadastrada pelo user.  Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user. Descrição cadastrada pelo user.
-                    </p>
-
-                    <ul class="list-inline blog-tags">
-                        <li>
-                            <i class="fa fa-tags"></i>
-                            Tag1
-                            <i class="fa fa-tags"></i>
-                            Tag2
-                            <i class="fa fa-tags"></i>
-                            Tag3
-                            <i class="fa fa-tags"></i>
-                            Tag4
-                            <i class="fa fa-tags"></i>
-                            Tag5
-                            <i class="fa fa-tags"></i>
-                            Tag6
-                            <i class="fa fa-tags"></i>
-                            Tag7
-                            <i class="fa fa-tags"></i>
-                            Tag8
-                            <i class="fa fa-tags"></i>
-                            Tag9
-                            <i class="fa fa-tags"></i>
-                            Tag10
-
-                        </li>
-                    </ul>
-
-                    @*<a class="mix-link">
-                            <i class="fa fa-link"></i>
-                        </a>
-                        <a class="mix-preview fancybox-button" href="../../assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
-                            <i class="fa fa-search"></i>
-                        </a>*@
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
-            <div class="mix-inner">
-                <img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
-                <div class="mix-details">
-                    <h3>Nome, idade </h3>
-                    <p>
-                        Descrição cadastrada pelo user.
-                    </p>
-
-                    <ul class="list-inline blog-tags">
-                        <li>
-                            <i class="fa fa-tags"></i>
-                            Tags cadastradas
-                            <i class="fa fa-tags"></i>
-                            Tag2
-                            <i class="fa fa-tags"></i>
-                            Tag3
-                            <i class="fa fa-tags"></i>
-                            Tag4
-                            <i class="fa fa-tags"></i>
-                            Tag5
-                            <i class="fa fa-tags"></i>
-                            Tag6
-                            <i class="fa fa-tags"></i>
-                            Tag7
-                            <i class="fa fa-tags"></i>
-                            Tag8
-                            <i class="fa fa-tags"></i>
-                            Tag9
-                            <i class="fa fa-tags"></i>
-                            Tag10
-                            <i class="fa fa-tags"></i>
-                            Tag11
-                        </li>
-                    </ul>
-
-                    <a class="mix-link">
-                        <i class="fa fa-link"></i>
-                    </a>
-                    <a class="mix-preview fancybox-button" href="../../assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
-                        <i class="fa fa-search"></i>
-                    </a>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
-            <div class="mix-inner">
-                <img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
-                <div class="mix-details">
-                    <h3>Nome, idade </h3>
-                    <p>
-                        Descrição cadastrada pelo user.
-                    </p>
-
-                    <ul class="list-inline blog-tags">
-                        <li>
-                            <i class="fa fa-tags"></i>
-                            Tags cadastradas
-                            <i class="fa fa-tags"></i>
-                            Tag2
-                            <i class="fa fa-tags"></i>
-                            Tag3
-                            <i class="fa fa-tags"></i>
-                            Tag4
-                            <i class="fa fa-tags"></i>
-                            Tag5
-                            <i class="fa fa-tags"></i>
-                            Tag6
-                            <i class="fa fa-tags"></i>
-                            Tag7
-                            <i class="fa fa-tags"></i>
-                            Tag8
-                            <i class="fa fa-tags"></i>
-                            Tag9
-                            <i class="fa fa-tags"></i>
-                            Tag10
-                            <i class="fa fa-tags"></i>
-                            Tag11
-                        </li>
-                    </ul>
-
-                    <a class="mix-link">
-                        <i class="fa fa-link"></i>
-                    </a>
-                    <a class="mix-preview fancybox-button" href="../../assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
-                        <i class="fa fa-search"></i>
-                    </a>
-
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-</div>
-
-
+@Html.Partial("CardsUsuarios", Model)
 
 @section  PageLevelPlugins
 {

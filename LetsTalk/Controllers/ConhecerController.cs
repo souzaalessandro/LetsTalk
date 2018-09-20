@@ -16,8 +16,14 @@ namespace LetsTalk.Controllers
         // GET: Conhecer
         public ActionResult Index()
         {
-           
-            return View();
+            List<Usuario> users;
+            using (LTContext ctx = new LTContext())
+            {
+                users = ctx.Usuarios.ToList();
+            }
+
+
+            return View(users);
         }
 
         public ActionResult VisualizarPerfil()

@@ -1,6 +1,7 @@
 ﻿@using Entity
 @model List<Usuario>
 
+@Model.Count
 <div class="row mix-grid thumbnails">
     @foreach (Usuario user in Model)
     {
@@ -16,7 +17,6 @@
                     <p>
                         @user.FraseApresentacao
                     </p>
-
 
                     <ul class="list-inline blog-tags">
                         <li>

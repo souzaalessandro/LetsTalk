@@ -129,8 +129,9 @@
 
                                             <div class="col-md-6" style="margin-bottom: 20px;">
                                                 <label class="control-label">Tags</label>
-                                                @{ string[] tags = Model.Tags.Split(',');}
-                                                <input id="tags_2" type="text" class="form-control tags medium" style="display: none;"  value="@String.Join(",", tags)">
+
+                                                @*@{ string[] tags = }*@
+                                                <input id="tags_2" type="text" class="form-control tags medium" style="display: none;"  value="@Model.Tags">
                                             </div>
                                             <div class="col-md-11">
                                                 <label class="control-label">Descrição</label>

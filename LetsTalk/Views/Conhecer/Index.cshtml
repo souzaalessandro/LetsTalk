@@ -24,40 +24,41 @@
         </div>
     </div>
     <div class="portlet-body" style="display: none;">
-        <div class="col-md-4">
-            <div>
-                Mínimo de Tags em comum
-                <select class="form-control" name="PREENCHER" style="width: 48%">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-        </div>
+        @using (Html.BeginForm("Filtrar", "Conhecer", FormMethod.Post))
+        {
 
-        <div class="col-md-4">
-            <div>
-                Idade mínima
-                <select id="seletor-idade-minima" class="form-control" style="width: 25%" name="PREENCHER">
-                    @for (int i = 18; i <= 79; i++)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
+            <div class="col-md-4">
+                <div>
+                    Mínimo de Tags em comum
+                    <select class="form-control" name="tagsComum" style="width: 48%">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                Idade máxima
-                <select id="seletor-idade-maxima" class="form-control" style="width: 25%" name="PREENCHER"></select>
+            <div class="col-md-4">
+                <div>
+                    Idade mínima
+                    <select id="seletor-idade-minima" class="form-control" style="width: 25%" name="idadeMin">
+                        @for (int i = 18; i <= 79; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    Idade máxima
+                    <select id="seletor-idade-maxima" class="form-control" style="width: 25%" name="idadeMax"></select>
+                </div>
             </div>
-        </div>
+            <div class="btn-group">
+                <input type="submit" class="btn purple-customizado" value="Filtrar" />
+            </div>
+        }
 
-        <div class="btn-group">
-            <a href=" javascript:;" class="btn purple-customizado">
-                <i class="fa fa-search"></i> Filtrar
-            </a>
-        </div>
     </div>
 </div>
 
@@ -80,20 +81,31 @@
 
 @section JqueryFinal{
     <script>
-        var x;
         jQuery(document).ready(function () {
             Metronic.init(); // init metronic core components
             Layout.init(); // init current layout
             Demo.init(); // init demo features  // set current page
             Portfolio.init();
             getLocation();
+            carregarIdadesMaximas();
         });
+
+        $('#seletor-idade-minima').change(carregarIdadesMaximas);
+
+        function carregarIdadesMaximas() {
+            $('#seletor-idade-maxima').empty();
+            var idade = $('#seletor-idade-minima').find(':selected').val();
+            var idademin = ++idade;
+            console.log(idademin);
+            for (var i = idademin; i <= 80; i++) {
+                var opt = $('<option>').val(i).text(i);
+                $('#seletor-idade-maxima').append(opt);
+            }
+        }
 
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
         function showPosition(position) {

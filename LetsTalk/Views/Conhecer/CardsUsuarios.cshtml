@@ -1,7 +1,6 @@
 ﻿@using Entity
 @model List<Usuario>
 
-@Model.Count
 <div class="row mix-grid thumbnails">
     @foreach (Usuario user in Model)
     {
@@ -13,7 +12,7 @@
                 <img class="img-responsive" src="@user.PathFotoPerfil" alt="">
                 <div class="mix-details">
 
-                    <h3>@user.Nome, @idade </h3>
+                    <h3>@user.Nome, @idade</h3>
                     <p>
                         @user.FraseApresentacao
                     </p>

@@ -45,7 +45,26 @@ namespace LetsTalk.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult SalvarFotoDiretorio(HttpPostedFileBase foto)
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            if (foto != null && IsImagemValida(foto))
+            {
+                string pathRelativo = GetPathFoto(foto, user);
+                var result = new UsuarioBLL().AtualizarFotosAlbum(user.ID, pathRelativo);
+                if (result.Sucesso)
+                {
+                    //se precisar retornar algum aviso que funcionou ou recarregar a página
+                    return RedirectToAction("Index");
+                    //return Json(new { sucesso = true }, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         private string GetPathFoto(HttpPostedFileBase foto, MvcUser user)

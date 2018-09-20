@@ -98,6 +98,29 @@ namespace BusinessLogicalLayer
             }
         }
 
+        public BLLResponse<Usuario> AtualizarFotosAlbum(int id, string pathRelativo)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+            Usuario user = new Usuario();
+            using (LTContext ctx = new LTContext())
+            {
+                user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+
+                if (user != null)
+                {
+                    response.Sucesso = true;
+                    Diretorio diretorio = new Diretorio();
+                    diretorio.PathRelativo = pathRelativo;
+                    diretorio.Usuario = user;
+                    List<Diretorio> diretorios = new List<Diretorio>();
+                    diretorios.Add(diretorio);
+                    user.DiretoriosImagens = diretorios;
+                    ctx.SaveChanges();
+                }
+                return response;
+            }
+        }
+
         public BLLResponse<Usuario> LerPorId(int id)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();

@@ -6,7 +6,9 @@
     @foreach (Usuario user in Model)
     {
         int idade = DateTime.Now.Year - user.DataNascimento.Year;
-        string[] tags = user.Tags.Split(',');
+
+
+        string[] tags = user.Tags == null ? new string[1] : user.Tags.Split(',');
 
         <div class="col-md-4 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
             <div class="mix-inner">

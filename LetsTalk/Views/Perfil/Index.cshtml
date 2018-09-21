@@ -24,6 +24,18 @@
 
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/jquery-tags-input/jquery.tagsinput.css" />
     <link href="~/Content/Perfil.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link href="~/assets/iEdit.css" rel="stylesheet" />
+    <script src="~/assets/iEdit.js"></script>
+
+    <style type="text/css">
+        #profilepic {
+            display: block;
+            position: relative;
+            width: 300px;
+        }
+    </style>
 }
 
 
@@ -131,7 +143,7 @@
                                                 <label class="control-label">Tags</label>
 
                                                 @*@{ string[] tags = }*@
-                                                <input id="tags_2" type="text" class="form-control tags medium" style="display: none;"  value="@Model.Tags">
+                                                <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" value="@Model.Tags">
                                             </div>
                                             <div class="col-md-11">
                                                 <label class="control-label">Descrição</label>
@@ -145,14 +157,14 @@
                                     <!-- END PERSONAL INFO TAB -->
                                     <!-- CHANGE album TAB -->
                                     <div class="tab-pane" id="tab_1_2">
-                                        <form action="#" role="form">
+                                        <form action="@Url.Action("SalvarFotoDiretorio", "Perfil")" enctype="multipart/form-data" role="form" method="post">
 
                                             <div class="row">
                                                 <div class="form-group col-md-6" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <label>Fotos para seu álbum</label>
                                                         <br />
-                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;">
+                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;" id="fotoAlbum">
                                                         </div>
                                                         <div>
                                                             <span class="btn default btn-file">
@@ -162,7 +174,7 @@
                                                                 <span class="fileinput-exists">
                                                                     Alterar
                                                                 </span>
-                                                                <input type="hidden"><input type="file" name="...">
+                                                                <input type="hidden"><input type="file" name="foto" />
                                                             </span>
                                                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
                                                                 Remover
@@ -171,7 +183,7 @@
                                                     </div>
 
                                                     <div class="col-md-6 pull-right">
-                                                        <ul class="list-inline blog-images">
+                                                        <ul class="list-inline blog-images" id="lista-fotos">
                                                             <li>
                                                                 <a class="fancybox-button" data-rel="fancybox-button" href="assets/img/blog/1.jpg">
                                                                     <img src="~/Content/De5RwT1XkAAfgS8.jpg">
@@ -182,9 +194,7 @@
                                                 </div>
                                             </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn purple-customizado">
-                                                    Salvar
-                                                </a>
+                                                <button type="submit" class="btn purple-customizado" id="botao-salvar-fotos">Salvar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -192,36 +202,69 @@
 
                                     <div class="tab-pane" id="tab_1_4">
                                         <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data" role="form" method="post">
-                                            <div class="form-group">
-                                                <div class="col-md-9" id="SelecaoDeImagem">
-                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                        <label>Foto de Perfil</label>
-                                                        <br />
-                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;">
-                                                        </div>
-                                                        <div>
-                                                            <span class="btn default btn-file">
-                                                                <span class="fileinput-new">
-                                                                    Selecionar
-                                                                </span>
-                                                                <span class="fileinput-exists">
-                                                                    Alterar
-                                                                </span>
-                                                                <input type="hidden"><input type="file" name="foto">
-                                                            </span>
-                                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                                                Remover
-                                                            </a>
-                                                        </div>
-                                                    </div>
+
+                                            <input type="hidden" name="imgbase64" id="imgbase64" />
+
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <div class="input-group input-large">
+                                                    <span class="input-group-addon btn default btn-file">
+                                                        <span class="fileinput-new">
+                                                            Selecionar foto
+                                                        </span>
+                                                        <span class="fileinput-exists">
+                                                            Alterar
+                                                        </span>
+                                                        <input id="file" accept="image/*" type="file">
+                                                    </span>
+
                                                 </div>
                                             </div>
-                                            <div class="margin-top-10">
-                                                <button type="submit" class="btn purple-customizado">Salvar</button>
-                                                @*<a href="javascript:;" class="btn purple-customizado">
-                                                        Salvar
-                                                    </a>*@
-                                            </div>
+                                            @{
+                                                string src = null;
+                                                string none = null;
+                                                if (!String.IsNullOrWhiteSpace(Model.PathFotoPerfil))
+                                                {
+                                                    src = "src=" + Model.PathFotoPerfil;
+                                                }
+                                                else
+                                                {
+                                                    none = "style=\"display: none\"";
+                                                }
+                                            }
+                                            @*<img id="profilepic" style="display:none">*@
+                                            <img id="profilepic" @none  @src>
+                                            <div class="margin-top-10"> </div>
+                                            <input type="submit" id="btnUpload" value="Salvar" class="btn purple-customizado" />
+
+                                            @*<div class="form-group">
+                                                    <div class="col-md-9" id="SelecaoDeImagem">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <label>Foto de Perfil</label>
+                                                            <br />
+                                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;">
+                                                            </div>
+                                                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new">
+                                                                        Selecionar
+                                                                    </span>
+                                                                    <span class="fileinput-exists">
+                                                                        Alterar
+                                                                    </span>
+                                                                    <input type="hidden"><input type="file" name="foto">
+                                                                </span>
+                                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                                    Remover
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+
+                                            @*<a href="javascript:;" class="btn purple-customizado">
+                                                    Salvar
+                                                </a>*@
+
                                         </form>
                                     </div>
                                     <!-- END CHANGE AVATAR TAB -->
@@ -232,11 +275,11 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label>Senha</label>
-                                                <input id="senha-atual" type="password" class="form-control" placeholder="Digite sua senha atual">
+                                                <input id="senha-atual" type="password" class="form-control" placeholder="Informe sua senha atual.">
                                             </div>
                                             <div class="form-group">
                                                 <label>Nova senha</label>
-                                                <input id="nova-senha" type="password" class="form-control" placeholder="Informe sua nova senha">
+                                                <input id="nova-senha" type="password" class="form-control" placeholder="Nova senha..">
                                             </div>
                                             <div class="form-group">
                                                 <label>Confirmar nova senha</label>
@@ -314,4 +357,18 @@
         });
     </script>
     <script src="~/Scripts/Specifics/Perfil.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#file").change(function (e) {
+                var img = e.target.files[0];
+                document.getElementById("profilepic").style.display = 'block';
+                if (!iEdit.open(img, true, function (res) {
+                    $("#profilepic").attr("src", res);
+                    document.getElementById("imgbase64").value = res;
+                })) {
+                    alert("Tipo de arquivo inválido");
+                }
+            });
+        });
+    </script>
 }

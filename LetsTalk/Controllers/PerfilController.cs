@@ -45,7 +45,26 @@ namespace LetsTalk.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult SalvarFotoDiretorio(HttpPostedFileBase foto)
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            if (foto != null && IsImagemValida(foto))
+            {
+                string pathRelativo = GetPathFoto(foto, user);
+                var result = new UsuarioBLL().AtualizarFotosAlbum(user.ID, pathRelativo);
+                if (result.Sucesso)
+                {
+                    //se precisar retornar algum aviso que funcionou ou recarregar a página
+                    return RedirectToAction("Index");
+                    //return Json(new { sucesso = true }, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         private string GetPathFoto(HttpPostedFileBase foto, MvcUser user)
@@ -80,7 +99,7 @@ namespace LetsTalk.Controllers
         }
 
         [HttpPost]
-        public ActionResult AtualizarSenha(string senhaNova)
+        public ActionResult AtualizarSenha(string senhaNova, string senhaAntiga)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             Usuario usuario = new Usuario
@@ -89,7 +108,7 @@ namespace LetsTalk.Controllers
                 Senha = senhaNova
             };
 
-            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario);
+            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario, senhaAntiga);
             if (response.Sucesso)
             {
                 return Json(new { sucesso = true, mensagem = response.Mensagem });

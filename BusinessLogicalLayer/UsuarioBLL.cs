@@ -9,6 +9,7 @@ using Entity;
 using Entity.Enums;
 using Entity.Extensions;
 using Entity.ViewModels;
+using System.Data.Entity;
 
 namespace BusinessLogicalLayer
 {
@@ -98,13 +99,36 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public BLLResponse<Usuario> LerPorId(int id)
+        public BLLResponse<Usuario> AtualizarFotosAlbum(int id, string pathRelativo)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
             Usuario user = new Usuario();
             using (LTContext ctx = new LTContext())
             {
                 user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+
+                if (user != null)
+                {
+                    response.Sucesso = true;
+                    Diretorio diretorio = new Diretorio();
+                    diretorio.PathRelativo = pathRelativo;
+                    diretorio.Usuario = user;
+                    List<Diretorio> diretorios = new List<Diretorio>();
+                    diretorios.Add(diretorio);
+                    user.DiretoriosImagens = diretorios;
+                    ctx.SaveChanges();
+                }
+                return response;
+            }
+        }
+
+        public BLLResponse<Usuario> LerPorId(int id)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+            Usuario user = new Usuario();
+            using (LTContext ctx = new LTContext())
+            {
+                user = ctx.Usuarios.Include("DiretoriosImagens").FirstOrDefault(u => u.ID == id);
             }
             response.Sucesso = user != null;
             response.Data = user;
@@ -164,14 +188,21 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public BLLResponse<Usuario> UpdatePassword(Usuario usuario)
+        public BLLResponse<Usuario> UpdatePassword(Usuario usuario, string senhaAntiga)
         {
+
+            /////
+
+
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
 
             using (LTContext ctx = new LTContext())
             {
                 Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
-                if (userDoDb != null)
+
+                bool EhSenhaAntiga = Criptografia.Verificar(senhaAntiga, userDoDb.Salt, userDoDb.Hash);
+
+                if (userDoDb != null && EhSenhaAntiga)
                 {
                     userDoDb.Senha = usuario.Senha;
                     EncriptografarEGuardarSalt(userDoDb);
@@ -199,6 +230,16 @@ namespace BusinessLogicalLayer
             if (!userVM.Tags.IsNullOrWhiteSpace())
             {
                 user.Tags = userVM.Tags;
+            }
+        }
+
+        public void BuscarDiretorios(UsuarioViewModel usuarioVM)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+                List<Diretorio> diretorios = ctx.Diretorios.ToList();
             }
         }
     }

@@ -84,6 +84,12 @@
             <div class="item">
                 <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
             </div>
+            @foreach (var diretorio in Model.DiretoriosImagens)
+            {
+                <div class="item">
+                    <img src="@diretorio.PathRelativo" class="img-responsive" alt="">
+                </div>
+            }
 
             <div class="item">
                 <img src="../../assets/admin/pages/media/gallery/image5.jpg" class="img-responsive" alt="">

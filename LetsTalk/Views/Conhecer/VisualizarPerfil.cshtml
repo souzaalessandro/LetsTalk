@@ -29,15 +29,16 @@
     </td>
 </tr>
 <!-- stackable -->
-@{ 
+@{
     int idade = DateTime.Now.Year - Model.DataNascimento.Year;
-    string[] tags = Model.Tags.Split(',');
- }
+    string[] tags = String.IsNullOrWhiteSpace(Model.Tags) ? new string[1] : Model.Tags.Split(',');
+}
+
 
 <div id="stack1" class="modal fade" tabindex="-1" data-focus-on="input:first">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h2 class="modal-title bold"> @Model.Nome @Model.Sobrenome, @idade </h2>
+        <h2 class="modal-title bold"> @Model.Nome, @idade </h2>
     </div>
 
     <div class="modal-body col-md-12 ">
@@ -75,6 +76,7 @@
         <button class="btn blue" data-toggle="modal" href="#stack2">Álbum de Fotos</button>
     </div>
 </div>
+
 <div id="stack2" class="modal fade" tabindex="-1" data-focus-on="input:first">
     <div id="myCarousel" class="carousel image-carousel slide">
         <div class="carousel-inner">

@@ -24,7 +24,6 @@ namespace LetsTalk.Controllers
                 users = ctx.Usuarios.ToList();
             }
 
-
             return View(users);
         }
 
@@ -56,6 +55,11 @@ namespace LetsTalk.Controllers
                 ctx.SaveChanges();
             }
             return Content("Coordenadas salvas no usuário");
+        }
+
+        public ActionResult GetUser(int id)
+        {
+
         }
     }
 }

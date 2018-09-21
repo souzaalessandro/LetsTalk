@@ -157,14 +157,14 @@
                                     <!-- END PERSONAL INFO TAB -->
                                     <!-- CHANGE album TAB -->
                                     <div class="tab-pane" id="tab_1_2">
-                                        <form action="#" role="form">
+                                        <form action="@Url.Action("SalvarFotoDiretorio", "Perfil")" enctype="multipart/form-data" role="form" method="post">
 
                                             <div class="row">
                                                 <div class="form-group col-md-6" id="SelecaoDeImagem">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <label>Fotos para seu álbum</label>
                                                         <br />
-                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;">
+                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;" id="fotoAlbum">
                                                         </div>
                                                         <div>
                                                             <span class="btn default btn-file">
@@ -174,7 +174,7 @@
                                                                 <span class="fileinput-exists">
                                                                     Alterar
                                                                 </span>
-                                                                <input type="hidden"><input type="file" name="...">
+                                                                <input type="hidden"><input type="file" name="foto" />
                                                             </span>
                                                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
                                                                 Remover
@@ -183,7 +183,7 @@
                                                     </div>
 
                                                     <div class="col-md-6 pull-right">
-                                                        <ul class="list-inline blog-images">
+                                                        <ul class="list-inline blog-images" id="lista-fotos">
                                                             <li>
                                                                 <a class="fancybox-button" data-rel="fancybox-button" href="assets/img/blog/1.jpg">
                                                                     <img src="~/Content/De5RwT1XkAAfgS8.jpg">
@@ -194,9 +194,7 @@
                                                 </div>
                                             </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn purple-customizado">
-                                                    Salvar
-                                                </a>
+                                                <button type="submit" class="btn purple-customizado" id="botao-salvar-fotos">Salvar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -277,11 +275,11 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label>Senha</label>
-                                                <input id="senha-atual" type="password" class="form-control" placeholder="Digite sua senha atual">
+                                                <input id="senha-atual" type="password" class="form-control" placeholder="Informe sua senha atual.">
                                             </div>
                                             <div class="form-group">
                                                 <label>Nova senha</label>
-                                                <input id="nova-senha" type="password" class="form-control" placeholder="Informe sua nova senha">
+                                                <input id="nova-senha" type="password" class="form-control" placeholder="Nova senha..">
                                             </div>
                                             <div class="form-group">
                                                 <label>Confirmar nova senha</label>

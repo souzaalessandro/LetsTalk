@@ -9,6 +9,7 @@ using Entity;
 using Entity.Enums;
 using Entity.Extensions;
 using Entity.ViewModels;
+using System.Data.Entity;
 
 namespace BusinessLogicalLayer
 {
@@ -127,7 +128,7 @@ namespace BusinessLogicalLayer
             Usuario user = new Usuario();
             using (LTContext ctx = new LTContext())
             {
-                user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+                user = ctx.Usuarios.Include("DiretoriosImagens").FirstOrDefault(u => u.ID == id);
             }
             response.Sucesso = user != null;
             response.Data = user;
@@ -222,6 +223,16 @@ namespace BusinessLogicalLayer
             if (!userVM.Tags.IsNullOrWhiteSpace())
             {
                 user.Tags = userVM.Tags;
+            }
+        }
+
+        public void BuscarDiretorios(UsuarioViewModel usuarioVM)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+                List<Diretorio> diretorios = ctx.Diretorios.ToList();
             }
         }
     }

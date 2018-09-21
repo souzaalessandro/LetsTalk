@@ -18,8 +18,45 @@ namespace LetsTalk.Controllers
         // GET: Conhecer
         public ActionResult Index()
         {
-           
-            return View();
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            List<Usuario> usersFiltrados = null;
+
+            if (TempData["Usuarios"] != null)
+            {
+                usersFiltrados = (List<Usuario>)TempData["Usuarios"];
+            }
+            if (usersFiltrados != null)
+            {
+                return View(usersFiltrados);
+            }
+
+            using (LTContext ctx = new LTContext())
+            {
+                var users = ctx.Usuarios.Where(u => u.ID != user.ID).ToList();
+                return View(users);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Filtrar(int idadeMin, int idadeMax, int tagsComum)
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+
+            using (LTContext ctx = new LTContext())
+            {
+                Usuario userDb = ctx.Usuarios.Find(user.ID);
+
+                DateTime menor = new DateTime(DateTime.Now.Year - idadeMin, DateTime.Now.Month, DateTime.Now.Day);
+                DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
+
+                var filtroEunao = ctx.Usuarios.Where(u => u.ID != user.ID);
+                var filtroIdade = filtroEunao.Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
+                var filtroTags = filtroIdade.Where(u => (u.Tags.Split(',').Intersect(userDb.Tags.Split(',')).Count() >= tagsComum)).ToList();
+
+                TempData["Usuarios"] = filtroTags;
+
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult VisualizarPerfil()

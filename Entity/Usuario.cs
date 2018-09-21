@@ -29,6 +29,6 @@ namespace Entity
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
 
-        public List<Diretorio> DiretoriosImagens { get; set; }
+        public virtual ICollection<Diretorio> DiretoriosImagens { get; set; }
     }
 }

@@ -34,13 +34,16 @@ $('#atualizar-senha').click(function () {
     var nova = $('#nova-senha').val();
     var repetida = $('#nova-senha-repetido').val();
 
-    if (nova === repetida) {
+    if (nova != repetida) {
+        mostrarAlerta('Senhas digitadas não são iguais. Digite senhas iguais e tente novamente', 'info');
+
+    } else  {
         $.ajax({
             url: '/Perfil/AtualizarSenha',
             type: 'POST',
             contentType: 'application/json;charset=utf-8',
             dataType: 'json',
-            data: JSON.stringify({ senhaNova: nova }),
+            data: JSON.stringify({ senhaNova: nova, senhaAntiga:atual }),
             success: function (result) {
                 if (result.sucesso) {
                     mostrarAlerta(result.mensagem, 'success');
@@ -52,8 +55,6 @@ $('#atualizar-senha').click(function () {
                 mostrarAlerta('Algo de errado ocorreu.', 'danger');
             }
         })
-    } else {
-        mostrarAlerta('Senhas digitadas não são iguais. Digite senhas iguais e tente novamente', 'info');
     }
 
 })

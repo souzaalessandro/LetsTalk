@@ -164,14 +164,17 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public BLLResponse<Usuario> UpdatePassword(Usuario usuario)
+        public BLLResponse<Usuario> UpdatePassword(Usuario usuario, string senhaAntiga)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
 
             using (LTContext ctx = new LTContext())
             {
                 Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
-                if (userDoDb != null)
+
+                bool EhSenhaAntiga = Criptografia.Verificar(senhaAntiga, userDoDb.Salt, userDoDb.Hash);
+
+                if (userDoDb != null && EhSenhaAntiga)
                 {
                     userDoDb.Senha = usuario.Senha;
                     EncriptografarEGuardarSalt(userDoDb);

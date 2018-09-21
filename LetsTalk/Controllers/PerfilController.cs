@@ -80,7 +80,7 @@ namespace LetsTalk.Controllers
         }
 
         [HttpPost]
-        public ActionResult AtualizarSenha(string senhaNova)
+        public ActionResult AtualizarSenha(string senhaNova, string senhaAntiga)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             Usuario usuario = new Usuario
@@ -89,7 +89,7 @@ namespace LetsTalk.Controllers
                 Senha = senhaNova
             };
 
-            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario);
+            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario, senhaAntiga);
             if (response.Sucesso)
             {
                 return Json(new { sucesso = true, mensagem = response.Mensagem });

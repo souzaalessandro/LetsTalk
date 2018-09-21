@@ -24,7 +24,7 @@ namespace LetsTalk.Controllers
         public  ActionResult Teste(string imgbase64)
         {
             byte[] bytes = Convert.FromBase64String(imgbase64.Split(',')[1]);
-            FileStream stream = new FileStream(Server.MapPath("~/Images/" + Guid.NewGuid() + ".png"), FileMode.Create);
+            FileStream stream = new FileStream(Server.MapPath("~/UserImages/" + Guid.NewGuid() + ".png"), FileMode.Create);
             stream.Write(bytes, 0, bytes.Length);
             stream.Flush();
             TempData["Success"] = "Image uploaded successfully";

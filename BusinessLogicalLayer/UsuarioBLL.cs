@@ -166,6 +166,10 @@ namespace BusinessLogicalLayer
 
         public BLLResponse<Usuario> UpdatePassword(Usuario usuario)
         {
+
+            /////
+
+
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
 
             using (LTContext ctx = new LTContext())

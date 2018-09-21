@@ -1,4 +1,29 @@
-﻿$('#salvar-informacoes').click(function () {
+﻿$(function () {
+    carregarFotosPequenasDoBanco();
+});
+
+function carregarFotosPequenasDoBanco() {
+    $.ajax({
+        url: '/Perfil/GetPathFoto',
+        type: 'POST',
+        data: JSON.stringify({  }),
+        contentType: "application/json;charset=utf-8",
+        dataType: 'json',
+        success: function (result) {
+            if (result.sucesso) {
+                gerarFotoPequena(resutado.pathFoto);
+            } else {
+                mostrarAlerta(result.mensagem, 'danger');
+            }
+        },
+        error: function (request, status, error) {
+            mostrarAlerta('Algo de errado ocorreu.', 'danger');
+        }
+    });
+}
+
+
+$('#salvar-informacoes').click(function () {
     var frase = $('#frase-apresentacao').val();
     var descricao = $("#descricao").val();
     var tags = [];
@@ -72,18 +97,41 @@ function mostrarAlerta(mensagem, tipoAlerta) {
     });
 }
 
+$("#botao-salvar-fotos").click(enviarFotos);
+
+function enviarFotos() {
+
+    $.ajax({
+        url: '/Perfil/SalvarFotoDiretorio',
+        type: 'POST',
+        data: JSON.stringify({ Frase: frase, Descricao: descricao, Tags: tags }),
+        contentType: "application/json;charset=utf-8",
+        dataType: 'json',
+        success: function (result) {
+            if (result.sucesso) {
+                mostrarAlerta(result.mensagem, 'success');
+            } else {
+                mostrarAlerta(result.mensagem, 'danger');
+            }
+        },
+        error: function (request, status, error) {
+            mostrarAlerta('Algo de errado ocorreu.', 'danger');
+        }
+    });
+}
 
 
-function gerarFotoPequena() {
+function gerarFotoPequena(pathFoto) {
     var li = $("<li>");
 
     var a = $("<a>").addClass("fancybox-button").attr("data-rel", "fancybox-button").attr("href", "#");
 
-    var img = $("<img>").attr("src", "");
+    var img = $("<img>").attr("src", pathFoto);
 
     a.append(img);
 
     li.append(a);
 
-    return li;
+    $("#lista-fotos").append(li);
 }
+

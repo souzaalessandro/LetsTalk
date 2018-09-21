@@ -142,10 +142,40 @@
             var userID = $divCard.attr('id').replace("user", '');
 
             $.ajax({
-                url: ''
-            })
+                url: '/Conhecer/GetUser',
+                type: 'POST',
+                data: JSON.stringify({ id: userID }),
+                contentType: "application/json;charset=utf-8",
+                dataType: 'json',
+                success: function (result) {
+                    if (result.sucesso) {
+                        inserirUserNoModal(result);
+                    } else {
+                        // mostrarAlerta(result.mensagem, 'danger');
+                    }
+                },
+                error: function (request, status, error) {
+                    //mostrarAlerta('Algo de errado ocorreu.', 'danger');
+                }
+            });
             console.log(userID);
         });
+        function inserirUserNoModal(result) {
+            $('#stack1 #nome').text(result.nome);
+            $('#stack1 #idade').text(result.idade);
+            $('#stack1 #foto').attr('src', result.foto);
+            $('#stack1 #frase-apresentacao').text(result.frase);
+            $('#stack1 #descricao').text(result.descricao);
+
+            $(result.tags).each(function (i) {
+                var iclass = '<i class="fa fa-tags"></i>' + this;
+                console.log(this);
+                $('#stack1 #tags').append(iclass);
+            });
+
+            @* <i class="fa fa-tags"></i>tag *@
+        }
+
     </script>
 }
 

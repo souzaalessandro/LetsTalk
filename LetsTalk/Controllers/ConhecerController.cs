@@ -50,9 +50,9 @@ namespace LetsTalk.Controllers
                 DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
 
                 var filtroEunao = ctx.Usuarios.Where(u => u.ID != user.ID);
-                var filtroIdade = filtroEunao. Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
+                var filtroIdade = filtroEunao.Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
                 //var filtroTags = filtroIdade.Where(u => (u.Tags.Split(',').Intersect(userDb.Tags.Split(',')).Count() >= tagsComum)).ToList();
-                var filtroTags = filtroIdade.AsEnumerable().Where(u=> TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
+                var filtroTags = filtroIdade.AsEnumerable().Where(u => TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
 
                 TempData["Usuarios"] = filtroTags;
 
@@ -107,7 +107,25 @@ namespace LetsTalk.Controllers
 
         public ActionResult GetUser(int id)
         {
+            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(id);
+            object dados = new { suceso = false };
+            if (response.Sucesso)
+            {
+                int idade = DateTime.Now.Year - response.Data.DataNascimento.Year;
+                string[] tags = String.IsNullOrWhiteSpace(response.Data.Tags) ? new string[1] : response.Data.Tags.Split(',');
 
+                dados = new
+                {
+                    sucesso = true,
+                    nome = response.Data.Nome,
+                    idade = idade,
+                    foto = response.Data.PathFotoPerfil,
+                    frase = response.Data.FraseApresentacao,
+                    descricao = response.Data.Descricao,
+                    tags = tags
+                };
+            }
+            return Json(dados);
         }
     }
 }

@@ -9,7 +9,7 @@
 
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
-        <div id="user@(user.ID)" class="col-md-3 col-sm-6 mix category_1 mix_all" style="display: block;  opacity: 1;">
+        <div id="user@(user.ID)" class="col-md-3 col-sm-4 mix mix_all" style="display: block;  opacity: 1;">
             <div class="mix-inner">
                 <img class="img-responsive" src="@user.PathFotoPerfil" alt="">
                 <div class="mix-details">
@@ -44,7 +44,7 @@
     </div>
 
     <div class="modal-body col-md-12 ">
-        <img src="" class="img-responsive" alt="">
+        <img src="" class="img-responsive" alt="" id="foto">
         <div class="row">
             <div class="col-md-12">
                 <p>
@@ -62,11 +62,7 @@
             <hr>
             <div class="col-md-12">
                 <ul class="list-inline blog-tags">
-                    <li>
-                        @*@foreach (string tag in tags)
-                        {
-                            <i class="fa fa-tags"></i>@tag
-                        }*@
+                    <li id="tags">
                     </li>
                 </ul>
             </div>

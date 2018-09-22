@@ -16,72 +16,7 @@ namespace BusinessLogicalLayer
 {
     public partial class UsuarioBLL
     {
-        public BLLResponse<Usuario> AtualizarFotosAlbum(int id, string pathRelativo)
-        {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            Usuario user = new Usuario();
-            using (LTContext ctx = new LTContext())
-            {
-                user = ctx.Usuarios.Find(id);
-
-                if (user != null)
-                {
-                    response.Sucesso = true;
-                    Diretorio diretorio = new Diretorio();
-                    diretorio.PathRelativo = pathRelativo;
-                    diretorio.Usuario = user;
-                    List<Diretorio> diretorios = new List<Diretorio>();
-                    diretorios.Add(diretorio);
-                    user.DiretoriosImagens = diretorios;
-                    ctx.SaveChanges();
-                }
-                return response;
-            }
-        }
-
-        public BLLResponse<Usuario> UpdateProfilePic(int id, string folder, byte[] imagem, string pathRelativo)
-        {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario user = ctx.Usuarios.Find(id);
-
-                if (user != null)
-                {
-                    response.Sucesso = true;
-
-                    string nomeFoto = Guid.NewGuid() + ".png";
-                    string path = Path.Combine(folder, nomeFoto);
-                    FileStream stream = new FileStream(path, FileMode.Create);
-                    stream.Write(imagem, 0, imagem.Length);
-                    stream.Flush();
-
-                    ApagarProfilePicAnterior(folder, user.PathFotoPerfil);
-
-                    user.PathFotoPerfil = Path.Combine(pathRelativo, nomeFoto);
-                    ctx.SaveChanges();
-
-                    response.Data = user;
-                }
-            }
-            return response;
-        }
-
-        private void ApagarProfilePicAnterior(string folder, string pathFotoPerfil)
-        {
-            if (pathFotoPerfil.IsNullOrWhiteSpace())
-            {
-                return;
-            }
-            int index = folder.IndexOf("\\UserImages");
-            string pastaRaiz = folder.Remove(index);
-            pathFotoPerfil= pathFotoPerfil.Replace("/", "\\").Remove(0, 1);
-            string pathFotoAtual = Path.Combine(pastaRaiz, pathFotoPerfil);
-            System.GC.Collect();
-            System.GC.WaitForPendingFinalizers();
-            File.Delete(pathFotoAtual);
-        }
+        
 
         public BLLResponse<Usuario> LerPorId(int id)
         {
@@ -89,7 +24,7 @@ namespace BusinessLogicalLayer
             Usuario user = new Usuario();
             using (LTContext ctx = new LTContext())
             {
-                user = ctx.Usuarios.Include("DiretoriosImagens").FirstOrDefault(u => u.ID == id);
+                user = ctx.Usuarios.Include(u => u.DiretoriosImagens).FirstOrDefault(u => u.ID == id);
             }
             response.Sucesso = user != null;
             response.Data = user;
@@ -113,7 +48,7 @@ namespace BusinessLogicalLayer
 
             using (LTContext ctx = new LTContext())
             {
-                user = ctx.Usuarios.FirstOrDefault(u => u.ID == userVM.ID);
+                user = ctx.Usuarios.Find(userVM.ID);
                 if (user != null)
                 {
                     response.Sucesso = true;
@@ -177,14 +112,6 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public void BuscarDiretorios(UsuarioViewModel usuarioVM)
-        {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-
-            using (LTContext ctx = new LTContext())
-            {
-                List<Diretorio> diretorios = ctx.Diretorios.ToList();
-            }
-        }
+       
     }
 }

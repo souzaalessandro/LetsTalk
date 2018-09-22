@@ -11,7 +11,6 @@ using System.Web.Mvc;
 
 namespace LetsTalk.Controllers
 {
-    //[Authorize(Roles = "Adm")]
     [Authorize]
     public class PerfilController : Controller
     {
@@ -38,7 +37,7 @@ namespace LetsTalk.Controllers
             string relativo = "";
             string folder = GetUserPicsFolder(user, out relativo);
             byte[] imagem = Convert.FromBase64String(imgbase64.Split(',')[1]);
-            var result = new UsuarioBLL().UpdateProfilePic(user.ID, folder, imagem, relativo);
+            var result = new FotosUsuarioBLL().UpdateProfilePic(user.ID, folder, imagem, relativo);
 
             return RedirectToAction("Index");
         }
@@ -50,7 +49,7 @@ namespace LetsTalk.Controllers
             if (foto != null && IsImagemValida(foto))
             {
                 string pathRelativo = GetPathFoto(foto, user);
-                var result = new UsuarioBLL().AtualizarFotosAlbum(user.ID, pathRelativo);
+                var result = new FotosUsuarioBLL().AtualizarFotosAlbum(user.ID, pathRelativo);
                 if (result.Sucesso)
                 {
                     //se precisar retornar algum aviso que funcionou ou recarregar a página
@@ -114,7 +113,6 @@ namespace LetsTalk.Controllers
             BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario, senhaAntiga);
 
             return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
-
         }
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Criptografia.cs" />
     <Compile Include="FiltroConhecerBLL.cs" />
     <Compile Include="FiltroUsuariosBLL.cs" />
+    <Compile Include="FotosUsuarioBLL.cs" />
     <Compile Include="LoginBLL.cs" />
     <Compile Include="MensagensPadrao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

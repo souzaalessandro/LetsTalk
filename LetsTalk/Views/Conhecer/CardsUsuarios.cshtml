@@ -8,7 +8,14 @@
 <div class="row mix-grid thumbnails">
     @foreach (Usuario user in Model.Usuarios)
     {
-        int idade = DateTime.Now.Year - user.DataNascimento.Year;
+        DateTime hoje = DateTime.Today;
+        DateTime nasc = user.DataNascimento;
+
+        int idade = hoje.Year - nasc.Year;
+        if (hoje.Month < nasc.Month || ((hoje.Month == nasc.Month) && (hoje.Day < nasc.Day)))
+        {
+            idade--;  
+        }
 
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
@@ -51,7 +58,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p>
-                    <h3 id="frase-apresentacao"></h3>
+                    <h4 class="bold" id="frase-apresentacao"></h4>
                 </p>
             </div>
 

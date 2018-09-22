@@ -130,8 +130,6 @@
             for (var i = idademin; i <= 80; i++) {
                 var opt = $('<option>').val(i).text(i);
                 if (i == maximaAnterior) {
-                    console.log(maximaAnterior);
-
                     opt.attr('selected','selected');
                 }
                 $('#seletor-idade-maxima').append(opt);
@@ -195,7 +193,6 @@
 
             $(result.tags).each(function (i) {
                 var iclass = '<i class="fa fa-tags"></i>' + this;
-                console.log(this);
                 $('#stack1 #tags').append(iclass);
             });
 
@@ -204,82 +201,3 @@
 
     </script>
 }
-
-
-@*<!--filtro sliders -->
-    <div class="portlet solid purple">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="fa fa-sliders fa-4x"></i>Filtros
-            </div>
-
-            <div class="tools">
-                <a href="javascript:;" class="expand" data-original-title="" title="">
-                </a>
-            </div>
-        </div>
-        <div class="portlet-body" style="display: none;">
-            <!-- inicio do codigo aqui -->
-            <!-- para alterar sliders --é necessario alterar ComponentsjQueryUISliders = function () -->
-
-            <div class="space20">
-            </div>
-
-            <div class="col-md-4">
-                <div id="slider-range" class="slider bg-blue ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 100%; left: 0%;"></div>
-                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
-                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
-                </div>
-                <div>
-                    <span id="slider-range-amount">0 - 100</span>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div id="slider-range-max" class="slider bg-purple ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-max" style="width: 100%;"></div>
-                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
-                </div>
-                <div class="slider-value">
-                    Tags iguais: <span id="slider-range-max-amount">1</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="icheck-list">
-                        <label class="">
-                            <div class="icheckbox_flat-purple" style="position: relative;">
-                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
-                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                            </div> Homem
-                        </label>
-                        <label class="">
-                            <div class="icheckbox_flat-purple" style="position: relative;">
-                                <input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
-                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                            </div> Mulher
-                        </label>
-                        <label class="">
-                            <div class="icheckbox_flat-purple checked" style="position: relative;">
-                                <input type="checkbox" checked="" class="icheck" data-checkbox="icheckbox_flat-purple" style="position: absolute; opacity: 0;">
-                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                            </div> Indefinido
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <a href=" javascript:;" class="btn purple-customizado">
-
-                    <i class="fa fa-search"></i> Filtrar
-                </a>
-
-
-            </div>
-            <!-- fim do codido-->
-
-        </div>
-    </div>*@

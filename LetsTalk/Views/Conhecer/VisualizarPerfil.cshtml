@@ -30,7 +30,14 @@
 </tr>
 <!-- stackable -->
 @{
-    int idade = DateTime.Now.Year - Model.DataNascimento.Year;
+    DateTime hoje = DateTime.Today;
+    DateTime nasc = Model.DataNascimento;
+
+    int idade = hoje.Year - nasc.Year;
+    if (hoje.Month < nasc.Month || ((hoje.Month == nasc.Month) && (hoje.Day < nasc.Day)))
+    {
+        idade--;
+    }
     string[] tags = String.IsNullOrWhiteSpace(Model.Tags) ? new string[1] : Model.Tags.Split(',');
 }
 
@@ -46,7 +53,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p>
-                    <h3> @Model.FraseApresentacao </h3>
+                    <h4 class="bold"> @Model.FraseApresentacao </h4>
                 </p>
             </div>
 

@@ -63,19 +63,19 @@ namespace BusinessLogicalLayer
             if (valorCampo.IsNullOrWhiteSpace())
             {
                 errors.Add(new ErrorField(fieldName: prop.Name,
-                    message: Utilities.CampoNuloMessage(prop.Name)));
+                    message: MensagensPadrao.CampoNuloMessage(prop.Name)));
                 return;
             }
             else if (valorCampo.Length < minCaracteres)
             {
                 errors.Add(new ErrorField(fieldName: prop.Name,
-                    message: Utilities.MinCharsMessage(prop.Name, minCaracteres)));
+                    message: MensagensPadrao.MinCharsMessage(prop.Name, minCaracteres)));
                 return;
             }
             else if (valorCampo.Length > maxCaracteres)
             {
                 errors.Add(new ErrorField(fieldName: prop.Name,
-                    message: Utilities.MaxCharsMessage(prop.Name, maxCaracteres)));
+                    message: MensagensPadrao.MaxCharsMessage(prop.Name, maxCaracteres)));
                 return;
             }
             string formatado = Utilities.FormatarNome(valorCampo);
@@ -87,7 +87,7 @@ namespace BusinessLogicalLayer
             if (user.DataNascimento == DateTime.MinValue)
             {
                 errors.Add(new ErrorField(fieldName: nameof(user.DataNascimento),
-                    message: Utilities.CampoNuloMessage("Data de nascimento")));
+                    message: MensagensPadrao.CampoNuloMessage("Data de nascimento")));
                 return;
             }
 
@@ -97,12 +97,12 @@ namespace BusinessLogicalLayer
             if (ehMenorIdade)
             {
                 errors.Add(new ErrorField(fieldName: nameof(user.DataNascimento),
-                    message: Utilities.IdadeMinimaMessage(idadeMinima)));
+                    message: MensagensPadrao.IdadeMinimaMessage(idadeMinima)));
             }
             else if (idadeExcedida)
             {
                 errors.Add(new ErrorField(fieldName: nameof(user.DataNascimento),
-                    message: Utilities.IdadeExcedidaMessage(idadeMaxima)));
+                    message: MensagensPadrao.IdadeExcedidaMessage(idadeMaxima)));
             }
         }
 
@@ -121,7 +121,7 @@ namespace BusinessLogicalLayer
             }
             if (!valid)
             {
-                errors.Add(new ErrorField(nameof(item.Genero), Utilities.EnumInvalidoMessage("Gênero")));
+                errors.Add(new ErrorField(nameof(item.Genero), MensagensPadrao.EnumInvalidoMessage("Gênero")));
             }
         }
 
@@ -130,17 +130,17 @@ namespace BusinessLogicalLayer
             if (item.Email.IsNullOrWhiteSpace())
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),
-                    message: Utilities.CampoNuloMessage(nameof(item.Email))));
+                    message: MensagensPadrao.CampoNuloMessage(nameof(item.Email))));
             }
             else if (!Utilities.IsEmailValido(item.Email))
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),
-                    message: Utilities.EmailInvalidoMessage()));
+                    message: MensagensPadrao.EmailInvalidoMessage()));
             }
             else if (EmailJaExiste(item, errors))
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),
-                    message: Utilities.EmailExistenteMessage()));
+                    message: MensagensPadrao.EmailExistenteMessage()));
             }
         }
 
@@ -149,18 +149,18 @@ namespace BusinessLogicalLayer
             if (item.Senha.IsNullOrWhiteSpace())
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Senha),
-                    message: Utilities.CampoNuloMessage(nameof(item.Senha))));
+                    message: MensagensPadrao.CampoNuloMessage(nameof(item.Senha))));
                 return;
             }
             else if (item.Senha.Length < minCaracteres)
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Senha),
-                   message: Utilities.MinCharsMessage(nameof(item.Senha), minCaracteres)));
+                   message: MensagensPadrao.MinCharsMessage(nameof(item.Senha), minCaracteres)));
             }
             else if (item.Senha.Length > maxCaracteres)
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Senha),
-                    message: Utilities.MaxCharsMessage(nameof(item.Senha), maxCaracteres)));
+                    message: MensagensPadrao.MaxCharsMessage(nameof(item.Senha), maxCaracteres)));
             }
 
             if (item.Senha != senhaRepetida)

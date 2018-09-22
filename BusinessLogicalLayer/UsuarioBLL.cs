@@ -44,7 +44,7 @@ namespace BusinessLogicalLayer
                 if (userDoBanco == null)
                 {
                     response.Erros.Add(new ErrorField(fieldName: nameof(userDoBanco.Email),
-                        message: Utilities.UserOuSenhaInvalidosMessage()));
+                        message: MensagensPadrao.UserOuSenhaInvalidosMessage()));
                     return response;
                 }
                 response.Sucesso = Criptografia.Verificar(item.Senha, userDoBanco.Salt, userDoBanco.Hash);
@@ -240,5 +240,21 @@ namespace BusinessLogicalLayer
                 List<Diretorio> diretorios = ctx.Diretorios.ToList();
             }
         }
+
+        private bool TagsEmComum(string tagsUser, string tagsUserLogado, int minTagsComum)
+        {
+            if (tagsUser.IsNullOrWhiteSpace() || tagsUserLogado.IsNullOrWhiteSpace())
+            {
+                return false;
+            }
+            List<string> userLinq = null;
+            List<string> userLogado = null;
+            userLinq = tagsUser.Contains(",") ? tagsUser.Split(',').ToList() : new List<string> { tagsUser };
+            userLogado = tagsUserLogado.Contains(",") ? tagsUserLogado.Split(',').ToList() : new List<string>() { tagsUserLogado };
+
+            var tagsEmComum = userLinq.Intersect(userLogado);
+            return tagsEmComum.Count() >= minTagsComum;
+        }
+
     }
 }

@@ -24,46 +24,6 @@ namespace BusinessLogicalLayer
             return nome;
         }
 
-        public static string CampoNuloMessage(string nomeCampo)
-        {
-            return $"{nomeCampo} deve ser informado";
-        }
-
-        public static string MaxCharsMessage(string nomeCampo, byte maxChars)
-        {
-            return $"{nomeCampo} deve conter no máximo {maxChars} caracteres";
-        }
-
-        public static string MinCharsMessage(string nomeCampo, byte minChars)
-        {
-            return $"{nomeCampo} deve conter no mínimo {minChars} caracteres";
-        }
-
-        public static string IdadeMinimaMessage(byte MinIdade)
-        {
-            return $"Idade deve de ser no mínimo {MinIdade} anos";
-        }
-
-        public static string IdadeExcedidaMessage(byte MaxIdade)
-        {
-            return $"Idade pode ser no máximo {MaxIdade} anos";
-        }
-
-        public static string EnumInvalidoMessage(string campoEnum)
-        {
-            return $"{campoEnum} deve ser algum valor do campo selecionado";
-        }
-
-        internal static string UserOuSenhaInvalidosMessage()
-        {
-            return "Email ou senha inválidos";
-        }
-
-        public static string EmailInvalidoMessage()
-        {
-            return $"Este email não é válido";
-        }
-
         static bool invalid = false;
         private static string DomainMapper(Match match)
         {
@@ -80,6 +40,7 @@ namespace BusinessLogicalLayer
             }
             return match.Groups[1].Value + domainName;
         }
+
         public static bool IsEmailValido(string email)
         {
             invalid = false;
@@ -115,11 +76,6 @@ namespace BusinessLogicalLayer
             }
         }
 
-        internal static string EmailExistenteMessage()
-        {
-            return $"Email já cadastrado!";
-
-        }
     }
 
 }

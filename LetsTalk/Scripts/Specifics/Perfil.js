@@ -6,7 +6,7 @@ function carregarFotosPequenasDoBanco() {
     $.ajax({
         url: '/Perfil/GetPathFoto',
         type: 'POST',
-        data: JSON.stringify({  }),
+        data: JSON.stringify({}),
         contentType: "application/json;charset=utf-8",
         dataType: 'json',
         success: function (result) {
@@ -16,9 +16,7 @@ function carregarFotosPequenasDoBanco() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        error: function (request, status, error) {
-            mostrarAlerta('Algo de errado ocorreu.', 'danger');
-        }
+
     });
 }
 
@@ -48,9 +46,7 @@ $('#salvar-informacoes').click(function () {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        error: function (request, status, error) {
-            mostrarAlerta('Algo de errado ocorreu.', 'danger');
-        }
+
     });
 });
 
@@ -59,28 +55,23 @@ $('#atualizar-senha').click(function () {
     var nova = $('#nova-senha').val();
     var repetida = $('#nova-senha-repetido').val();
 
-    if (nova != repetida) {
-        mostrarAlerta('Senhas digitadas não são iguais. Digite senhas iguais e tente novamente', 'info');
 
-    } else  {
-        $.ajax({
-            url: '/Perfil/AtualizarSenha',
-            type: 'POST',
-            contentType: 'application/json;charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify({ senhaNova: nova, senhaAntiga:atual }),
-            success: function (result) {
-                if (result.sucesso) {
-                    mostrarAlerta(result.mensagem, 'success');
-                } else {
-                    mostrarAlerta(result.mensagem, 'danger');
-                }
-            },
-            error: function (xmlresponse, status, error) {
-                mostrarAlerta('Algo de errado ocorreu.', 'danger');
+    $.ajax({
+        url: '/Perfil/AtualizarSenha',
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({ senhaNova: nova, senhaAntiga: atual }),
+        success: function (result) {
+            if (result.sucesso) {
+                mostrarAlerta(result.mensagem, 'success');
+            } else {
+                mostrarAlerta(result.mensagem, 'danger');
             }
-        })
-    }
+        },
+
+    })
+
 
 })
 
@@ -114,9 +105,7 @@ function enviarFotos() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        error: function (request, status, error) {
-            mostrarAlerta('Algo de errado ocorreu.', 'danger');
-        }
+
     });
 }
 
@@ -134,4 +123,7 @@ function gerarFotoPequena(pathFoto) {
 
     $("#lista-fotos").append(li);
 }
+
+
+
 

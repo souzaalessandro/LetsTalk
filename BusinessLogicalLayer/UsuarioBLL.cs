@@ -235,52 +235,74 @@ namespace BusinessLogicalLayer
         public BLLResponse<Usuario> UpdatePassword(Usuario usuario, string senhaAntiga)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-
-            using (LTContext ctx = new LTContext())
+            
+            try
             {
-                Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
-
-                bool EhSenhaAntiga = Criptografia.Verificar(senhaAntiga, userDoDb.Salt, userDoDb.Hash);
-
-                if (userDoDb != null && EhSenhaAntiga)
+                using (LTContext ctx = new LTContext())
                 {
-                    userDoDb.Senha = usuario.Senha;
-                    EncriptografarEGuardarSalt(userDoDb);
-                    ctx.SaveChanges();
-                    response.Sucesso = true;
-                    response.Mensagem = "Senha atualizada com sucesso!";
-                    response.Data = userDoDb;
-                    return response;
+                    
+
+                    Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
+                    bool EhSenhaAntiga = Criptografia.Verificar(senhaAntiga, userDoDb.Salt, userDoDb.Hash);
+
+                    if (!EhSenhaAntiga)
+                    {
+                        response.Mensagem = "Senha atual incorreta.";
+                        return response;
+
+                    }
+                    else if (userDoDb == null)
+                    {
+                        response.Mensagem = "Sessão expirada, efetue o login novamente.";
+                        return response;
+                    }
+                    else
+                    {
+                        userDoDb.Senha = usuario.Senha;
+                        EncriptografarEGuardarSalt(userDoDb);
+                        ctx.SaveChanges();
+                        response.Sucesso = true;
+                        response.Mensagem = "Senha atualizada com sucesso!";
+                        response.Data = userDoDb;
+                        return response;
+                    }
                 }
-                response.Mensagem = "Algo de errado ocorreu. Tente novamente";
-                return response;
             }
+            catch (Exception)
+            {
+                response.Mensagem = "Algo muito estranho aconteceu, tente novamente.";
+               return response;
+            }
+
+
+
         }
+    
 
-        private void CopiarInformacoes(UsuarioViewModel userVM, Usuario user)
+    private void CopiarInformacoes(UsuarioViewModel userVM, Usuario user)
+    {
+        if (!userVM.Frase.IsNullOrWhiteSpace())
         {
-            if (!userVM.Frase.IsNullOrWhiteSpace())
-            {
-                user.FraseApresentacao = userVM.Frase;
-            }
-            if (!userVM.Descricao.IsNullOrWhiteSpace())
-            {
-                user.Descricao = userVM.Descricao;
-            }
-            if (!userVM.Tags.IsNullOrWhiteSpace())
-            {
-                user.Tags = userVM.Tags;
-            }
+            user.FraseApresentacao = userVM.Frase;
         }
-
-        public void BuscarDiretorios(UsuarioViewModel usuarioVM)
+        if (!userVM.Descricao.IsNullOrWhiteSpace())
         {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-
-            using (LTContext ctx = new LTContext())
-            {
-                List<Diretorio> diretorios = ctx.Diretorios.ToList();
-            }
+            user.Descricao = userVM.Descricao;
+        }
+        if (!userVM.Tags.IsNullOrWhiteSpace())
+        {
+            user.Tags = userVM.Tags;
         }
     }
+
+    public void BuscarDiretorios(UsuarioViewModel usuarioVM)
+    {
+        BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+        using (LTContext ctx = new LTContext())
+        {
+            List<Diretorio> diretorios = ctx.Diretorios.ToList();
+        }
+    }
+}
 }

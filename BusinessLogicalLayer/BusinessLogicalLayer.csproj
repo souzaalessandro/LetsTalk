@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="BLLResponse.cs" />
     <Compile Include="Criptografia.cs" />
+    <Compile Include="FiltroConhecerBLL.cs" />
     <Compile Include="FiltroUsuariosBLL.cs" />
+    <Compile Include="LoginBLL.cs" />
     <Compile Include="MensagensPadrao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistroBLL.cs" />

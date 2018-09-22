@@ -16,85 +16,13 @@ namespace BusinessLogicalLayer
 {
     public partial class UsuarioBLL
     {
-        public List<Usuario> GetUsersComFiltro(int idadeMin, int idadeMax, int tagsComum, int userID)
-        {
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario userDb = ctx.Usuarios.Find(userID);
-
-                DateTime menor = new DateTime(DateTime.Now.Year - idadeMin, DateTime.Now.Month, DateTime.Now.Day);
-                DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
-
-                var filtroEunao = ctx.Usuarios.Where(u => u.ID != userID);
-                var filtroIdade = filtroEunao.Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
-                var filtroTags = filtroIdade.AsEnumerable().Where(u => TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
-
-                return filtroTags;
-            }
-        }
-
-        public BLLResponse<Usuario> IsLoginValido(Usuario item)
-        {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            response.Erros = new List<ErrorField>();
-
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario userDoBanco = ctx.Usuarios.FirstOrDefault(u => u.Email == item.Email);
-                if (userDoBanco == null)
-                {
-                    response.Erros.Add(new ErrorField(fieldName: nameof(userDoBanco.Email),
-                        message: MensagensPadrao.UserOuSenhaInvalidosMessage()));
-                    return response;
-                }
-                response.Sucesso = Criptografia.Verificar(item.Senha, userDoBanco.Salt, userDoBanco.Hash);
-                if (response.Sucesso)
-                {
-                    response.Data = userDoBanco;
-                }
-            }
-            return response;
-        }
-
-        public BLLResponse<Usuario> Delete(Usuario item)
-        {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario user = ctx.Usuarios.FirstOrDefault(u => u.ID == item.ID);
-                ctx.Usuarios.Remove(user);
-                ctx.SaveChanges();
-            }
-            response.Sucesso = true;
-            response.Mensagem = "Deletado com sucesso.";
-            return response;
-        }
-
-        public BLLResponse<Usuario> AtualizarFotoPerfil(int id, string pathRelativo)
-        {
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            Usuario user = new Usuario();
-            using (LTContext ctx = new LTContext())
-            {
-                user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
-
-                if (user != null)
-                {
-                    response.Sucesso = true;
-                    user.PathFotoPerfil = pathRelativo;
-                    ctx.SaveChanges();
-                }
-                return response;
-            }
-        }
-
         public BLLResponse<Usuario> AtualizarFotosAlbum(int id, string pathRelativo)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
             Usuario user = new Usuario();
             using (LTContext ctx = new LTContext())
             {
-                user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+                user = ctx.Usuarios.Find(id);
 
                 if (user != null)
                 {
@@ -117,16 +45,19 @@ namespace BusinessLogicalLayer
 
             using (LTContext ctx = new LTContext())
             {
-                Usuario user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+                Usuario user = ctx.Usuarios.Find(id);
 
                 if (user != null)
                 {
                     response.Sucesso = true;
+
                     string nomeFoto = Guid.NewGuid() + ".png";
                     string path = Path.Combine(folder, nomeFoto);
                     FileStream stream = new FileStream(path, FileMode.Create);
                     stream.Write(imagem, 0, imagem.Length);
                     stream.Flush();
+
+                    ApagarProfilePicAnterior(folder, user.PathFotoPerfil);
 
                     user.PathFotoPerfil = Path.Combine(pathRelativo, nomeFoto);
                     ctx.SaveChanges();
@@ -135,6 +66,21 @@ namespace BusinessLogicalLayer
                 }
             }
             return response;
+        }
+
+        private void ApagarProfilePicAnterior(string folder, string pathFotoPerfil)
+        {
+            if (pathFotoPerfil.IsNullOrWhiteSpace())
+            {
+                return;
+            }
+            int index = folder.IndexOf("\\UserImages");
+            string pastaRaiz = folder.Remove(index);
+            pathFotoPerfil= pathFotoPerfil.Replace("/", "\\").Remove(0, 1);
+            string pathFotoAtual = Path.Combine(pastaRaiz, pathFotoPerfil);
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+            File.Delete(pathFotoAtual);
         }
 
         public BLLResponse<Usuario> LerPorId(int id)
@@ -240,21 +186,5 @@ namespace BusinessLogicalLayer
                 List<Diretorio> diretorios = ctx.Diretorios.ToList();
             }
         }
-
-        private bool TagsEmComum(string tagsUser, string tagsUserLogado, int minTagsComum)
-        {
-            if (tagsUser.IsNullOrWhiteSpace() || tagsUserLogado.IsNullOrWhiteSpace())
-            {
-                return false;
-            }
-            List<string> userLinq = null;
-            List<string> userLogado = null;
-            userLinq = tagsUser.Contains(",") ? tagsUser.Split(',').ToList() : new List<string> { tagsUser };
-            userLogado = tagsUserLogado.Contains(",") ? tagsUserLogado.Split(',').ToList() : new List<string>() { tagsUserLogado };
-
-            var tagsEmComum = userLinq.Intersect(userLogado);
-            return tagsEmComum.Count() >= minTagsComum;
-        }
-
     }
 }

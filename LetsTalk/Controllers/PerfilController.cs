@@ -69,7 +69,7 @@ namespace LetsTalk.Controllers
             relativo = $"/UserImages/userperfil-{user.ID}";
             return folder;
         }
-
+       
         private string GetPathFoto(HttpPostedFileBase foto, MvcUser user)
         {
             string folder = Path.Combine(Server.MapPath("~/UserImages"), $"userperfil-{user.ID}");

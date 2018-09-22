@@ -32,7 +32,7 @@ namespace MexendoNoTemplate.Controllers
         [HttpPost, ValidateAntiForgeryToken, AllowAnonymous]
         public ActionResult Logar(Usuario usuario, bool lembrar = false)
         {
-            BLLResponse<Usuario> response = new UsuarioBLL().IsLoginValido(usuario);
+            BLLResponse<Usuario> response = new LoginBLL().IsLoginValido(usuario);
 
             if (response.Sucesso)
             {

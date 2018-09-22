@@ -20,7 +20,7 @@ namespace LetsTalk.Controllers
         public ActionResult Index(int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            List<Usuario> users = new UsuarioBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
+            List<Usuario> users = new FiltroConhecerBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
 
             int skip = (pagina - 1) * qntPorPagina;
             users = users.Skip(skip).Take(qntPorPagina).ToList();
@@ -38,21 +38,6 @@ namespace LetsTalk.Controllers
 
             return View(modelo);
         }
-
-        [HttpPost]
-        public ActionResult Filtrar(int idadeMin, int idadeMax, int tagsComum, int qntPorPagina, int colunas)
-        {
-            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            List<Usuario> users = new UsuarioBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
-
-            TempData["Usuarios"] = users;
-            TempData["QntPorPagina"] = qntPorPagina;
-            TempData["Colunas"] = colunas;
-
-            return RedirectToAction("Index");
-        }
-
-
 
         public ActionResult VisualizarPerfil()
         {

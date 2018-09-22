@@ -16,7 +16,7 @@ function carregarFotosPequenasDoBanco() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        
+
     });
 }
 
@@ -46,7 +46,7 @@ $('#salvar-informacoes').click(function () {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-       
+
     });
 });
 
@@ -69,7 +69,7 @@ $('#atualizar-senha').click(function () {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        
+
     })
 
 
@@ -105,7 +105,7 @@ function enviarFotos() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        
+
     });
 }
 
@@ -125,7 +125,5 @@ function gerarFotoPequena(pathFoto) {
 }
 
 
-function criarFotoVizualizarPerfil() {
 
-}
 

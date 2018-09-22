@@ -1,6 +1,5 @@
 ﻿@{
     ViewBag.Title = "Registrar";
-    ViewBag.MostrarBarrinha = true;
 }
 
 @model Entity.Usuario
@@ -54,14 +53,14 @@
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label>Data de Nascimento</label>
-                            @{ 
+                            @{
                                 DateTime now = DateTime.Now;
                                 string dateMin = $"{now.Year - 80}-{now.Month.ToString("00")}-{now.Day.ToString("00")}";
                                 string dateMax = $"{now.Year - 18}-{now.Month.ToString("00")}-{now.Day.ToString("00")}";
                                 string dataNasc = Model.DataNascimento != DateTime.MinValue ? Model.DataNascimento.ToString("yyyy-MM-dd") : null;
                             }
-                            <input value="@dataNasc"  type="date" class="form-control" 
-                               min="@dateMin" max="@dateMax" name="usuario.DataNascimento">
+                            <input value="@dataNasc" type="date" class="form-control"
+                                   min="@dateMin" max="@dateMax" name="usuario.DataNascimento">
                             @if (ViewData.ModelState.ContainsKey("DataNascimento"))
                             {
                                 <span class="font-red-thunderbird"> @ViewData.ModelState["DataNascimento"].Errors[0].ErrorMessage</span>
@@ -102,23 +101,21 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label>Senha</label>
-                            <input value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha" name="usuario.Senha">
-                            @if (ViewData.ModelState.ContainsKey("Senha"))
-                            {
-                                <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
-                            }
-                        </div>
-                        <div class="form-group" style="float: none">
-                            <label>Confirmar Senha</label>
-                            <input type="password" class="form-control" placeholder="Confirme sua senha" name="senhaRepetida">
-                        </div>
-                        @if (ViewData.ModelState.ContainsKey("SenhasDiferentes"))
+                        <label>Senha</label>
+                        <input value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha, que deve conter pelo menos 4 caracteres" name="usuario.Senha">
+                        @if (ViewData.ModelState.ContainsKey("Senha"))
                         {
-                            <span class="font-red-thunderbird"> @ViewData.ModelState["SenhasDiferentes"].Errors[0].ErrorMessage</span>
+                            <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>
                         }
                     </div>
+                    <div class="form-group" style="float: none">
+                        <label>Confirmar Senha</label>
+                        <input type="password" class="form-control" placeholder="Confirme sua senha" name="senhaRepetida">
+                    </div>
+                    @if (ViewData.ModelState.ContainsKey("SenhasDiferentes"))
+                    {
+                        <span class="font-red-thunderbird"> @ViewData.ModelState["SenhasDiferentes"].Errors[0].ErrorMessage</span>
+                    }
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">

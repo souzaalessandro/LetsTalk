@@ -105,9 +105,9 @@ namespace LetsTalk.Controllers
             return Content("Coordenadas salvas no usuário");
         }
 
-        public ActionResult GetUser(int id)
-        {
+        //public ActionResult GetUser(int id)
+        //{
 
-        }
+        //}
     }
 }

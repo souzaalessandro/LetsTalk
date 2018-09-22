@@ -59,7 +59,7 @@ $('#atualizar-senha').click(function () {
     var nova = $('#nova-senha').val();
     var repetida = $('#nova-senha-repetido').val();
 
-    if (nova != repetida) {
+    if (nova !== repetida) {
         mostrarAlerta('Senhas digitadas não são iguais. Digite senhas iguais e tente novamente', 'info');
 
     } else  {

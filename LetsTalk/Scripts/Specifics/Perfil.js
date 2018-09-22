@@ -16,7 +16,7 @@ function carregarFotosPequenasDoBanco() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-
+        error: ajaxError()
     });
 }
 
@@ -46,9 +46,13 @@ $('#salvar-informacoes').click(function () {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-
+        error: ajaxError()
     });
 });
+
+function ajaxError() {
+    mostrarAlerta('Algo de errado ocorreu', 'danger');
+}
 
 $('#atualizar-senha').click(function () {
     var atual = $('#senha-atual').val();
@@ -62,7 +66,7 @@ $('#atualizar-senha').click(function () {
         mostrarAlerta('Informe a nova senha', 'info');
         return;
     }
-    if (nova != repetida) {
+    if (nova !== repetida) {
         mostrarAlerta('Senhas digitadas não são iguais. Digite senhas iguais e tente novamente', 'info');
         return;
     } else {
@@ -79,12 +83,10 @@ $('#atualizar-senha').click(function () {
                     mostrarAlerta(result.mensagem, 'danger');
                 }
             },
-
-        })
+            error: ajaxError()
+        });
     }
-
-
-})
+});
 
 function mostrarAlerta(mensagem, tipoAlerta) {
     $.bootstrapGrowl(mensagem, {
@@ -116,7 +118,7 @@ function enviarFotos() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-
+        error: ajaxError()
     });
 }
 
@@ -134,7 +136,3 @@ function gerarFotoPequena(pathFoto) {
 
     $("#lista-fotos").append(li);
 }
-
-
-
-

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity;
 using PWDTK_DOTNET451;
 
 namespace BusinessLogicalLayer
@@ -34,6 +35,17 @@ namespace BusinessLogicalLayer
                 salt: salt,
                 password: senha,
                 hash: hashedSenha);
+        }
+
+        /// <summary>
+        /// Encriptografa senha de um Usuario, armazenando no objeto o hash e salt
+        /// </summary>
+        /// <param name="item"></param>
+        public static void EncriptografarEGuardarSalt(Usuario item)
+        {
+            byte[] salt;
+            item.Hash = Criptografia.Encriptar(item.Senha, out salt);
+            item.Salt = salt;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace LetsTalk.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Registrar(Usuario usuario, string senha, string senhaRepetida)
         {
-            BLLResponse<Usuario> response = new UsuarioBLL().Registrar(usuario, senhaRepetida);
+            BLLResponse<Usuario> response = new RegistroBLL().Registrar(usuario, senhaRepetida);
 
             if (!response.Sucesso)
             {
@@ -40,7 +40,7 @@ namespace LetsTalk.Controllers
                 TempData["CamposInformados"] = usuario;
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("index", "Conhecer");
+            return RedirectToAction("Index", "Conhecer");
         }
     }
 }

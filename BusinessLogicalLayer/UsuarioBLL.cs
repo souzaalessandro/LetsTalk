@@ -33,28 +33,6 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public BLLResponse<Usuario> Registrar(Usuario item, string senhaRepetida)
-        {
-            List<ErrorField> erros = ValidarUsuarioParaRegistro(item, senhaRepetida);
-            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            response.Erros = erros;
-            if (response.HasErros)
-            {
-                response.Sucesso = false;
-                return response;
-            }
-
-            EncriptografarEGuardarSalt(item);
-
-            using (LTContext ctx = new LTContext())
-            {
-                ctx.Usuarios.Add(item);
-                ctx.SaveChanges();
-            }
-            response.Sucesso = true;
-            return response;
-        }
-
         public BLLResponse<Usuario> IsLoginValido(Usuario item)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
@@ -76,13 +54,6 @@ namespace BusinessLogicalLayer
                 }
             }
             return response;
-        }
-
-        private void EncriptografarEGuardarSalt(Usuario item)
-        {
-            byte[] salt;
-            item.Hash = Criptografia.Encriptar(item.Senha, out salt);
-            item.Salt = salt;
         }
 
         public BLLResponse<Usuario> Delete(Usuario item)
@@ -189,27 +160,6 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        private List<ErrorField> ValidarUsuarioParaRegistro(Usuario item, string senhaRepetida)
-        {
-            List<ErrorField> errors = new List<ErrorField>();
-
-            var property = item.GetType().GetProperty(nameof(item.Nome));
-            ValidarString(item, property, errors, 3, 20);
-
-            property = item.GetType().GetProperty(nameof(item.Sobrenome));
-            ValidarString(item, property, errors, 3, 25);
-
-            ValidarIdade(item, errors);
-
-            ValidarGenero(item, errors);
-
-            ValidarEmail(item, errors);
-
-            ValidarSenha(item, errors, senhaRepetida);
-
-            return errors;
-        }
-
         public BLLResponse<Usuario> Update(UsuarioViewModel userVM)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
@@ -235,74 +185,60 @@ namespace BusinessLogicalLayer
         public BLLResponse<Usuario> UpdatePassword(Usuario usuario, string senhaAntiga)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-            
-            try
+
+            using (LTContext ctx = new LTContext())
             {
-                using (LTContext ctx = new LTContext())
+                Usuario userDoDb = ctx.Usuarios.Find(usuario.ID);
+                bool EhSenhaAntiga = Criptografia.Verificar(senhaAntiga, userDoDb.Salt, userDoDb.Hash);
+
+                if (!EhSenhaAntiga)
                 {
-                    
+                    response.Mensagem = "Senha atual incorreta.";
+                    return response;
+                }
+                if (userDoDb == null)
+                {
+                    response.Mensagem = "Algo de errado ocorreu.";
+                    return response;
+                }
+                else
+                {
+                    userDoDb.Senha = usuario.Senha;
+                    Criptografia.EncriptografarEGuardarSalt(userDoDb);
+                    ctx.SaveChanges();
 
-                    Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == usuario.ID);
-                    bool EhSenhaAntiga = Criptografia.Verificar(senhaAntiga, userDoDb.Salt, userDoDb.Hash);
-
-                    if (!EhSenhaAntiga)
-                    {
-                        response.Mensagem = "Senha atual incorreta.";
-                        return response;
-
-                    }
-                    else if (userDoDb == null)
-                    {
-                        response.Mensagem = "Sessão expirada, efetue o login novamente.";
-                        return response;
-                    }
-                    else
-                    {
-                        userDoDb.Senha = usuario.Senha;
-                        EncriptografarEGuardarSalt(userDoDb);
-                        ctx.SaveChanges();
-                        response.Sucesso = true;
-                        response.Mensagem = "Senha atualizada com sucesso!";
-                        response.Data = userDoDb;
-                        return response;
-                    }
+                    response.Sucesso = true;
+                    response.Mensagem = "Senha atualizada com sucesso!";
+                    response.Data = userDoDb;
+                    return response;
                 }
             }
-            catch (Exception)
+        }
+
+        private void CopiarInformacoes(UsuarioViewModel userVM, Usuario user)
+        {
+            if (!userVM.Frase.IsNullOrWhiteSpace())
             {
-                response.Mensagem = "Algo muito estranho aconteceu, tente novamente.";
-               return response;
+                user.FraseApresentacao = userVM.Frase;
             }
-
-
-
+            if (!userVM.Descricao.IsNullOrWhiteSpace())
+            {
+                user.Descricao = userVM.Descricao;
+            }
+            if (!userVM.Tags.IsNullOrWhiteSpace())
+            {
+                user.Tags = userVM.Tags;
+            }
         }
-    
 
-    private void CopiarInformacoes(UsuarioViewModel userVM, Usuario user)
-    {
-        if (!userVM.Frase.IsNullOrWhiteSpace())
+        public void BuscarDiretorios(UsuarioViewModel usuarioVM)
         {
-            user.FraseApresentacao = userVM.Frase;
-        }
-        if (!userVM.Descricao.IsNullOrWhiteSpace())
-        {
-            user.Descricao = userVM.Descricao;
-        }
-        if (!userVM.Tags.IsNullOrWhiteSpace())
-        {
-            user.Tags = userVM.Tags;
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+                List<Diretorio> diretorios = ctx.Diretorios.ToList();
+            }
         }
     }
-
-    public void BuscarDiretorios(UsuarioViewModel usuarioVM)
-    {
-        BLLResponse<Usuario> response = new BLLResponse<Usuario>();
-
-        using (LTContext ctx = new LTContext())
-        {
-            List<Diretorio> diretorios = ctx.Diretorios.ToList();
-        }
-    }
-}
 }

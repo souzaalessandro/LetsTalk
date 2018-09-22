@@ -112,14 +112,9 @@ namespace LetsTalk.Controllers
             };
 
             BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario, senhaAntiga);
-            if (response.Sucesso)
-            {
-                return Json(new { sucesso = true, mensagem = response.Mensagem });
-            }
-            else
-            {
-                return Json(new { sucesso = false, mensagem = response.Mensagem });
-            }
+
+            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
+
         }
     }
 }

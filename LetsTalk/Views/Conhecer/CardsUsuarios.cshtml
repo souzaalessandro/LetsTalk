@@ -1,11 +1,11 @@
 ﻿@using Entity
 @model List<Usuario>
 
+
 <div class="row mix-grid thumbnails">
     @foreach (Usuario user in Model)
     {
         int idade = DateTime.Now.Year - user.DataNascimento.Year;
-
 
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
@@ -36,6 +36,7 @@
         </div>
     }
 </div>
+
 <div id="stack1" class="modal fade" tabindex="-1" data-focus-on="input:first">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -43,7 +44,7 @@
     </div>
 
     <div class="modal-body col-md-12 ">
-        <img src="" class="img-responsive" alt="" id="foto">
+        <img src="" class="img-responsive" alt="" id="foto" >
         <div class="row">
             <div class="col-md-12">
                 <p>

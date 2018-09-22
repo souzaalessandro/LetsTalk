@@ -16,6 +16,23 @@ namespace BusinessLogicalLayer
 {
     public partial class UsuarioBLL
     {
+        public List<Usuario> GetUsersComFiltro(int idadeMin, int idadeMax, int tagsComum, int userID)
+        {
+            using (LTContext ctx = new LTContext())
+            {
+                Usuario userDb = ctx.Usuarios.Find(userID);
+
+                DateTime menor = new DateTime(DateTime.Now.Year - idadeMin, DateTime.Now.Month, DateTime.Now.Day);
+                DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
+
+                var filtroEunao = ctx.Usuarios.Where(u => u.ID != userID);
+                var filtroIdade = filtroEunao.Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
+                var filtroTags = filtroIdade.AsEnumerable().Where(u => TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
+
+                return filtroTags;
+            }
+        }
+
         public BLLResponse<Usuario> Registrar(Usuario item, string senhaRepetida)
         {
             List<ErrorField> erros = ValidarUsuarioParaRegistro(item, senhaRepetida);

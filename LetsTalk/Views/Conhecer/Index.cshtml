@@ -5,6 +5,7 @@
 
 @using Entity
 @model List<Usuario>
+
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
 
@@ -22,7 +23,6 @@
         <div class="caption">
             <i class="fa fa-sliders fa-4x"></i>Filtros
         </div>
-
         <div class="tools">
             <a href="javascript:;" class="expand" data-original-title="" title="Abrir/fechar filtros">
             </a>
@@ -31,45 +31,62 @@
     <div class="portlet-body" style="display: none;">
         @using (Html.BeginForm("Filtrar", "Conhecer", FormMethod.Post))
         {
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>Mínimo de Tags em comum</label>
+                        <select class="form-control" name="tagsComum">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
 
-            <div class="col-md-4">
-                <div>
-                    Mínimo de Tags em comum
-                    <select class="form-control" name="tagsComum" style="width: 48%">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div class="form-group col-md-2">
+                        <label> Idade mínima</label>
+                        <select id="seletor-idade-minima" class="form-control" name="idadeMin">
+                            @for (int i = 18; i <= 79; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <label>Idade máxima</label>
+                        <select id="seletor-idade-maxima" class="form-control" name="idadeMax"></select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Resultados por página</label>
+                        <select class="form-control" name="qntPorPagina">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Colunas</label>
+                        <select class="form-control" name="colunas">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div>
-                    Idade mínima
-                    <select id="seletor-idade-minima" class="form-control" style="width: 25%" name="idadeMin">
-                        @for (int i = 18; i <= 79; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
+            <div class="form-actions">
+                <div class="col-md-offset-9">
+                    <input type="submit" class="btn btn-lg default-roxocustomizado purple-customizado" value="Aplicar filtros" />
                 </div>
-                <div>
-                    Idade máxima
-                    <select id="seletor-idade-maxima" class="form-control" style="width: 25%" name="idadeMax"></select>
-                </div>
-            </div>
-            <div class="btn-group">
-                <input type="submit" class="btn purple-customizado" value="Filtrar" />
             </div>
         }
 
     </div>
 </div>
-
-
 <!--pessoas encontradas -->
 @Html.Partial("CardsUsuarios", Model)
+
 
 
 @section  PageLevelPlugins

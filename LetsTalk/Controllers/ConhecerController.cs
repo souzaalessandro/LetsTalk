@@ -20,16 +20,19 @@ namespace LetsTalk.Controllers
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             List<Usuario> usersFiltrados = null;
-
+            int qntPorPagina = 10;
+            int colunas = 4;
             if (TempData["Usuarios"] != null)
             {
                 usersFiltrados = (List<Usuario>)TempData["Usuarios"];
+                qntPorPagina = (int)TempData["QntPorPagina"];
+                colunas = (int)TempData["Colunas"];
             }
             if (usersFiltrados != null)
             {
                 return View(usersFiltrados);
             }
-
+            ViewData["Colunas"] = colunas;
             using (LTContext ctx = new LTContext())
             {
                 var users = ctx.Usuarios.Where(u => u.ID != user.ID).ToList();
@@ -38,42 +41,19 @@ namespace LetsTalk.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filtrar(int idadeMin, int idadeMax, int tagsComum)
+        public ActionResult Filtrar(int idadeMin, int idadeMax, int tagsComum, int qntPorPagina, int colunas)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            List<Usuario> users = new UsuarioBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
 
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario userDb = ctx.Usuarios.Find(user.ID);
+            TempData["Usuarios"] = users;
+            TempData["QntPorPagina"] = qntPorPagina;
+            TempData["Colunas"] = colunas;
 
-                DateTime menor = new DateTime(DateTime.Now.Year - idadeMin, DateTime.Now.Month, DateTime.Now.Day);
-                DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
-
-                var filtroEunao = ctx.Usuarios.Where(u => u.ID != user.ID);
-                var filtroIdade = filtroEunao.Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
-                //var filtroTags = filtroIdade.Where(u => (u.Tags.Split(',').Intersect(userDb.Tags.Split(',')).Count() >= tagsComum)).ToList();
-                var filtroTags = filtroIdade.AsEnumerable().Where(u => TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
-
-                TempData["Usuarios"] = filtroTags;
-
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Index");
         }
 
-        private bool TagsEmComum(string tagsUser, string tagsUserLogado, int minTagsComum)
-        {
-            if (tagsUser.IsNullOrWhiteSpace() || tagsUserLogado.IsNullOrWhiteSpace())
-            {
-                return false;
-            }
-            List<string> userLinq = null;
-            List<string> userLogado = null;
-            userLinq = tagsUser.Contains(",") ? tagsUser.Split(',').ToList() : new List<string> { tagsUser };
-            userLogado = tagsUserLogado.Contains(",") ? tagsUserLogado.Split(',').ToList() : new List<string>() { tagsUserLogado };
-
-            var tagsEmComum = userLinq.Intersect(userLogado);
-            return tagsEmComum.Count() >= minTagsComum;
-        }
+       
 
         public ActionResult VisualizarPerfil()
         {

@@ -9,23 +9,10 @@ using LetsTalk.Models;
 using System.Data.Entity;
 using BusinessLogicalLayer;
 using Entity.Extensions;
+using Entity.ViewModels;
 
 namespace LetsTalk.Controllers
 {
-    public class UsersConhecerPessoas
-    {
-        public UsersConhecerPessoas()
-        {
-            Usuarios = new List<Usuario>();
-        }
-        public List<Usuario> Usuarios { get; set; }
-        public int PaginaAtual { get; set; }
-        public int NumeroTagsComum { get; set; }
-        public int QtdPessoasPagina { get; set; }
-        public int IdadeMinima { get; set; }
-        public int IdadeMaxima { get; set; }
-        public int NumeroColunas { get; set; }
-    }
     [Authorize]
     public class ConhecerController : Controller
     {
@@ -50,23 +37,6 @@ namespace LetsTalk.Controllers
             };
 
             return View(modelo);
-
-            //if (TempData["Usuarios"] != null)
-            //{
-            //    usersFiltrados = (List<Usuario>)TempData["Usuarios"];
-            //    qntPorPagina = (int)TempData["QntPorPagina"];
-            //    colunas = (int)TempData["Colunas"];
-            //}
-            //if (usersFiltrados != null)
-            //{
-            //    return View(usersFiltrados);
-            //}
-            //ViewData["Colunas"] = colunas;
-            //using (LTContext ctx = new LTContext())
-            //{
-            //    var users = ctx.Usuarios.Where(u => u.ID != user.ID).ToList();
-            //    return View(users);
-            //}
         }
 
         [HttpPost]

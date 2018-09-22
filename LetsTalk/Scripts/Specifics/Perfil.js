@@ -54,23 +54,34 @@ $('#atualizar-senha').click(function () {
     var atual = $('#senha-atual').val();
     var nova = $('#nova-senha').val();
     var repetida = $('#nova-senha-repetido').val();
+    if ($.trim(atual).length === 0) {
+        mostrarAlerta('Informe sua senha atual', 'info');
+        return;
+    }
+    if ($.trim(nova).length === 0 || $.trim(repetida).length === 0) {
+        mostrarAlerta('Informe a nova senha', 'info');
+        return;
+    }
+    if (nova != repetida) {
+        mostrarAlerta('Senhas digitadas não são iguais. Digite senhas iguais e tente novamente', 'info');
+        return;
+    } else {
+        $.ajax({
+            url: '/Perfil/AtualizarSenha',
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify({ senhaNova: nova, senhaAntiga: atual }),
+            success: function (result) {
+                if (result.sucesso) {
+                    mostrarAlerta(result.mensagem, 'success');
+                } else {
+                    mostrarAlerta(result.mensagem, 'danger');
+                }
+            },
 
-
-    $.ajax({
-        url: '/Perfil/AtualizarSenha',
-        type: 'POST',
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify({ senhaNova: nova, senhaAntiga: atual }),
-        success: function (result) {
-            if (result.sucesso) {
-                mostrarAlerta(result.mensagem, 'success');
-            } else {
-                mostrarAlerta(result.mensagem, 'danger');
-            }
-        },
-
-    })
+        })
+    }
 
 
 })

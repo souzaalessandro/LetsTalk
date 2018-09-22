@@ -135,3 +135,8 @@ function gerarFotoPequena(pathFoto) {
     $("#lista-fotos").append(li);
 }
 
+
+function criarFotoVizualizarPerfil() {
+
+}
+

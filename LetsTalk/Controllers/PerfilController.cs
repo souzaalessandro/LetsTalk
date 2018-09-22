@@ -32,19 +32,14 @@ namespace LetsTalk.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalvarFoto(HttpPostedFileBase foto)
+        public ActionResult SalvarFoto(string imgbase64)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            if (foto != null && IsImagemValida(foto))
-            {
-                string pathRelativo = GetPathFoto(foto, user);
-                var result = new UsuarioBLL().AtualizarFotoPerfil(user.ID, pathRelativo);
-                if (result.Sucesso)
-                {
-                    //se precisar retornar algum aviso que funcionou ou recarregar a página
-                    return RedirectToAction("Index");
-                }
-            }
+            string relativo = "";
+            string folder = GetUserPicsFolder(user, out relativo);
+            byte[] imagem = Convert.FromBase64String(imgbase64.Split(',')[1]);
+            var result = new UsuarioBLL().UpdateProfilePic(user.ID, folder, imagem, relativo);
+
             return RedirectToAction("Index");
         }
 
@@ -65,6 +60,14 @@ namespace LetsTalk.Controllers
                 }
             }
             return RedirectToAction("Index");
+        }
+
+        private string GetUserPicsFolder(MvcUser user, out string relativo)
+        {
+            string folder = Path.Combine(Server.MapPath("~/UserImages"), $"userperfil-{user.ID}");
+            Directory.CreateDirectory(folder);
+            relativo = $"/UserImages/userperfil-{user.ID}";
+            return folder;
         }
 
         private string GetPathFoto(HttpPostedFileBase foto, MvcUser user)

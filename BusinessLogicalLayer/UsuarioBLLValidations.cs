@@ -63,6 +63,21 @@ namespace BusinessLogicalLayer
             }
         }
 
+        private bool TagsEmComum(string tagsUser, string tagsUserLogado, int minTagsComum)
+        {
+            if (tagsUser.IsNullOrWhiteSpace() || tagsUserLogado.IsNullOrWhiteSpace())
+            {
+                return false;
+            }
+            List<string> userLinq = null;
+            List<string> userLogado = null;
+            userLinq = tagsUser.Contains(",") ? tagsUser.Split(',').ToList() : new List<string> { tagsUser };
+            userLogado = tagsUserLogado.Contains(",") ? tagsUserLogado.Split(',').ToList() : new List<string>() { tagsUserLogado };
+
+            var tagsEmComum = userLinq.Intersect(userLogado);
+            return tagsEmComum.Count() >= minTagsComum;
+        }
+
         private void ValidarGenero(Usuario item, List<ErrorField> errors)
         {
             int valueDaCmb = (int)item.Genero;
@@ -82,11 +97,8 @@ namespace BusinessLogicalLayer
             }
         }
 
-      
-
         private void ValidarEmail(Usuario item, List<ErrorField> errors)
         {
-
             if (item.Email.IsNullOrWhiteSpace())
             {
                 errors.Add(new ErrorField(fieldName: nameof(item.Email),

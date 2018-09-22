@@ -24,6 +24,18 @@
 
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/jquery-tags-input/jquery.tagsinput.css" />
     <link href="~/Content/Perfil.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link href="~/assets/iEdit.css" rel="stylesheet" />
+    <script src="~/assets/iEdit.js"></script>
+
+    <style type="text/css">
+        #profilepic {
+            display: block;
+            position: relative;
+            width: 300px;
+        }
+    </style>
 }
 
 
@@ -190,41 +202,42 @@
 
                                     <div class="tab-pane" id="tab_1_4">
                                         <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data" role="form" method="post">
-                                            <div class="form-group">
-                                                <div class="col-md-9" id="SelecaoDeImagem">
-                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                        <label>Foto de Perfil</label>
-                                                        <br />
-                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;">
-                                                        </div>
-                                                        <div>
-                                                            <span class="btn default btn-file">
-                                                                <span class="fileinput-new">
-                                                                    Selecionar
-                                                                </span>
-                                                                <span class="fileinput-exists">
-                                                                    Alterar
-                                                                </span>
-                                                                <input type="hidden"><input type="file" name="foto">
-                                                            </span>
-                                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                                                Remover
-                                                            </a>
-                                                        </div>
-                                                    </div>
+
+                                            <input type="hidden" name="imgbase64" id="imgbase64" />
+
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <div class="input-group input-large">
+                                                    <span class="input-group-addon btn default btn-file">
+                                                        <span class="fileinput-new">
+                                                            Selecionar foto
+                                                        </span>
+                                                        <span class="fileinput-exists">
+                                                            Alterar
+                                                        </span>
+                                                        <input id="file" accept="image/*" type="file">
+                                                    </span>
+
                                                 </div>
                                             </div>
-                                            <div class="margin-top-10">
-                                                <button type="submit" class="btn purple-customizado">Salvar</button>
-                                                @*<a href="javascript:;" class="btn purple-customizado">
-                                                        Salvar
-                                                    </a>*@
-                                            </div>
+                                            @{
+                                                string src = null;
+                                                string none = null;
+                                                if (!String.IsNullOrWhiteSpace(Model.PathFotoPerfil))
+                                                {
+                                                    src = "src=" + Model.PathFotoPerfil;
+                                                }
+                                                else
+                                                {
+                                                    none = "style=\"display: none\"";
+                                                }
+                                            }
+                                            <img id="profilepic" @none  @src>
+                                            <div class="margin-top-10"> </div>
+                                            <input type="submit" id="btnUpload" value="Salvar" class="btn purple-customizado" />
                                         </form>
                                     </div>
                                     <!-- END CHANGE AVATAR TAB -->
                                     <!-- CHANGE PASSWORD TAB -->
-                                    <!-- ÑÃO ESTA FUNCIONANDO-->
 
                                     <div class="tab-pane" id="tab_1_3">
                                         <div class="form-group">
@@ -312,4 +325,18 @@
         });
     </script>
     <script src="~/Scripts/Specifics/Perfil.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#file").change(function (e) {
+                var img = e.target.files[0];
+                document.getElementById("profilepic").style.display = 'block';
+                if (!iEdit.open(img, true, function (res) {
+                    $("#profilepic").attr("src", res);
+                    document.getElementById("imgbase64").value = res;
+                })) {
+                    mostrarAlerta("Tipo de arquivo inválido. Selecione uma imagem .png ou .jpg", 'danger');
+                }
+            });
+        });
+    </script>
 }

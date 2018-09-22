@@ -9,6 +9,7 @@ using LetsTalk.Models;
 using System.Data.Entity;
 using BusinessLogicalLayer;
 using Entity.Extensions;
+using Entity.ViewModels;
 
 namespace LetsTalk.Controllers
 {
@@ -16,64 +17,42 @@ namespace LetsTalk.Controllers
     public class ConhecerController : Controller
     {
         // GET: Conhecer
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            List<Usuario> usersFiltrados = null;
+            List<Usuario> users = new UsuarioBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
 
-            if (TempData["Usuarios"] != null)
-            {
-                usersFiltrados = (List<Usuario>)TempData["Usuarios"];
-            }
-            if (usersFiltrados != null)
-            {
-                return View(usersFiltrados);
-            }
+            int skip = (pagina - 1) * qntPorPagina;
+            users = users.Skip(skip).Take(qntPorPagina).ToList();
 
-            using (LTContext ctx = new LTContext())
+            UsersConhecerPessoas modelo = new UsersConhecerPessoas()
             {
-                var users = ctx.Usuarios.Where(u => u.ID != user.ID).ToList();
-                return View(users);
-            }
+                Usuarios = users,
+                PaginaAtual = pagina,
+                NumeroTagsComum = tagsComum,
+                QtdPessoasPagina = qntPorPagina,
+                IdadeMinima = idadeMin,
+                IdadeMaxima = idadeMax,
+                NumeroColunas = colunas
+            };
+
+            return View(modelo);
         }
 
         [HttpPost]
-        public ActionResult Filtrar(int idadeMin, int idadeMax, int tagsComum)
+        public ActionResult Filtrar(int idadeMin, int idadeMax, int tagsComum, int qntPorPagina, int colunas)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            List<Usuario> users = new UsuarioBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
 
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario userDb = ctx.Usuarios.Find(user.ID);
+            TempData["Usuarios"] = users;
+            TempData["QntPorPagina"] = qntPorPagina;
+            TempData["Colunas"] = colunas;
 
-                DateTime menor = new DateTime(DateTime.Now.Year - idadeMin, DateTime.Now.Month, DateTime.Now.Day);
-                DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
-
-                var filtroEunao = ctx.Usuarios.Where(u => u.ID != user.ID);
-                var filtroIdade = filtroEunao. Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
-                //var filtroTags = filtroIdade.Where(u => (u.Tags.Split(',').Intersect(userDb.Tags.Split(',')).Count() >= tagsComum)).ToList();
-                var filtroTags = filtroIdade.AsEnumerable().Where(u=> TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
-
-                TempData["Usuarios"] = filtroTags;
-
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Index");
         }
 
-        private bool TagsEmComum(string tagsUser, string tagsUserLogado, int minTagsComum)
-        {
-            if (tagsUser.IsNullOrWhiteSpace() || tagsUserLogado.IsNullOrWhiteSpace())
-            {
-                return false;
-            }
-            List<string> userLinq = null;
-            List<string> userLogado = null;
-            userLinq = tagsUser.Contains(",") ? tagsUser.Split(',').ToList() : new List<string> { tagsUser };
-            userLogado = tagsUserLogado.Contains(",") ? tagsUserLogado.Split(',').ToList() : new List<string>() { tagsUserLogado };
 
-            var tagsEmComum = userLinq.Intersect(userLogado);
-            return tagsEmComum.Count() >= minTagsComum;
-        }
 
         public ActionResult VisualizarPerfil()
         {
@@ -105,9 +84,27 @@ namespace LetsTalk.Controllers
             return Content("Coordenadas salvas no usuário");
         }
 
-        //public ActionResult GetUser(int id)
-        //{
+        public ActionResult GetUser(int id)
+        {
+            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(id);
+            object dados = new { suceso = false };
+            if (response.Sucesso)
+            {
+                int idade = DateTime.Now.Year - response.Data.DataNascimento.Year;
+                string[] tags = String.IsNullOrWhiteSpace(response.Data.Tags) ? new string[1] : response.Data.Tags.Split(',');
 
-        //}
+                dados = new
+                {
+                    sucesso = true,
+                    nome = response.Data.Nome,
+                    idade = idade,
+                    foto = response.Data.PathFotoPerfil,
+                    frase = response.Data.FraseApresentacao,
+                    descricao = response.Data.Descricao,
+                    tags = tags
+                };
+            }
+            return Json(dados);
+        }
     }
 }

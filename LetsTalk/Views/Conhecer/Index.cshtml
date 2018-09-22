@@ -3,8 +3,9 @@
     ViewBag.Title = "Index";
 }
 
-@using Entity
-@model List<Usuario>
+@using Entity.ViewModels
+@model UsersConhecerPessoas
+
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
 
@@ -22,54 +23,75 @@
         <div class="caption">
             <i class="fa fa-sliders fa-4x"></i>Filtros
         </div>
-
         <div class="tools">
             <a href="javascript:;" class="expand" data-original-title="" title="Abrir/fechar filtros">
             </a>
         </div>
     </div>
     <div class="portlet-body" style="display: none;">
-        @using (Html.BeginForm("Filtrar", "Conhecer", FormMethod.Post))
+        @using (Html.BeginForm("Index", "Conhecer", FormMethod.Post))
         {
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>Mínimo de Tags em comum</label>
+                        <select class="form-control" name="tagsComum">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                string selected = Model.NumeroTagsComum == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
 
-            <div class="col-md-4">
-                <div>
-                    Mínimo de Tags em comum
-                    <select class="form-control" name="tagsComum" style="width: 48%">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div class="form-group col-md-2">
+                        <label> Idade mínima</label>
+                        <select id="seletor-idade-minima" class="form-control" name="idadeMin">
+                            @for (int i = 18; i <= 79; i++)
+                            {
+                                string selected = Model.IdadeMinima == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
+                        </select>
+                        <label>Idade máxima</label>
+                        <select id="seletor-idade-maxima" class="form-control" name="idadeMax"></select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Resultados por página</label>
+                        <select class="form-control" name="qntPorPagina">
+                            @for (int i = 15; i <= 35; i += 10)
+                            {
+                                string selected = Model.QtdPessoasPagina == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Colunas</label>
+                        <select class="form-control" name="colunas">
+                            @for (int i = 4; i >= 2; i--)
+                            {
+                                string selected = Model.NumeroColunas == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div>
-                    Idade mínima
-                    <select id="seletor-idade-minima" class="form-control" style="width: 25%" name="idadeMin">
-                        @for (int i = 18; i <= 79; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
+            <div class="form-actions">
+                <div class="col-md-offset-9">
+                    <input type="submit" class="btn btn-lg default-roxocustomizado purple-customizado" value="Aplicar filtros" />
                 </div>
-                <div>
-                    Idade máxima
-                    <select id="seletor-idade-maxima" class="form-control" style="width: 25%" name="idadeMax"></select>
-                </div>
-            </div>
-            <div class="btn-group">
-                <input type="submit" class="btn purple-customizado" value="Filtrar" />
             </div>
         }
 
     </div>
 </div>
-
-
 <!--pessoas encontradas -->
 @Html.Partial("CardsUsuarios", Model)
+
 
 
 @section  PageLevelPlugins
@@ -101,12 +123,17 @@
         $('#seletor-idade-minima').change(carregarIdadesMaximas);
 
         function carregarIdadesMaximas() {
+            var maximaAnterior = @Model.IdadeMaxima;
             $('#seletor-idade-maxima').empty();
             var idade = $('#seletor-idade-minima').find(':selected').val();
             var idademin = ++idade;
-            console.log(idademin);
             for (var i = idademin; i <= 80; i++) {
                 var opt = $('<option>').val(i).text(i);
+                if (i == maximaAnterior) {
+                    console.log(maximaAnterior);
+
+                    opt.attr('selected','selected');
+                }
                 $('#seletor-idade-maxima').append(opt);
             }
         }
@@ -120,7 +147,6 @@
 
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
-            console.log(position);
             $.ajax({
                 url: '/Conhecer/SalvarCoordenadas',
                 type: 'POST',
@@ -142,10 +168,40 @@
             var userID = $divCard.attr('id').replace("user", '');
 
             $.ajax({
-                url: ''
-            })
+                url: '/Conhecer/GetUser',
+                type: 'POST',
+                data: JSON.stringify({ id: userID }),
+                contentType: "application/json;charset=utf-8",
+                dataType: 'json',
+                success: function (result) {
+                    if (result.sucesso) {
+                        inserirUserNoModal(result);
+                    } else {
+                        // mostrarAlerta(result.mensagem, 'danger');
+                    }
+                },
+                error: function (request, status, error) {
+                    //mostrarAlerta('Algo de errado ocorreu.', 'danger');
+                }
+            });
             console.log(userID);
         });
+        function inserirUserNoModal(result) {
+            $('#stack1 #nome').text(result.nome);
+            $('#stack1 #idade').text(result.idade);
+            $('#stack1 #foto').attr('src', result.foto);
+            $('#stack1 #frase-apresentacao').text(result.frase);
+            $('#stack1 #descricao').text(result.descricao);
+
+            $(result.tags).each(function (i) {
+                var iclass = '<i class="fa fa-tags"></i>' + this;
+                console.log(this);
+                $('#stack1 #tags').append(iclass);
+            });
+
+            @* <i class="fa fa-tags"></i>tag *@
+        }
+
     </script>
 }
 

@@ -10,11 +10,29 @@ using Entity.Enums;
 using Entity.Extensions;
 using Entity.ViewModels;
 using System.Data.Entity;
+using System.IO;
 
 namespace BusinessLogicalLayer
 {
     public partial class UsuarioBLL
     {
+        public List<Usuario> GetUsersComFiltro(int idadeMin, int idadeMax, int tagsComum, int userID)
+        {
+            using (LTContext ctx = new LTContext())
+            {
+                Usuario userDb = ctx.Usuarios.Find(userID);
+
+                DateTime menor = new DateTime(DateTime.Now.Year - idadeMin, DateTime.Now.Month, DateTime.Now.Day);
+                DateTime maior = new DateTime(DateTime.Now.Year - idadeMax, DateTime.Now.Month, DateTime.Now.Day);
+
+                var filtroEunao = ctx.Usuarios.Where(u => u.ID != userID);
+                var filtroIdade = filtroEunao.Where(u => u.DataNascimento < menor && u.DataNascimento > maior);
+                var filtroTags = filtroIdade.AsEnumerable().Where(u => TagsEmComum(u.Tags, userDb.Tags, tagsComum)).ToList();
+
+                return filtroTags;
+            }
+        }
+
         public BLLResponse<Usuario> Registrar(Usuario item, string senhaRepetida)
         {
             List<ErrorField> erros = ValidarUsuarioParaRegistro(item, senhaRepetida);
@@ -120,6 +138,32 @@ namespace BusinessLogicalLayer
                 }
                 return response;
             }
+        }
+
+        public BLLResponse<Usuario> UpdateProfilePic(int id, string folder, byte[] imagem, string pathRelativo)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+                Usuario user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+
+                if (user != null)
+                {
+                    response.Sucesso = true;
+                    string nomeFoto = Guid.NewGuid() + ".png";
+                    string path = Path.Combine(folder, nomeFoto);
+                    FileStream stream = new FileStream(path, FileMode.Create);
+                    stream.Write(imagem, 0, imagem.Length);
+                    stream.Flush();
+
+                    user.PathFotoPerfil = Path.Combine(pathRelativo, nomeFoto);
+                    ctx.SaveChanges();
+
+                    response.Data = user;
+                }
+            }
+            return response;
         }
 
         public BLLResponse<Usuario> LerPorId(int id)

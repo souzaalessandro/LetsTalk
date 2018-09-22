@@ -12,32 +12,61 @@ using Entity.Extensions;
 
 namespace LetsTalk.Controllers
 {
+    public class UsersConhecerPessoas
+    {
+        public UsersConhecerPessoas()
+        {
+            Usuarios = new List<Usuario>();
+        }
+        public List<Usuario> Usuarios { get; set; }
+        public int PaginaAtual { get; set; }
+        public int NumeroTagsComum { get; set; }
+        public int QtdPessoasPagina { get; set; }
+        public int IdadeMinima { get; set; }
+        public int IdadeMaxima { get; set; }
+        public int NumeroColunas { get; set; }
+    }
     [Authorize]
     public class ConhecerController : Controller
     {
         // GET: Conhecer
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            List<Usuario> usersFiltrados = null;
-            int qntPorPagina = 10;
-            int colunas = 4;
-            if (TempData["Usuarios"] != null)
+            List<Usuario> users = new UsuarioBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
+
+            int skip = (pagina - 1) * qntPorPagina;
+            users = users.Skip(skip).Take(qntPorPagina).ToList();
+
+            UsersConhecerPessoas modelo = new UsersConhecerPessoas()
             {
-                usersFiltrados = (List<Usuario>)TempData["Usuarios"];
-                qntPorPagina = (int)TempData["QntPorPagina"];
-                colunas = (int)TempData["Colunas"];
-            }
-            if (usersFiltrados != null)
-            {
-                return View(usersFiltrados);
-            }
-            ViewData["Colunas"] = colunas;
-            using (LTContext ctx = new LTContext())
-            {
-                var users = ctx.Usuarios.Where(u => u.ID != user.ID).ToList();
-                return View(users);
-            }
+                Usuarios = users,
+                PaginaAtual = pagina,
+                NumeroTagsComum = tagsComum,
+                QtdPessoasPagina = qntPorPagina,
+                IdadeMinima = idadeMin,
+                IdadeMaxima = idadeMax,
+                NumeroColunas = colunas
+            };
+
+            return View(modelo);
+
+            //if (TempData["Usuarios"] != null)
+            //{
+            //    usersFiltrados = (List<Usuario>)TempData["Usuarios"];
+            //    qntPorPagina = (int)TempData["QntPorPagina"];
+            //    colunas = (int)TempData["Colunas"];
+            //}
+            //if (usersFiltrados != null)
+            //{
+            //    return View(usersFiltrados);
+            //}
+            //ViewData["Colunas"] = colunas;
+            //using (LTContext ctx = new LTContext())
+            //{
+            //    var users = ctx.Usuarios.Where(u => u.ID != user.ID).ToList();
+            //    return View(users);
+            //}
         }
 
         [HttpPost]
@@ -53,7 +82,7 @@ namespace LetsTalk.Controllers
             return RedirectToAction("Index");
         }
 
-       
+
 
         public ActionResult VisualizarPerfil()
         {

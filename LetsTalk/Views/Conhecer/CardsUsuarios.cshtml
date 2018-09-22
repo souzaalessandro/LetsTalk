@@ -1,15 +1,17 @@
 ﻿@using Entity
-@model List<Usuario>
+@model LetsTalk.Controllers.UsersConhecerPessoas
 
-
+@{
+   int cols = 12 / Model.NumeroColunas;
+}
 <div class="row mix-grid thumbnails">
-    @foreach (Usuario user in Model)
+    @foreach (Usuario user in Model.Usuarios)
     {
         int idade = DateTime.Now.Year - user.DataNascimento.Year;
 
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
-        <div id="user@(user.ID)" class="col-md-3 col-sm-4 mix mix_all" style="display: block;  opacity: 1;">
+        <div id="user@(user.ID)" class="col-md-@cols col-sm-4 mix mix_all" style="display: block;  opacity: 1;">
             <div class="mix-inner">
                 <img class="img-responsive" src="@user.PathFotoPerfil" alt="">
                 <div class="mix-details">
@@ -44,7 +46,7 @@
     </div>
 
     <div class="modal-body col-md-12 ">
-        <img src="" class="img-responsive" alt="" id="foto" >
+        <img src="" class="img-responsive" alt="" id="foto">
         <div class="row">
             <div class="col-md-12">
                 <p>

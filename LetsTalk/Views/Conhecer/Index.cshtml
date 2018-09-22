@@ -4,7 +4,7 @@
 }
 
 @using Entity
-@model List<Usuario>
+@model LetsTalk.Controllers.UsersConhecerPessoas
 
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -29,18 +29,18 @@
         </div>
     </div>
     <div class="portlet-body" style="display: none;">
-        @using (Html.BeginForm("Filtrar", "Conhecer", FormMethod.Post))
+        @using (Html.BeginForm("Index", "Conhecer", FormMethod.Post))
         {
             <div class="form-body">
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Mínimo de Tags em comum</label>
                         <select class="form-control" name="tagsComum">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                string selected = Model.NumeroTagsComum == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
                         </select>
                     </div>
 
@@ -49,7 +49,8 @@
                         <select id="seletor-idade-minima" class="form-control" name="idadeMin">
                             @for (int i = 18; i <= 79; i++)
                             {
-                                <option value="@i">@i</option>
+                                string selected = Model.IdadeMinima == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
                             }
                         </select>
                         <label>Idade máxima</label>
@@ -59,18 +60,22 @@
                     <div class="form-group col-md-3">
                         <label>Resultados por página</label>
                         <select class="form-control" name="qntPorPagina">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
+                            @for (int i = 15; i <= 35; i += 10)
+                            {
+                                string selected = Model.QtdPessoasPagina == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
                         </select>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label>Colunas</label>
                         <select class="form-control" name="colunas">
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            @for (int i = 4; i >= 2; i--)
+                            {
+                                string selected = Model.NumeroColunas == i ? "selected=\"selected\"" : null;
+                                <option @selected value="@i">@i</option>
+                            }
                         </select>
                     </div>
                 </div>
@@ -118,12 +123,17 @@
         $('#seletor-idade-minima').change(carregarIdadesMaximas);
 
         function carregarIdadesMaximas() {
+            var maximaAnterior = @Model.IdadeMaxima;
             $('#seletor-idade-maxima').empty();
             var idade = $('#seletor-idade-minima').find(':selected').val();
             var idademin = ++idade;
-            console.log(idademin);
             for (var i = idademin; i <= 80; i++) {
                 var opt = $('<option>').val(i).text(i);
+                if (i == maximaAnterior) {
+                    console.log(maximaAnterior);
+
+                    opt.attr('selected','selected');
+                }
                 $('#seletor-idade-maxima').append(opt);
             }
         }
@@ -137,7 +147,6 @@
 
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
-            console.log(position);
             $.ajax({
                 url: '/Conhecer/SalvarCoordenadas',
                 type: 'POST',

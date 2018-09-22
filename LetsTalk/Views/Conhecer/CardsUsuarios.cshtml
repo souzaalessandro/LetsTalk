@@ -1,8 +1,9 @@
-﻿@using Entity.ViewModels
+﻿@using Entity
+@using Entity.ViewModels
 @model UsersConhecerPessoas
 
 @{
-   int cols = 12 / Model.NumeroColunas;
+    int cols = 12 / Model.NumeroColunas;
 }
 <div class="row mix-grid thumbnails">
     @foreach (Usuario user in Model.Usuarios)

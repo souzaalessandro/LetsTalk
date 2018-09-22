@@ -231,45 +231,13 @@
                                                     none = "style=\"display: none\"";
                                                 }
                                             }
-                                            @*<img id="profilepic" style="display:none">*@
                                             <img id="profilepic" @none  @src>
                                             <div class="margin-top-10"> </div>
                                             <input type="submit" id="btnUpload" value="Salvar" class="btn purple-customizado" />
-
-                                            @*<div class="form-group">
-                                                    <div class="col-md-9" id="SelecaoDeImagem">
-                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                            <label>Foto de Perfil</label>
-                                                            <br />
-                                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;">
-                                                            </div>
-                                                            <div>
-                                                                <span class="btn default btn-file">
-                                                                    <span class="fileinput-new">
-                                                                        Selecionar
-                                                                    </span>
-                                                                    <span class="fileinput-exists">
-                                                                        Alterar
-                                                                    </span>
-                                                                    <input type="hidden"><input type="file" name="foto">
-                                                                </span>
-                                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                                                    Remover
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>*@
-
-                                            @*<a href="javascript:;" class="btn purple-customizado">
-                                                    Salvar
-                                                </a>*@
-
                                         </form>
                                     </div>
                                     <!-- END CHANGE AVATAR TAB -->
                                     <!-- CHANGE PASSWORD TAB -->
-                                    <!-- ÑÃO ESTA FUNCIONANDO-->
 
                                     <div class="tab-pane" id="tab_1_3">
                                         <div class="form-group">
@@ -366,7 +334,7 @@
                     $("#profilepic").attr("src", res);
                     document.getElementById("imgbase64").value = res;
                 })) {
-                    alert("Tipo de arquivo inválido");
+                    mostrarAlerta("Tipo de arquivo inválido. Selecione uma imagem .png ou .jpg", 'danger');
                 }
             });
         });

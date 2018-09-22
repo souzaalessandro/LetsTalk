@@ -10,6 +10,7 @@ using Entity.Enums;
 using Entity.Extensions;
 using Entity.ViewModels;
 using System.Data.Entity;
+using System.IO;
 
 namespace BusinessLogicalLayer
 {
@@ -122,6 +123,32 @@ namespace BusinessLogicalLayer
             }
         }
 
+        public BLLResponse<Usuario> UpdateProfilePic(int id, string folder, byte[] imagem, string pathRelativo)
+        {
+            BLLResponse<Usuario> response = new BLLResponse<Usuario>();
+
+            using (LTContext ctx = new LTContext())
+            {
+                Usuario user = ctx.Usuarios.FirstOrDefault(u => u.ID == id);
+
+                if (user != null)
+                {
+                    response.Sucesso = true;
+                    string nomeFoto = Guid.NewGuid() + ".png";
+                    string path = Path.Combine(folder, nomeFoto);
+                    FileStream stream = new FileStream(path, FileMode.Create);
+                    stream.Write(imagem, 0, imagem.Length);
+                    stream.Flush();
+
+                    user.PathFotoPerfil = Path.Combine(pathRelativo, nomeFoto);
+                    ctx.SaveChanges();
+
+                    response.Data = user;
+                }
+            }
+            return response;
+        }
+
         public BLLResponse<Usuario> LerPorId(int id)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
@@ -190,10 +217,6 @@ namespace BusinessLogicalLayer
 
         public BLLResponse<Usuario> UpdatePassword(Usuario usuario, string senhaAntiga)
         {
-
-            /////
-
-
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
 
             using (LTContext ctx = new LTContext())

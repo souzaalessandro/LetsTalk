@@ -89,7 +89,7 @@
 
     </div>
 </div>
-<!--pessoas encontradas -->
+
 @Html.Partial("CardsUsuarios", Model)
 
 @section  PageLevelPlugins
@@ -118,9 +118,23 @@
             Portfolio.init();
             getLocation();
             carregarIdadesMaximas();
+            setFonts();
         });
 
         $('#seletor-idade-minima').change(carregarIdadesMaximas);
+
+        $(window).resize(function () {
+            setFonts();
+        })
+
+        function setFonts() {
+            var divWidth = $('.card-usuario').width();
+            var divHeight = $('.card-usuario').height();
+            $('.h3-nome-idade').css('fontSize', divWidth / 13);
+            $('.p-frase').css('fontSize', divWidth / 18);
+            $('.ul-tags').css('fontSize', divWidth / 20);
+            $('.botao-ver-perfil').css('fontSize', divWidth / 20);
+        }
 
         function carregarIdadesMaximas() {
             var maximaAnterior = @Model.IdadeMaxima;

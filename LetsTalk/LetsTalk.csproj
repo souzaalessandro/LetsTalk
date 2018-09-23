@@ -587,6 +587,7 @@
     <Content Include="assets\admin\pages\scripts\ui-notific8.js" />
     <Content Include="assets\admin\pages\scripts\ui-toastr.js" />
     <Content Include="assets\admin\pages\scripts\ui-tree.js" />
+    <Content Include="assets\banner LT.bmp" />
     <Content Include="assets\frontend\layout\css\custom.css" />
     <Content Include="assets\frontend\layout\css\style-responsive.css" />
     <Content Include="assets\frontend\layout\css\style.css" />
@@ -3733,7 +3734,6 @@
     <Content Include="assets\iEdit.css" />
     <Content Include="assets\iEdit.js" />
     <Content Include="assets\logo\Logo.png" />
-    <Content Include="assets\teste 1300x450.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />

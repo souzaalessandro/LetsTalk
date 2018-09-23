@@ -1,6 +1,10 @@
 ﻿@using Entity
 @using Entity.ViewModels
 @model UsersConhecerPessoas
+@if (Model.Usuarios.Count == 0)
+{
+    <h2 align="center">Não foram encontradas pessoas compatíveis com seu filtro :/</h2>
+}
 
 @{
     int cols = 12 / Model.NumeroColunas;
@@ -19,17 +23,17 @@
 
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
-        <div id="user@(user.ID)" class="col-md-@cols col-sm-4 mix mix_all" style="display: block;  opacity: 1;">
+        <div id="user@(user.ID)" class="col-md-@cols col-sm-4 col-xs-6 mix mix_all card-usuario" style="display: block;  opacity: 1;">
             <div class="mix-inner">
                 <img class="img-responsive" src="@user.PathFotoPerfil" alt="">
                 <div class="mix-details">
 
-                    <h3 class="bold">@user.Nome, @idade</h3>
-                    <p>
+                    <h3 class="bold h3-nome-idade" style="margin-top: 10px;">@user.Nome, @idade</h3>
+                    <p style="padding: 5px;" class="p-frase">
                         @user.FraseApresentacao
                     </p>
 
-                    <ul class="list-inline blog-tags">
+                    <ul class="list-inline blog-tags ul-tags">
                         <li>
                             @foreach (string tag in tags)
                             {
@@ -38,7 +42,7 @@
                         </li>
                     </ul>
 
-                    <a class="btn default ver-perfil-detalhado" data-target="#stack1" data-toggle="modal">
+                    <a class="btn default ver-perfil-detalhado botao-ver-perfil" data-target="#stack1" data-toggle="modal">
                         Ver perfil
                     </a>
                 </div>

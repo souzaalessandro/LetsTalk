@@ -341,6 +341,12 @@ var ComponentsFormTools = function () {
             alwaysShow: true
         });
 
+        $('#frase-apresentacao').maxlength({
+            limitReachedClass: "label label-danger",
+            alwaysShow: true
+        });
+       
+
         $('#maxlength_placement').maxlength({
             limitReachedClass: "label label-danger",
             alwaysShow: true,

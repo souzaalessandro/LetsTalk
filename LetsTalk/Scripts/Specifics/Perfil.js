@@ -20,7 +20,6 @@
 //    });
 //}
 
-
 $('#salvar-informacoes').click(function () {
     var frase = $('#frase-apresentacao').val();
     var descricao = $("#descricao").val();
@@ -46,7 +45,9 @@ $('#salvar-informacoes').click(function () {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        error: ajaxError()
+        error: function (xml, status, erro) {
+            ajaxError();
+        }
     });
 });
 
@@ -83,7 +84,9 @@ $('#atualizar-senha').click(function () {
                     mostrarAlerta(result.mensagem, 'danger');
                 }
             },
-            error: ajaxError()
+            error: function (xml, status, erro) {
+                ajaxError();
+            }
         });
     }
 });
@@ -117,10 +120,11 @@ function enviarFotos() {
                 mostrarAlerta(result.mensagem, 'danger');
             }
         },
-        error: ajaxError()
+        error: function (xml, status, erro) {
+            ajaxError();
+        }
     });
 }
-
 
 //function gerarFotoPequena(pathFoto) {
 //    var li = $("<li>");

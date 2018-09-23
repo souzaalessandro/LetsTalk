@@ -15,19 +15,22 @@ body.modal-open,
 }
 
 .modal {
-  left: 50%;
-  bottom: auto;
-  right: auto;
-  padding: 0;
-  width: 500px;
-  margin-left: -250px;
-  background-color: #ffffff;
-  border: 1px solid #999999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  background-clip: padding-box;
+    left: 50%;
+    bottom: auto;
+    right: auto;
+    padding: 0;
+    /*width: 500px;
+    margin-left: -250px;*/
+    width: 400px;
+    margin-left: -200px;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    /*border-radius: 6px;*/
+    border-radius: 25px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
 }
 
 .modal.container {

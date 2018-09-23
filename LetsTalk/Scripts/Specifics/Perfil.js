@@ -1,24 +1,24 @@
-﻿$(function () {
-    carregarFotosPequenasDoBanco();
-});
+﻿//$(function () {
+//    carregarFotosPequenasDoBanco();
+//});
 
-function carregarFotosPequenasDoBanco() {
-    $.ajax({
-        url: '/Perfil/GetPathFoto',
-        type: 'POST',
-        data: JSON.stringify({}),
-        contentType: "application/json;charset=utf-8",
-        dataType: 'json',
-        success: function (result) {
-            if (result.sucesso) {
-                gerarFotoPequena(resutado.pathFoto);
-            } else {
-                mostrarAlerta(result.mensagem, 'danger');
-            }
-        },
-        error: ajaxError()
-    });
-}
+//function carregarFotosPequenasDoBanco() {
+//    $.ajax({
+//        url: '/Perfil/GetPathFoto',
+//        type: 'POST',
+//        data: JSON.stringify({}),
+//        contentType: "application/json;charset=utf-8",
+//        dataType: 'json',
+//        success: function (result) {
+//            if (result.sucesso) {
+//                gerarFotoPequena(resutado.pathFoto);
+//            } else {
+//                mostrarAlerta(result.mensagem, 'danger');
+//            }
+//        },
+//        error: ajaxError()
+//    });
+//}
 
 
 $('#salvar-informacoes').click(function () {
@@ -104,7 +104,6 @@ function mostrarAlerta(mensagem, tipoAlerta) {
 $("#botao-salvar-fotos").click(enviarFotos);
 
 function enviarFotos() {
-
     $.ajax({
         url: '/Perfil/SalvarFotoDiretorio',
         type: 'POST',
@@ -123,16 +122,16 @@ function enviarFotos() {
 }
 
 
-function gerarFotoPequena(pathFoto) {
-    var li = $("<li>");
+//function gerarFotoPequena(pathFoto) {
+//    var li = $("<li>");
 
-    var a = $("<a>").addClass("fancybox-button").attr("data-rel", "fancybox-button").attr("href", "#");
+//    var a = $("<a>").addClass("fancybox-button").attr("data-rel", "fancybox-button").attr("href", "#");
 
-    var img = $("<img>").attr("src", pathFoto);
+//    var img = $("<img>").attr("src", pathFoto);
 
-    a.append(img);
+//    a.append(img);
 
-    li.append(a);
+//    li.append(a);
 
-    $("#lista-fotos").append(li);
-}
+//    $("#lista-fotos").append(li);
+//}

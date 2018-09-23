@@ -44,6 +44,17 @@ namespace BusinessLogicalLayer
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
             Usuario user = new Usuario();
 
+            if (userVM.Frase != null && userVM.Frase.Length > 100)
+            {
+                response.Mensagem = "Frase de apresentação deve possuir até 100 caracteres";
+                return response;
+            }
+            if (userVM.Descricao != null && userVM.Descricao.Length >300)
+            {
+                response.Mensagem = "Descrição deve possuir até 300 caracteres";
+                return response;
+            }
+
             using (LTContext ctx = new LTContext())
             {
                 user = ctx.Usuarios.Find(userVM.ID);
@@ -109,7 +120,5 @@ namespace BusinessLogicalLayer
                 user.Tags = userVM.Tags;
             }
         }
-
-       
     }
 }

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLResponse.cs" />
+    <Compile Include="CoordenadasBLL.cs" />
     <Compile Include="Criptografia.cs" />
     <Compile Include="FiltroConhecerBLL.cs" />
     <Compile Include="FiltroUsuariosBLL.cs" />

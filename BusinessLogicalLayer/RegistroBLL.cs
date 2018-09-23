@@ -32,6 +32,7 @@ namespace BusinessLogicalLayer
                 ctx.SaveChanges();
             }
             response.Sucesso = true;
+            response.Data = item;
             return response;
         }
 

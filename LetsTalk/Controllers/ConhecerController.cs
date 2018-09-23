@@ -39,29 +39,12 @@ namespace LetsTalk.Controllers
             return View(modelo);
         }
 
-        public ActionResult VisualizarPerfil()
-        {
-            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(user.ID);
-            return View(response.Data);
-        }
-
         [HttpPost]
         public ActionResult SalvarCoordenadas(Coordenada coordenada)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            using (LTContext ctx = new LTContext())
-            {
-                Usuario userDoDb = ctx.Usuarios.Find(user.ID);
-                if (userDoDb == null)
-                {
-                    //return
-                }
-                userDoDb.Latitude = coordenada.Latitude;
-                userDoDb.Longitude = coordenada.Longitude;
-                ctx.SaveChanges();
-            }
-            return Content("Coordenadas salvas no usuário");
+            BLLResponse<Coordenada> response = new CoordenadasBLL().SalvarCoordenadas(coordenada, user.ID);
+            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
         }
 
         public ActionResult GetUser(int id)
@@ -82,7 +65,7 @@ namespace LetsTalk.Controllers
                     frase = response.Data.FraseApresentacao,
                     descricao = response.Data.Descricao,
                     tags = tags,
-                    album = response.Data.DiretoriosImagens.Select(a=>a.PathRelativo).ToArray()
+                    album = response.Data.DiretoriosImagens.Select(a => a.PathRelativo).ToArray()
                 };
             }
             return Json(dados);

@@ -3733,6 +3733,7 @@
     <Content Include="assets\iEdit.css" />
     <Content Include="assets\iEdit.js" />
     <Content Include="assets\logo\Logo.png" />
+    <Content Include="assets\teste 1300x450.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -4053,7 +4054,7 @@
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Conhecer\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
-    <Content Include="Views\Conhecer\VisualizarPerfil.cshtml" />
+    <Content Include="Views\Perfil\VisualizarPerfil.cshtml" />
     <Content Include="Views\Conhecer\CardsUsuarios.cshtml" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />

@@ -40,7 +40,8 @@ namespace LetsTalk.Controllers
                 TempData["CamposInformados"] = usuario;
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Conhecer");
+            TempData["NovoUser"] = response.Data;
+            return RedirectToAction("LogarAposRegistro", "Login");
         }
     }
 }

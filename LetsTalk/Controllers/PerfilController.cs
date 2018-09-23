@@ -46,6 +46,31 @@ namespace LetsTalk.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult SalvarInformacoesPessoais(UsuarioViewModel userVM)
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            userVM.ID = user.ID;
+
+            BLLResponse<Usuario> response = new UsuarioBLL().Update(userVM);
+            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
+        }
+
+        [HttpPost]
+        public ActionResult AtualizarSenha(string senhaNova, string senhaAntiga)
+        {
+            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
+            Usuario usuario = new Usuario
+            {
+                ID = user.ID,
+                Senha = senhaNova
+            };
+
+            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario, senhaAntiga);
+
+            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
+        }
+
         private string GetUserPicsFolder(MvcUser user, out string relativo)
         {
             string folder = Path.Combine(Server.MapPath("~/UserImages"), $"userperfil-{user.ID}");
@@ -73,31 +98,6 @@ namespace LetsTalk.Controllers
             bool validExtension = formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
 
             return validType && validSize && validExtension;
-        }
-
-        [HttpPost]
-        public ActionResult SalvarInformacoesPessoais(UsuarioViewModel userVM)
-        {
-            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            userVM.ID = user.ID;
-
-            BLLResponse<Usuario> response = new UsuarioBLL().Update(userVM);
-            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
-        }
-
-        [HttpPost]
-        public ActionResult AtualizarSenha(string senhaNova, string senhaAntiga)
-        {
-            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            Usuario usuario = new Usuario
-            {
-                ID = user.ID,
-                Senha = senhaNova
-            };
-
-            BLLResponse<Usuario> response = new UsuarioBLL().UpdatePassword(usuario, senhaAntiga);
-
-            return Json(new { sucesso = response.Sucesso, mensagem = response.Mensagem });
         }
     }
 }

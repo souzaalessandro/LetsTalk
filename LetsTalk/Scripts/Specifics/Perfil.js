@@ -128,14 +128,9 @@ function enviarFotos() {
 
 //function gerarFotoPequena(pathFoto) {
 //    var li = $("<li>");
-
 //    var a = $("<a>").addClass("fancybox-button").attr("data-rel", "fancybox-button").attr("href", "#");
-
 //    var img = $("<img>").attr("src", pathFoto);
-
 //    a.append(img);
-
 //    li.append(a);
-
 //    $("#lista-fotos").append(li);
 //}

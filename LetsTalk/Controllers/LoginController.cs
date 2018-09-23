@@ -11,12 +11,10 @@ using BusinessLogicalLayer;
 using Entity;
 using LetsTalk.Models;
 
-namespace MexendoNoTemplate.Controllers
+namespace LetsTalk.Controllers
 {
     public class LoginController : Controller
     {
-
-        // GET: Login
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -39,11 +37,15 @@ namespace MexendoNoTemplate.Controllers
                 CriarCookie(lembrar, response);
                 return RedirectToAction("Index", "Conhecer");
             }
-            else
-            {
-                ModelState.AddModelError("Invalido", "Usuário ou senha inválidos");
-                return View("Index", usuario);
-            }
+            ModelState.AddModelError("Invalido", "Usuário ou senha inválidos");
+            return View("Index", usuario);
+        }
+
+        public ActionResult LogarAposRegistro()
+        {
+            Usuario user = (Usuario)TempData["NovoUser"];
+            CriarCookie(false, new BLLResponse<Usuario>() { Data = user });
+            return RedirectToAction("Index", "Conhecer");
         }
 
         [Authorize]

@@ -9,7 +9,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using LetsTalk.Models;
-using MexendoNoTemplate.Controllers;
 
 namespace LetsTalk
 {

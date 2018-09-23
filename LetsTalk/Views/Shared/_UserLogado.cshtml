@@ -1,16 +1,16 @@
 ﻿<!-- BEGIN HEADER TOP -->
-
 @{ 
     LetsTalk.Models.MvcUser user = (LetsTalk.Models.MvcUser)HttpContext.Current.User;
     BusinessLogicalLayer.BLLResponse<Entity.Usuario> response = new BusinessLogicalLayer.UsuarioBLL().LerPorId(user.ID);
     Entity.Usuario usuario = response.Data;
 }
-
 <div class="page-header-top">
     <div class="container">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="index.html"><img src="~/assets/logo/Logo.png" alt="logo" class="logo-default" style="width: 150px; margin: 18px 0 0 0"></a>
+            <a href="@Url.Action("Index","Conhecer")">
+            <img src="~/assets/logo/Logo.png" alt="logo" class="logo-default" style="width: 150px; margin: 18px 0 0 0">
+            </a>
         </div>
 
         <!-- END LOGO -->
@@ -49,10 +49,7 @@
                 <!-- END USER LOGIN DROPDOWN -->
             </ul>
         </div>
-
         <!-- END TOP NAVIGATION MENU -->
-
-
     </div>
 </div>
 <!-- END HEADER TOP -->

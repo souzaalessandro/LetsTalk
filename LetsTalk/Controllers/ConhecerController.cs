@@ -46,18 +46,13 @@ namespace LetsTalk.Controllers
             return View(response.Data);
         }
 
-        public ActionResult GetUsuarios()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult SalvarCoordenadas(Coordenada coordenada)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             using (LTContext ctx = new LTContext())
             {
-                Usuario userDoDb = ctx.Usuarios.FirstOrDefault(u => u.ID == user.ID);
+                Usuario userDoDb = ctx.Usuarios.Find(user.ID);
                 if (userDoDb == null)
                 {
                     //return
@@ -86,7 +81,8 @@ namespace LetsTalk.Controllers
                     foto = response.Data.PathFotoPerfil,
                     frase = response.Data.FraseApresentacao,
                     descricao = response.Data.Descricao,
-                    tags = tags
+                    tags = tags,
+                    album = response.Data.DiretoriosImagens.Select(a=>a.PathRelativo).ToArray()
                 };
             }
             return Json(dados);

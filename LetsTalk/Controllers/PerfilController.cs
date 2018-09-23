@@ -21,15 +21,6 @@ namespace LetsTalk.Controllers
             return View(response.Data);
         }
 
-        public ActionResult MostrarDadosExistente()
-        {
-            MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
-            BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(user.ID);
-
-
-            return View(response.Data);
-        }
-
         [HttpPost]
         public ActionResult SalvarFoto(string imgbase64)
         {
@@ -50,13 +41,7 @@ namespace LetsTalk.Controllers
             {
                 string pathRelativo = GetPathFoto(foto, user);
                 var result = new FotosUsuarioBLL().AtualizarFotosAlbum(user.ID, pathRelativo);
-                if (result.Sucesso)
-                {
-                    //se precisar retornar algum aviso que funcionou ou recarregar a página
-                    return RedirectToAction("Index");
-                    //return Json(new { sucesso = true }, JsonRequestBehavior.AllowGet);
-
-                }
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
@@ -68,7 +53,7 @@ namespace LetsTalk.Controllers
             relativo = $"/UserImages/userperfil-{user.ID}";
             return folder;
         }
-       
+
         private string GetPathFoto(HttpPostedFileBase foto, MvcUser user)
         {
             string folder = Path.Combine(Server.MapPath("~/UserImages"), $"userperfil-{user.ID}");

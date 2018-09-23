@@ -41,46 +41,47 @@
     string[] tags = String.IsNullOrWhiteSpace(Model.Tags) ? new string[1] : Model.Tags.Split(',');
 }
 
-
 <div id="stack1" class="modal fade" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h2 class="modal-title bold"> @Model.Nome, @idade </h2>
-    </div>
-
-    <div class="modal-body col-md-12 ">
-        <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
-        <div class="row">
-            <div class="col-md-12">
-                <p>
-                    <h4 class="bold"> @Model.FraseApresentacao </h4>
-                </p>
-            </div>
-
-            <hr>
-            <div class="col-md-12">
-                <p>
-                    <h4> @Model.Descricao </h4>
-                </p>
-            </div>
-
-            <hr>
-            <div class="col-md-12">
-                <ul class="list-inline blog-tags">
-                    <li>
-                        @foreach (string tag in tags)
-                        {
-                            <i class="fa fa-tags"></i>@tag
-                        }
-                    </li>
-                </ul>
-            </div>
-
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h2 class="modal-title bold"> @Model.Nome, @idade </h2>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
-        <button class="btn blue" data-toggle="modal" href="#stack2">Álbum de Fotos</button>
+
+        <div class="modal-body col-md-12 ">
+            <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <h4 class="bold"> @Model.FraseApresentacao </h4>
+                    </p>
+                </div>
+
+                <hr>
+                <div class="col-md-12">
+                    <p>
+                        <h4> @Model.Descricao </h4>
+                    </p>
+                </div>
+
+                <hr>
+                <div class="col-md-12">
+                    <ul class="list-inline blog-tags">
+                        <li>
+                            @foreach (string tag in tags)
+                            {
+                                <i class="fa fa-tags"></i>@tag
+                            }
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
+            <button class="btn blue" data-toggle="modal" href="#stack2">Álbum de Fotos</button>
+        </div>
     </div>
 </div>
 
@@ -131,12 +132,8 @@
 </div>
 
 
-
 @section  PageLevelPlugins
 {
-    <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
-    <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
-    <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 }
@@ -150,7 +147,7 @@
             Metronic.init(); // init metronic core components
             Layout.init(); // init current layout
             Demo.init(); // init demo features
-            UIExtendedModals.init();
+            // UIExtendedModals.init();
         });
     </script>
 }

@@ -4028,7 +4028,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Specifics\coordenadas.js" />
     <Content Include="Scripts\Specifics\FiltersOfUserName.js" />
+    <Content Include="Scripts\Specifics\modalDosCards.js" />
     <Content Include="Scripts\Specifics\Perfil.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />

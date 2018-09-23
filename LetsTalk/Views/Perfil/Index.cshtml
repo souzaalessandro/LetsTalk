@@ -25,6 +25,13 @@
     <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/jquery-tags-input/jquery.tagsinput.css" />
     <link href="~/Content/Perfil.css" rel="stylesheet" />
 
+    <!-- MODAL -->
+    <link href="~/assets/admin/pages/css/news.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+    <!-- END MODAL-->
+
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="~/assets/iEdit.css" rel="stylesheet" />
     <script src="~/assets/iEdit.js"></script>
@@ -39,240 +46,322 @@
 }
 
 
-<div class="container">
-    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-    <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Modal title</h4>
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<!-- BEGIN PAGE BREADCRUMB -->
+<!-- END PAGE BREADCRUMB -->
+<!-- BEGIN PAGE CONTENT INNER -->
+<div class="row margin-top-10">
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar" style="width: 250px;">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
                 </div>
-                <div class="modal-body">
-                    Widget settings form goes here
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        @Model.Nome
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn blue">Save changes</button>
-                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li>
+                            <a data-target="#stack1" data-toggle="modal">
+                                <i class="icon-home"></i>
+                                Perfil
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+                <!-- END MENU -->
             </div>
-            <!-- /.modal-content -->
+            <!-- END PORTLET MAIN -->
+            <!-- PORTLET MAIN -->
+            <!-- END PORTLET MAIN -->
         </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-    <!-- BEGIN PAGE BREADCRUMB -->
-    <!-- END PAGE BREADCRUMB -->
-    <!-- BEGIN PAGE CONTENT INNER -->
-    <div class="row margin-top-10">
-        <div class="col-md-12">
-            <!-- BEGIN PROFILE SIDEBAR -->
-            <div class="profile-sidebar" style="width: 250px;">
-                <!-- PORTLET MAIN -->
-                <div class="portlet light profile-sidebar-portlet">
-                    <!-- SIDEBAR USERPIC -->
-                    <div class="profile-userpic">
-                        <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
-                    </div>
-                    <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle">
-                        <div class="profile-usertitle-name">
-                            @Model.Nome
-                        </div>
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- SIDEBAR BUTTONS -->
-                    <!-- END SIDEBAR BUTTONS -->
-                    <!-- SIDEBAR MENU -->
-                    <div class="profile-usermenu">
-                        <ul class="nav">
-                            <li>
-                                <a href="">
-                                    <i class="icon-home"></i>
-                                    Perfil
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- END MENU -->
-                </div>
-                <!-- END PORTLET MAIN -->
-                <!-- PORTLET MAIN -->
-                <!-- END PORTLET MAIN -->
-            </div>
-            <!-- END BEGIN PROFILE SIDEBAR -->
-            <!-- BEGIN PROFILE CONTENT -->
-            <div class="profile-content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="portlet light">
-                            <div class="portlet-title tabbable-line">
-                                <div class="caption caption-md">
-                                    <i class="icon-globe theme-font hide"></i>
-                                    <span class="caption-subject font-purple-studio bold uppercase">Seu Perfil</span>
-                                </div>
-                                <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#tab_1_1" data-toggle="tab">Informações Pessoais</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab_1_2" data-toggle="tab">Álbum de Fotos</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab_1_4" data-toggle="tab">Foto de Perfil</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab_1_3" data-toggle="tab">Alterar Senha</a>
-                                    </li>
-                                </ul>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-purple-studio bold uppercase">Seu Perfil</span>
                             </div>
-                            <div class="portlet-body">
-                                <div class="tab-content">
-                                    <!-- PERSONAL INFO TAB -->
-                                    <div class="tab-pane active" id="tab_1_1">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab_1_1" data-toggle="tab">Informações Pessoais</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_2" data-toggle="tab">Álbum de Fotos</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_4" data-toggle="tab">Foto de Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_3" data-toggle="tab">Alterar Senha</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <!-- PERSONAL INFO TAB -->
+                                <div class="tab-pane active" id="tab_1_1">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label">Frase de Apresentação</label>
+                                            <input id="frase-apresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control"
+                                                   name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
+                                        </div>
+
+                                        <div class="col-md-6" style="margin-bottom: 20px;">
+                                            <label class="control-label">Tags</label>
+
+                                            @*@{ string[] tags = }*@
+                                            <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" value="@Model.Tags">
+                                        </div>
+                                        <div class="col-md-11">
+                                            <label class="control-label">Descrição</label>
+                                            <textarea id="descricao" class="form-control" maxlength="200" rows="3" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres">@Model.Descricao</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix margin-top-15"></div>
+                                    <button type="button" id="salvar-informacoes" class="btn purple-customizado">Salvar</button>
+
+                                </div>
+                                <!-- END PERSONAL INFO TAB -->
+                                <!-- CHANGE album TAB -->
+                                <div class="tab-pane" id="tab_1_2">
+                                    <form action="@Url.Action("SalvarFotoDiretorio", "Perfil")" enctype="multipart/form-data" role="form" method="post">
                                         <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="control-label">Frase de Apresentação</label>
-                                                <input id="frase-apresentacao" type="text" placeholder="Informe uma breve descrição" class="form-control"
-                                                       name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
-                                            </div>
-
-                                            <div class="col-md-6" style="margin-bottom: 20px;">
-                                                <label class="control-label">Tags</label>
-
-                                                @*@{ string[] tags = }*@
-                                                <input id="tags_2" type="text" class="form-control tags medium" style="display: none;" value="@Model.Tags">
-                                            </div>
-                                            <div class="col-md-11">
-                                                <label class="control-label">Descrição</label>
-                                                <textarea id="descricao" class="form-control" maxlength="200" rows="3" placeholder="Digite sua descrição, ela deve conter no máximo 200 caracteres">@Model.Descricao</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix margin-top-15"></div>
-                                        <button type="button" id="salvar-informacoes" class="btn purple-customizado">Salvar</button>
-
-                                    </div>
-                                    <!-- END PERSONAL INFO TAB -->
-                                    <!-- CHANGE album TAB -->
-                                    <div class="tab-pane" id="tab_1_2">
-                                        <form action="@Url.Action("SalvarFotoDiretorio", "Perfil")" enctype="multipart/form-data" role="form" method="post">
-
-                                            <div class="row">
-                                                <div class="form-group col-md-6" id="SelecaoDeImagem">
-                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                        <label>Fotos para seu álbum</label>
-                                                        <br />
-                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;" id="fotoAlbum">
-                                                        </div>
-                                                        <div>
-                                                            <span class="btn default btn-file">
-                                                                <span class="fileinput-new">
-                                                                    Selecionar
-                                                                </span>
-                                                                <span class="fileinput-exists">
-                                                                    Alterar
-                                                                </span>
-                                                                <input type="hidden"><input type="file" name="foto" />
+                                            <div class="form-group col-md-6" id="SelecaoDeImagem">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <label>Fotos para seu álbum</label>
+                                                    <br />
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px; line-height: 150px;" id="fotoAlbum">
+                                                    </div>
+                                                    <div>
+                                                        <span class="btn default btn-file">
+                                                            <span class="fileinput-new">
+                                                                Selecionar
                                                             </span>
-                                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                                                Remover
+                                                            <span class="fileinput-exists">
+                                                                Alterar
+                                                            </span>
+                                                            <input type="hidden"><input type="file" name="foto" />
+                                                        </span>
+                                                        <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                            Remover
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 pull-right">
+                                                    <ul class="list-inline blog-images" id="lista-fotos">
+                                                        <li>
+                                                            <a class="fancybox-button" data-rel="fancybox-button">
+                                                                @foreach (var item in Model.DiretoriosImagens)
+                                                                {
+                                                                    <img src="@item.PathRelativo" />
+                                                                }
                                                             </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6 pull-right">
-                                                        <ul class="list-inline blog-images" id="lista-fotos">
-                                                            <li>
-                                                                <a class="fancybox-button" data-rel="fancybox-button" href="assets/img/blog/1.jpg">
-                                                                    <img src="~/Content/De5RwT1XkAAfgS8.jpg">
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                            </div>
-                                            <div class="margin-top-10">
-                                                <button type="submit" class="btn purple-customizado" id="botao-salvar-fotos">Salvar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- CHANGE AVATAR TAB -->
-
-                                    <div class="tab-pane" id="tab_1_4">
-                                        <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data" role="form" method="post">
-
-                                            <input type="hidden" name="imgbase64" id="imgbase64" />
-
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="input-group input-large">
-                                                    <span class="input-group-addon btn default btn-file">
-                                                        <span class="fileinput-new">
-                                                            Selecionar foto
-                                                        </span>
-                                                        <span class="fileinput-exists">
-                                                            Alterar
-                                                        </span>
-                                                        <input id="file" accept="image/*" type="file">
-                                                    </span>
-
-                                                </div>
-                                            </div>
-                                            @{
-                                                string src = null;
-                                                string none = null;
-                                                if (!String.IsNullOrWhiteSpace(Model.PathFotoPerfil))
-                                                {
-                                                    src = "src=" + Model.PathFotoPerfil;
-                                                }
-                                                else
-                                                {
-                                                    none = "style=\"display: none\"";
-                                                }
-                                            }
-                                            <img id="profilepic" @none  @src>
-                                            <div class="margin-top-10"> </div>
-                                            <input type="submit" id="btnUpload" value="Salvar" class="btn purple-customizado" />
-                                        </form>
-                                    </div>
-                                    <!-- END CHANGE AVATAR TAB -->
-                                    <!-- CHANGE PASSWORD TAB -->
-
-                                    <div class="tab-pane" id="tab_1_3">
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label>Senha</label>
-                                                <input id="senha-atual" type="password" class="form-control" placeholder="Informe sua senha atual.">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nova senha</label>
-                                                <input id="nova-senha" type="password" class="form-control" placeholder="Nova senha..">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Confirmar nova senha</label>
-                                                <input id="nova-senha-repetido" type="password" class="form-control" placeholder="Confirme sua nova senha">
                                             </div>
                                         </div>
-
                                         <div class="margin-top-10">
-                                            <button id="atualizar-senha" type="button" class="btn purple-customizado">Salvar</button>
+                                            <button type="submit" class="btn purple-customizado" id="botao-salvar-fotos">Salvar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- CHANGE AVATAR TAB -->
+
+                                <div class="tab-pane" id="tab_1_4">
+                                    <form action="@Url.Action("SalvarFoto", "Perfil")" enctype="multipart/form-data" role="form" method="post">
+
+                                        <input type="hidden" name="imgbase64" id="imgbase64" />
+
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">
+                                                        Selecionar foto
+                                                    </span>
+                                                    <span class="fileinput-exists">
+                                                        Alterar
+                                                    </span>
+                                                    <input id="file" accept="image/*" type="file">
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                        @{
+                                            string src = null;
+                                            string none = null;
+                                            if (!String.IsNullOrWhiteSpace(Model.PathFotoPerfil))
+                                            {
+                                                src = "src=" + Model.PathFotoPerfil;
+                                            }
+                                            else
+                                            {
+                                                none = "style=\"display: none\"";
+                                            }
+                                        }
+                                        <img id="profilepic" @none @src>
+                                        <div class="margin-top-10"> </div>
+                                        <input type="submit" id="btnUpload" value="Salvar" class="btn purple-customizado" />
+                                    </form>
+                                </div>
+                                <!-- END CHANGE AVATAR TAB -->
+                                <!-- CHANGE PASSWORD TAB -->
+
+                                <div class="tab-pane" id="tab_1_3">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Senha</label>
+                                            <input id="senha-atual" type="password" class="form-control" placeholder="Informe sua senha atual.">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nova senha</label>
+                                            <input id="nova-senha" type="password" class="form-control" placeholder="Nova senha..">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirmar nova senha</label>
+                                            <input id="nova-senha-repetido" type="password" class="form-control" placeholder="Confirme sua nova senha">
                                         </div>
                                     </div>
-                                    <!-- END CHANGE PASSWORD TAB -->
-                                    <!-- PRIVACY SETTINGS TAB -->
-                                    <!-- END PRIVACY SETTINGS TAB -->
+
+                                    <div class="margin-top-10">
+                                        <button id="atualizar-senha" type="button" class="btn purple-customizado">Salvar</button>
+                                    </div>
                                 </div>
+                                <!-- END CHANGE PASSWORD TAB -->
+                                <!-- PRIVACY SETTINGS TAB -->
+                                <!-- END PRIVACY SETTINGS TAB -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END PROFILE CONTENT -->
+        </div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>
+<!-- END PAGE CONTENT INNER -->
+
+@{
+    DateTime hoje = DateTime.Today;
+    DateTime nasc = Model.DataNascimento;
+
+    int idade = hoje.Year - nasc.Year;
+    if (hoje.Month < nasc.Month || ((hoje.Month == nasc.Month) && (hoje.Day < nasc.Day)))
+    {
+        idade--;
+    }
+    string[] tags = String.IsNullOrWhiteSpace(Model.Tags) ? new string[1] : Model.Tags.Split(',');
+}
+
+<div id="stack1" class="modal fade" tabindex="-1" data-focus-on="input:first">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h2 class="modal-title bold"> @Model.Nome, @idade </h2>
+        </div>
+
+        <div class="modal-body col-md-12 ">
+            <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <h4 class="bold"> @Model.FraseApresentacao </h4>
+                    </p>
+                </div>
+
+                <hr>
+                <div class="col-md-12">
+                    <p>
+                        <h4> @Model.Descricao </h4>
+                    </p>
+                </div>
+
+                <hr>
+                <div class="col-md-12">
+                    <ul class="list-inline blog-tags">
+                        <li>
+                            @foreach (string tag in tags)
+                            {
+                                <i class="fa fa-tags"></i>@tag
+                            }
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
+            <button class="btn blue" data-toggle="modal" href="#stack2">Álbum de Fotos</button>
         </div>
     </div>
-    <!-- END PAGE CONTENT INNER -->
 </div>
+
+<div id="stack2" class="modal fade" tabindex="-1" data-focus-on="input:first">
+    <div id="myCarousel" class="carousel image-carousel slide">
+        <div class="carousel-inner">
+            @*<div class="item">
+                    <img src="@Model.PathFotoPerfil" class="img-responsive" alt="">
+                </div>*@
+            @{bool ativo = true;}
+            @foreach (var diretorio in Model.DiretoriosImagens)
+            {
+                if (ativo)
+                {
+                    <div class="item active">
+                        <img src="@diretorio.PathRelativo" class="img-responsive" />
+                    </div>
+                    ativo = false;
+                }
+                else
+                {
+                    <div class="item">
+                        <img src="@diretorio.PathRelativo" class="img-responsive" />
+                    </div>
+                }
+            }
+
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            <i class="m-icon-big-swapleft m-icon-white"></i>
+        </a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+            <i class="m-icon-big-swapright m-icon-white"></i>
+        </a>
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < Model.DiretoriosImagens.Count; i++)
+            {
+                <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+
+            }
+        </ol>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
+    </div>
+</div>
+
 
 
 @section  PageLevelPlugins
@@ -300,12 +389,14 @@
     <script src="~/assets/admin/pages/scripts/ui-blockui.js"></script>
     <script src="~/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
     <script src="~/assets/admin/pages/scripts/ui-bootstrap-growl.js"></script>
+
+    <!-- MODAL -->
+    <script src="~/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+    <script src="~/assets/admin/pages/scripts/ui-extended-modals.js"></script>
 }
 
 @section PageLevelScripts {
-    <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
-    <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
-    <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="~/assets/admin/pages/scripts/profile.js" type="text/javascript"></script>
 
     <script src="~/assets/admin/pages/scripts/components-form-tools.js"></script>
@@ -322,11 +413,6 @@
             ComponentsFormTools.init();
             //ComponentsDropdowns.init();
             UIBlockUI.init();
-        });
-    </script>
-    <script src="~/Scripts/Specifics/Perfil.js"></script>
-    <script>
-        $(document).ready(function () {
             $("#file").change(function (e) {
                 var img = e.target.files[0];
                 document.getElementById("profilepic").style.display = 'block';
@@ -339,4 +425,5 @@
             });
         });
     </script>
+    <script src="~/Scripts/Specifics/Perfil.js"></script>
 }

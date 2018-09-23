@@ -92,8 +92,6 @@
 <!--pessoas encontradas -->
 @Html.Partial("CardsUsuarios", Model)
 
-
-
 @section  PageLevelPlugins
 {
     <script type="text/javascript" src="~/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js"></script>
@@ -107,6 +105,8 @@
     <script src="~/assets/admin/pages/scripts/portfolio.js"></script>
     <script src="~/assets/global/plugins/gmaps/gmaps.js"></script>
     <script src="~/assets/global/plugins/gmaps/gmaps.min.js"></script>
+    <script src="~/Scripts/Specifics/coordenadas.js"></script>
+    <script src="~/Scripts/Specifics/modalDosCards.js"></script>
 }
 
 @section JqueryFinal{
@@ -135,69 +135,5 @@
                 $('#seletor-idade-maxima').append(opt);
             }
         }
-
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            }
-        }
-        function showPosition(position) {
-
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            $.ajax({
-                url: '/Conhecer/SalvarCoordenadas',
-                type: 'POST',
-                data: JSON.stringify({ Latitude: lat, Longitude: lon }),
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    //alert(data);
-                },
-                error: function (request, status, error) {
-                    //alert('oh, errors here. The call to the server is not working.')
-                }
-            });
-
-        }
-    </script>
-    <script>
-        $('.ver-perfil-detalhado').click(function () {
-            var $divCard = $(this).parent().parent().parent();
-            var userID = $divCard.attr('id').replace("user", '');
-
-            $.ajax({
-                url: '/Conhecer/GetUser',
-                type: 'POST',
-                data: JSON.stringify({ id: userID }),
-                contentType: "application/json;charset=utf-8",
-                dataType: 'json',
-                success: function (result) {
-                    if (result.sucesso) {
-                        inserirUserNoModal(result);
-                    } else {
-                        // mostrarAlerta(result.mensagem, 'danger');
-                    }
-                },
-                error: function (request, status, error) {
-                    //mostrarAlerta('Algo de errado ocorreu.', 'danger');
-                }
-            });
-            console.log(userID);
-        });
-        function inserirUserNoModal(result) {
-            $('#stack1 #nome').text(result.nome);
-            $('#stack1 #idade').text(result.idade);
-            $('#stack1 #foto').attr('src', result.foto);
-            $('#stack1 #frase-apresentacao').text(result.frase);
-            $('#stack1 #descricao').text(result.descricao);
-
-            $(result.tags).each(function (i) {
-                var iclass = '<i class="fa fa-tags"></i>' + this;
-                $('#stack1 #tags').append(iclass);
-            });
-
-            @* <i class="fa fa-tags"></i>tag *@
-        }
-
     </script>
 }

@@ -16,8 +16,6 @@ namespace BusinessLogicalLayer
 {
     public partial class UsuarioBLL
     {
-        
-
         public BLLResponse<Usuario> LerPorId(int id)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();

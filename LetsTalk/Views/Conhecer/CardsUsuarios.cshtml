@@ -20,19 +20,16 @@
         {
             idade--;  
         }
-
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
         <div id="user@(user.ID)" class="col-md-@cols col-sm-4 col-xs-6 mix mix_all card-usuario" style="display: block;  opacity: 1;">
             <div class="mix-inner">
-                <img class="img-responsive" src="@user.PathFotoPerfil" alt="">
+                <img class="img-responsive foto-usuarios" src="@user.PathFotoPerfil" alt="">
                 <div class="mix-details">
-
                     <h3 class="bold h3-nome-idade" style="margin-top: 10px;">@user.Nome, @idade</h3>
                     <p style="padding: 5px;" class="p-frase">
                         @user.FraseApresentacao
                     </p>
-
                     <ul class="list-inline blog-tags ul-tags">
                         <li>
                             @foreach (string tag in tags)
@@ -41,7 +38,6 @@
                             }
                         </li>
                     </ul>
-
                     <a class="btn default ver-perfil-detalhado botao-ver-perfil" data-target="#stack1" data-toggle="modal">
                         Ver perfil
                     </a>
@@ -56,7 +52,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h2 class="modal-title bold"> <span id="nome"></span>, <span id="idade"></span></h2>
     </div>
-
     <div class="modal-body col-md-12 ">
         <img src="" class="img-responsive" alt="" id="foto">
         <div class="row">
@@ -65,14 +60,12 @@
                     <h4 class="bold" id="frase-apresentacao"></h4>
                 </p>
             </div>
-
             <hr>
             <div class="col-md-12">
                 <p>
                     <h4 id="descricao"></h4>
                 </p>
             </div>
-
             <hr>
             <div class="col-md-12">
                 <ul class="list-inline blog-tags">
@@ -80,7 +73,6 @@
                     </li>
                 </ul>
             </div>
-
         </div>
     </div>
     <div class="modal-footer">
@@ -103,7 +95,6 @@
         <ol class="carousel-indicators" id="indicadores-carousel">
         </ol>
     </div>
-
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>
     </div>

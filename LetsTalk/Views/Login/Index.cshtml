@@ -8,8 +8,8 @@
     <div class="portlet light ">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-share font-green-sharp"></i>
-                <span class="caption-subject font-green-sharp bold uppercase">Login</span>
+                <i class="fa fa-share" style="color: #582c6b"></i>
+                <span class="caption-subject bold uppercase" style="color: #582c6b">Login</span>
             </div>
         </div>
         @{
@@ -30,7 +30,6 @@
             <form action="@Url.Action("Logar", "Login")" method="post" role="form">
                 @Html.AntiForgeryToken()
                 <div class="form-body">
-
                     <div class="form-group">
                         <label>Email</label>
                         <div class="input-group">
@@ -63,7 +62,7 @@
 
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn purple-customizado-fraco default-roxocustomizadofraco btn-circle">Registrar</button>
+                    <a href="@Url.Action("Index","Registrar")" class="btn purple-customizado-fraco default-roxocustomizadofraco btn-circle">Registrar</a>
                     <button id="botao" type="submit" class="btn purple-customizado default-roxocustomizado btn-circle pull-right">
                         Entrar &thinsp;
                         <i class="icon-login"></i>

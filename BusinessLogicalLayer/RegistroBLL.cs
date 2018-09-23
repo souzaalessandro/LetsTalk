@@ -28,6 +28,7 @@ namespace BusinessLogicalLayer
 
             using (LTContext ctx = new LTContext())
             {
+                item.PathFotoPerfil = "/UserImages/DefaultCropped.png";
                 ctx.Usuarios.Add(item);
                 ctx.SaveChanges();
             }

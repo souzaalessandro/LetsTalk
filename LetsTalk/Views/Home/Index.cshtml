@@ -3,11 +3,49 @@
     ViewBag.Title = "Home";
 }
 <img src="~/assets/banner LT.bmp" width="100%" />
-@section JqueryFinal{}
-
+<style>
+    .custom-texto {
+        font-size: 18px;
+        color: black;
+    }
+</style>
 <div class="clearfix margin-top-20"></div>
-<p>
-    Desta maneira, a necessidade de renovação processual prepara-nos para enfrentar situações atípicas decorrentes das condições financeiras e administrativas exigidas. A certificação de metodologias que nos auxiliam a lidar com a expansão dos mercados mundiais não pode mais se dissociar das diretrizes de desenvolvimento para o futuro. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a contínua expansão de nossa atividade é uma das consequências do processo de comunicação como um todo. O cuidado em identificar pontos críticos na estrutura atual da organização faz parte de um processo de gerenciamento de alternativas às soluções ortodoxas. Do mesmo modo, o novo modelo estrutural aqui preconizado exige a precisão e a definição de todos os recursos funcionais envolvidos.
-
-    Neste sentido, a valorização de fatores subjetivos auxilia a preparação e a composição do retorno esperado a longo prazo. Não obstante, a constante divulgação das informações facilita a criação do sistema de participação geral. Podemos já vislumbrar o modo pelo qual a consolidação das estruturas obstaculiza a apreciação da importância dos modos de operação convencionais. O empenho em analisar a consulta aos diversos militantes cumpre um papel essencial na formulação dos níveis de motivação departamental.
+<p class="custom-texto">
+    Você gosta de fazer <strong>novas amizades?</strong> Quer conhecer pessoas com gostos em comum aos
+    seus? Adora conversar e fazer teorias sobre o episódio novo da sua série favorita? Então o
+    Let&#39;s Talk é perfeito para você!
 </p>
+<h2 class="bold" style="color:black; text-align:center">Como funciona?</h2>
+<div class="clearfix margin-top-20"></div>
+<p class="custom-texto">
+    No <strong>Let&#39;s Talk</strong> é possível descobrir pessoas com interesses e gostos em comum aos seus. Você
+    só precisa se cadastrar para começar a usar! Faça o seu perfil informando sua data de
+    nascimento, nome, sobrenome, email e gênero.
+</p>
+<p class="custom-texto">
+    Escolha uma foto de perfil e tags de interesses, como aquela série que você não perde um
+    episódio ou até mesmo uma banda que não sai da sua playlist. Mas não precisa se limitar! As
+    tags também servem para mostrar interesses por diversos assuntos.
+</p>
+<p class="custom-texto">
+    Além disso, você pode escolher se quer compartilhar a sua localização e ter a chance de
+    conhecer pessoas que estão ainda mais perto de você.
+</p>
+
+<p class="custom-texto">
+    Gostou?
+</p>
+<p class="custom-texto">
+    <a href="@Url.Action("Index","Registrar")" class="bold" style="color:black">Cadastre-se</a> agora mesmo e comece a usar!
+</p>
+
+@section JqueryFinal{
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features\
+        }
+    </script>
+}

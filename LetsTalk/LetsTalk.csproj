@@ -4089,10 +4089,6 @@
       <Project>{051d02de-6dc2-4811-8117-da10d4db0c99}</Project>
       <Name>BusinessLogicalLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj">
-      <Project>{15EF7C40-C51F-427A-BFF9-401794A6D1CB}</Project>
-      <Name>DataAccessObject</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{7b29194d-7577-412c-a5c3-116c20e4d0ab}</Project>
       <Name>Entity</Name>

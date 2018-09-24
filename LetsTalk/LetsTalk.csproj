@@ -588,6 +588,7 @@
     <Content Include="assets\admin\pages\scripts\ui-toastr.js" />
     <Content Include="assets\admin\pages\scripts\ui-tree.js" />
     <Content Include="assets\banner LT.bmp" />
+    <Content Include="assets\erros\erro404.png" />
     <Content Include="assets\frontend\layout\css\custom.css" />
     <Content Include="assets\frontend\layout\css\style-responsive.css" />
     <Content Include="assets\frontend\layout\css\style.css" />

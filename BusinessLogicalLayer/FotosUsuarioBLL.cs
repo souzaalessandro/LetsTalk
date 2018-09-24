@@ -13,6 +13,8 @@ namespace BusinessLogicalLayer
 {
     public class FotosUsuarioBLL
     {
+        private const string PATH_IMAGEM_PADRAO = "/UserImages/DefaultCropped.png";
+        //fazer trocar a foto direito
         public BLLResponse<Usuario> AtualizarFotosAlbum(int id, string pathRelativo)
         {
             BLLResponse<Usuario> response = new BLLResponse<Usuario>();
@@ -54,7 +56,10 @@ namespace BusinessLogicalLayer
                     stream.Write(imagem, 0, imagem.Length);
                     stream.Flush();
 
-                    ApagarProfilePicAnterior(folder, user.PathFotoPerfil);
+                    if (user.PathFotoPerfil != PATH_IMAGEM_PADRAO)
+                    {
+                        ApagarProfilePicAnterior(folder, user.PathFotoPerfil);
+                    }
 
                     user.PathFotoPerfil = Path.Combine(pathRelativo, nomeFoto);
                     ctx.SaveChanges();

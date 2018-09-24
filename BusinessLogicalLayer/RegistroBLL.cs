@@ -13,6 +13,7 @@ namespace BusinessLogicalLayer
 {
     public class RegistroBLL
     {
+
         public BLLResponse<Usuario> Registrar(Usuario item, string senhaRepetida)
         {
             List<ErrorField> erros = ValidarUsuarioParaRegistro(item, senhaRepetida);

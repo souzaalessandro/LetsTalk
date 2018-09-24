@@ -31,5 +31,10 @@ namespace LetsTalk.Controllers
 
             return View();
         }
+
+        public ActionResult teste404()
+        {
+            return View();
+        }
     }
 }

@@ -45,7 +45,8 @@ namespace LetsTalk.Controllers
         {
             Usuario user = (Usuario)TempData["NovoUser"];
             CriarCookie(false, new BLLResponse<Usuario>() { Data = user });
-            return RedirectToAction("Index", "Conhecer");
+            TempData["AcabouDeRegistrar"] = true;
+            return RedirectToAction("Index", "Perfil");
         }
 
         [Authorize]

@@ -33,6 +33,13 @@
         }
     </style>
 }
+@if (ViewData["AcabouDeRegistrar"] != null)
+{
+    <div class="alert alert-success">
+        <button class="close" data-close="alert"></button>
+        <span style="font-size: 18px; font-weight:bold;">Seja bem vindo! Para aparecer nas pesquisas dos outros usuários e encontrá-los, por favor preencha tags de seu interesse, como bandas, comidas, filmes, dentre outros. Uma breve frase de apresentação e descrição mais detalhada sobre você também ajudarão a despertar interesse das outras pessoas em te conhecer! Ah, uma foto de perfil e algumas no álbum também é bacana.</span>
+    </div>
+}
 <!-- BEGIN PAGE CONTENT INNER -->
 <div class="row margin-top-10">
     <div class="col-md-12">
@@ -303,14 +310,14 @@
                 if (ativo)
                 {
                     <div class="item active">
-                        <img src="@diretorio.PathRelativo" class="img-responsive" width="100%"/>
+                        <img src="@diretorio.PathRelativo" class="img-responsive" width="100%" />
                     </div>
                     ativo = false;
                 }
                 else
                 {
                     <div class="item">
-                        <img src="@diretorio.PathRelativo" class="img-responsive" width="100%"/>
+                        <img src="@diretorio.PathRelativo" class="img-responsive" width="100%" />
                     </div>
                 }
             }

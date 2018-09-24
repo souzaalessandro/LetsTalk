@@ -18,6 +18,10 @@ namespace LetsTalk.Controllers
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             BLLResponse<Usuario> response = new UsuarioBLL().LerPorId(user.ID);
+            if (TempData["AcabouDeRegistrar"] != null)
+            {
+                ViewData["AcabouDeRegistrar"] = true;
+            }
             return View(response.Data);
         }
 

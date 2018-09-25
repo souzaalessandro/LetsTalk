@@ -4231,9 +4231,9 @@ Customized Bootstrap Pagination
 }
 .pagination .active > a,
 .pagination .active > a:hover {
-  background: #eee;
+  background: #8e5fa2;
   border-color: #dddddd;
-  color: #333;
+  color: #fff;
 }
 
 /***

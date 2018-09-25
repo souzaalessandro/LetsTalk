@@ -16,11 +16,13 @@ namespace LetsTalk.Controllers
     public class ConhecerController : Controller
     {
         // GET: Conhecer
-        public ActionResult Index(int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
+        public ActionResult Index
+            (int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
         {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             List<Usuario> users = new FiltroConhecerBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
 
+            int numeroPaginas = GetNumeroPaginas(qntPorPagina, users);
             int skip = (pagina - 1) * qntPorPagina;
             users = users.Skip(skip).Take(qntPorPagina).ToList();
 
@@ -32,10 +34,17 @@ namespace LetsTalk.Controllers
                 QtdPessoasPagina = qntPorPagina,
                 IdadeMinima = idadeMin,
                 IdadeMaxima = idadeMax,
-                NumeroColunas = colunas
+                NumeroColunas = colunas,
+                NumeroPaginas = numeroPaginas
             };
 
             return View(modelo);
+        }
+
+        private int GetNumeroPaginas(int qntPorPagina, List<Usuario> users)
+        {
+            decimal divisao = (decimal)users.Count / qntPorPagina;
+            return (int)Math.Ceiling(divisao);
         }
 
         [HttpPost]

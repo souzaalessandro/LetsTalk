@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Perfil";
 
     LetsTalk.Models.MvcUser user = (LetsTalk.Models.MvcUser)HttpContext.Current.User;
 
@@ -54,7 +54,7 @@
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
+                    <div class="profile-usertitle-name" style="color: #582c6b">
                         @Model.Nome
                     </div>
                 </div>
@@ -63,8 +63,8 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li>
-                            <a data-target="#stack1" data-toggle="modal">
-                                <i class="icon-home"></i>
+                            <a data-target="#stack1" data-toggle="modal" style="color: #582c6b" >
+                                <i class="icon-home"  style="color: #582c6b"></i>
                                 Perfil
                             </a>
                         </li>
@@ -107,7 +107,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label class="control-label">Frase de Apresentação</label>
-                                            <input id="frase-apresentacao" maxlength="100" type="text" placeholder="Informe uma breve descrição" class="form-control"
+                                            <input id="frase-apresentacao" maxlength="100" type="text" placeholder="Informe uma breve frase" class="form-control"
                                                    name="userVM.FraseApresentacao" value="@Model.FraseApresentacao">
                                         </div>
 

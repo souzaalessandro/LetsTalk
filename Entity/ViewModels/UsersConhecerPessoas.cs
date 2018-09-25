@@ -19,5 +19,6 @@ namespace Entity.ViewModels
         public int IdadeMinima { get; set; }
         public int IdadeMaxima { get; set; }
         public int NumeroColunas { get; set; }
+        public int NumeroPaginas { get; set; }
     }
 }

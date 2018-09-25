@@ -92,6 +92,72 @@
 
 @Html.Partial("CardsUsuarios", Model)
 
+<table class="table">
+    <tr>
+        <td></td>
+        <td class="text-center">
+            <ul class="pagination">
+                @if (Model.PaginaAtual != 1)
+                {
+                    <li>
+                        <a style="font-size: 15px; font-weight:700" href="@Url.Action("Index","Conhecer",
+                    new {
+                        pagina = Model.PaginaAtual-1,
+                        tagsComum = Model.NumeroTagsComum,
+                        idadeMin = Model.IdadeMinima,
+                        idadeMax = Model.IdadeMaxima,
+                        colunas = Model.NumeroColunas,
+                        qntPorPagina = Model.QtdPessoasPagina
+                    })">
+                            <i class="fa fa-angle-left" style="font-size:17px"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (int i = 0; i <= Model.NumeroPaginas; i++)
+                {
+                    if (i <= 0 || i > Model.PaginaAtual + 4 || i < Model.PaginaAtual - 4)
+                    {
+                        continue;
+                    }
+
+                    string ativo = i == Model.PaginaAtual ? "active" : null;
+                    <li class="@ativo">
+                        <a style="font-size: 15px; font-weight:700" href="@Url.Action("Index","Conhecer",
+                    new {
+                        pagina = i,
+                        tagsComum = Model.NumeroTagsComum,
+                        idadeMin = Model.IdadeMinima,
+                        idadeMax = Model.IdadeMaxima,
+                        colunas = Model.NumeroColunas,
+                        qntPorPagina = Model.QtdPessoasPagina
+                    })">
+                            @i.ToString()
+                        </a>
+                    </li>
+                }
+                @if (Model.PaginaAtual != Model.NumeroPaginas)
+                {
+                    <li>
+                        <a style="font-size: 15px; font-weight:700" href="@Url.Action("Index","Conhecer",
+                    new {
+                        pagina = Model.PaginaAtual+1,
+                        tagsComum = Model.NumeroTagsComum,
+                        idadeMin = Model.IdadeMinima,
+                        idadeMax = Model.IdadeMaxima,
+                        colunas = Model.NumeroColunas,
+                        qntPorPagina = Model.QtdPessoasPagina
+                    })">
+                            <i class="fa fa-angle-right" style="font-size:17px"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+</table>
+
 @section  PageLevelPlugins
 {
     <script type="text/javascript" src="~/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js"></script>
@@ -129,7 +195,6 @@
 
         function setFonts() {
             var divWidth = $('.card-usuario').width();
-            var divHeight = $('.card-usuario').height();
             $('.h3-nome-idade').css('fontSize', divWidth / 13);
             $('.p-frase').css('fontSize', divWidth / 18);
             $('.ul-tags').css('fontSize', divWidth / 20);

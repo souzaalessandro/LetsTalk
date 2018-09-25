@@ -21,7 +21,7 @@ namespace LetsTalk.Controllers
             return View();
         }
 
-        public  ActionResult Teste(string imgbase64)
+        public ActionResult Teste(string imgbase64)
         {
             byte[] bytes = Convert.FromBase64String(imgbase64.Split(',')[1]);
             FileStream stream = new FileStream(Server.MapPath("~/UserImages/" + Guid.NewGuid() + ".png"), FileMode.Create);
@@ -36,5 +36,6 @@ namespace LetsTalk.Controllers
         {
             return View();
         }
+
     }
 }

@@ -4,6 +4,7 @@
 @if (Model.Usuarios.Count == 0)
 {
     <h2 align="center">Não foram encontradas pessoas compatíveis com seu filtro :/</h2>
+    <h3 align="center">Tente cadastrar mais tags em seu perfil ou</h3>
 }
 
 @{
@@ -18,7 +19,7 @@
         int idade = hoje.Year - nasc.Year;
         if (hoje.Month < nasc.Month || ((hoje.Month == nasc.Month) && (hoje.Day < nasc.Day)))
         {
-            idade--;  
+            idade--;
         }
         string[] tags = String.IsNullOrWhiteSpace(user.Tags) ? new string[1] : user.Tags.Split(',');
 
@@ -92,8 +93,7 @@
         <a class="carousel-control right" href="#myCarousel" data-slide="next">
             <i class="m-icon-big-swapright m-icon-white"></i>
         </a>
-        <ol class="carousel-indicators" id="indicadores-carousel">
-        </ol>
+        <ol class="carousel-indicators" id="indicadores-carousel"></ol>
     </div>
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-default">Voltar</button>

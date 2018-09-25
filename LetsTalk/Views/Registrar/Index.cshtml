@@ -102,7 +102,7 @@
 
                     <div class="form-group">
                         <label>Senha</label>
-                        <input value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha, que deve conter pelo menos 4 caracteres" name="usuario.Senha">
+                        <input value="@Model.Senha" type="password" class="form-control" placeholder="Digite sua senha, que deve conter pelo menos 5 caracteres" name="usuario.Senha">
                         @if (ViewData.ModelState.ContainsKey("Senha"))
                         {
                             <span class="font-red-thunderbird"> @ViewData.ModelState["Senha"].Errors[0].ErrorMessage</span>

@@ -28,13 +28,17 @@ namespace LetsTalk.Controllers
         [HttpPost]
         public ActionResult SalvarFoto(string imgbase64)
         {
+            if (!String.IsNullOrWhiteSpace(imgbase64))
+            {
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             string relativo = "";
             string folder = GetUserPicsFolder(user, out relativo);
             byte[] imagem = Convert.FromBase64String(imgbase64.Split(',')[1]);
             var result = new FotosUsuarioBLL().UpdateProfilePic(user.ID, folder, imagem, relativo);
 
+            }
             return RedirectToAction("Index");
+
         }
 
         [HttpPost]

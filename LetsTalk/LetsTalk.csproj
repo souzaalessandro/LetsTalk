@@ -147,11 +147,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ConhecerController.cs" />
+    <Compile Include="Controllers\ErrosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\RegistrarController.cs" />
-    <Compile Include="Controllers\TesteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -589,6 +589,7 @@
     <Content Include="assets\admin\pages\scripts\ui-tree.js" />
     <Content Include="assets\banner LT.bmp" />
     <Content Include="assets\erros\erro404.png" />
+    <Content Include="assets\erros\erro404v2.jpg" />
     <Content Include="assets\frontend\layout\css\custom.css" />
     <Content Include="assets\frontend\layout\css\style-responsive.css" />
     <Content Include="assets\frontend\layout\css\style.css" />
@@ -4045,7 +4046,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Teste\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_BodyHeader.cshtml" />
     <Content Include="Views\Registrar\Index.cshtml" />
@@ -4065,7 +4065,6 @@
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Views\Teste\TesteNovo.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -4075,7 +4074,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Teste\teste404.cshtml" />
+    <Content Include="Views\Erros\ErroNotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

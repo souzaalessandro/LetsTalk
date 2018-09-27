@@ -19,6 +19,14 @@ namespace LetsTalk.Controllers
         public ActionResult Index
             (int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
         {
+            if (pagina == 0)
+            {
+                pagina = 1;
+            }
+            //if (tagsComum == 0)
+            //{
+            //    tagsComum = 1;
+            //}
             MvcUser user = (MvcUser)System.Web.HttpContext.Current.User;
             List<Usuario> users = new FiltroConhecerBLL().GetUsersComFiltro(idadeMin, idadeMax, tagsComum, user.ID);
 

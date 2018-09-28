@@ -1,10 +1,8 @@
 ﻿@{
     ViewBag.Title = "Login";
 }
-
 @model Entity.Usuario
 <div class="col-md-offset-3 col-md-6" style="margin-top: 10%">
-    <!-- BEGIN SAMPLE FORM PORTLET-->
     <div class="portlet light ">
         <div class="portlet-title">
             <div class="caption">
@@ -15,7 +13,6 @@
         @{
             bool isInvalid = ViewData.ModelState.ContainsKey("Invalido");
             string mensagem = ViewData?.ModelState["Invalido"]?.Errors[0]?.ErrorMessage;
-
             if (isInvalid)
             {
                 <div class="alert alert-danger">
@@ -43,7 +40,6 @@
                             }
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>Senha</label>
                         <div class="input-group">
@@ -57,9 +53,7 @@
                             }
                         </div>
                     </div>
-
                     <label><input id="lembrar-me" type="checkbox" name="lembrar">Lembrar-me</label>
-
                 </div>
                 <div class="form-actions">
                     <a href="@Url.Action("Index","Registrar")" class="btn purple-customizado-fraco default-roxocustomizadofraco btn-circle">Registrar</a>
@@ -72,7 +66,6 @@
         </div>
     </div>
 </div>
-
 @section JqueryFinal{
     <script>
         document.getElementById("botao").addEventListener("click", PegarBoolDoLembrarme);
@@ -83,15 +76,11 @@
             }
         }
     </script>
-
     <script>
         jQuery(document).ready(function () {
-            // initiate layout and plugins
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features
+            Metronic.init(); 
+            Layout.init(); 
+            Demo.init(); 
         });
     </script>
 }
-@*assets/admin/layout3/css/themes/default.css*@
-@*assets/global/css/components-rounded.css*@

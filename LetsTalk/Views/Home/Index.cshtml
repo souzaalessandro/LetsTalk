@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Home";
 }
 <img src="~/assets/banner LT.bmp" width="100%" />
@@ -31,21 +30,18 @@
     Além disso, você pode escolher se quer compartilhar a sua localização e ter a chance de
     conhecer pessoas que estão ainda mais perto de você.
 </p>
-
 <p class="custom-texto">
     Gostou?
 </p>
 <p class="custom-texto">
     <a href="@Url.Action("Index","Registrar")" class="bold" style="color:black">Cadastre-se</a> agora mesmo e comece a usar!
 </p>
-
 @section JqueryFinal{
     <script>
         jQuery(document).ready(function () {
-            // initiate layout and plugins
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features\
+            Metronic.init();
+            Layout.init();
+            Demo.init();
         }
     </script>
 }

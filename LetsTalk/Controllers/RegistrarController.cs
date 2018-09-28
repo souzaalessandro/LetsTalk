@@ -24,7 +24,6 @@ namespace LetsTalk.Controllers
             return View(user);
         }
 
-
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Registrar(Usuario usuario, string senha, string senhaRepetida)
         {

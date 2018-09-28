@@ -15,7 +15,6 @@ namespace LetsTalk.Controllers
     [Authorize]
     public class ConhecerController : Controller
     {
-        // GET: Conhecer
         public ActionResult Index
             (int pagina = 1, int idadeMin = 18, int idadeMax = 80, int tagsComum = 1, int colunas = 4, int qntPorPagina = 15)
         {

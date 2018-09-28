@@ -1,23 +1,17 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Encontrar Pessoas";
 }
-
 @using Entity.ViewModels
 @model UsersConhecerPessoas
-
 @section PageLevelPluginStyles{
     <link href="~/assets/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-
     <link href="~/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
-
     <link href="~/assets/admin/pages/css/news.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
 }
-
 <div class="portlet solid purple">
     <div class="portlet-title">
         <div class="caption">
@@ -43,7 +37,6 @@
                             }
                         </select>
                     </div>
-
                     <div class="form-group col-md-2">
                         <label> Idade mínima</label>
                         <select id="seletor-idade-minima" class="form-control" name="idadeMin">
@@ -56,7 +49,6 @@
                         <label>Idade máxima</label>
                         <select id="seletor-idade-maxima" class="form-control" name="idadeMax"></select>
                     </div>
-
                     <div class="form-group col-md-3">
                         <label>Resultados por página</label>
                         <select class="form-control" name="qntPorPagina">
@@ -67,7 +59,6 @@
                             }
                         </select>
                     </div>
-
                     <div class="form-group col-md-3">
                         <label>Colunas</label>
                         <select class="form-control" name="colunas">
@@ -86,12 +77,9 @@
                 </div>
             </div>
         }
-
     </div>
 </div>
-
 @Html.Partial("CardsUsuarios", Model)
-
 @if (Model.Usuarios.Count != 0)
 {
     <table class="table">
@@ -114,14 +102,12 @@
                             </a>
                         </li>
                     }
-
                     @for (int i = 0; i <= Model.NumeroPaginas; i++)
                     {
                         if (i <= 0 || i > Model.PaginaAtual + 4 || i < Model.PaginaAtual - 4)
                         {
                             continue;
                         }
-
                         string ativo = i == Model.PaginaAtual ? "active" : null;
                         <li class="@ativo">
                             <a style="font-size: 15px; font-weight:700" href="@Url.Action("Index","Conhecer",
@@ -158,16 +144,13 @@
         </tr>
     </table>
 }
-
 @section  PageLevelPlugins
 {
     <script type="text/javascript" src="~/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-
     <script src="~/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 }
-
 @section PageLevelScripts {
     <script src="~/assets/admin/pages/scripts/portfolio.js"></script>
     <script src="~/assets/global/plugins/gmaps/gmaps.js"></script>
@@ -176,13 +159,12 @@
     <script src="~/Scripts/Specifics/modalDosCards.js"></script>
     <script src="~/Scripts/Specifics/Conhecer.js"></script>
 }
-
 @section JqueryFinal{
     <script>
         jQuery(document).ready(function () {
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features  // set current page
+            Metronic.init();
+            Layout.init(); 
+            Demo.init();
             Portfolio.init();
             getLocation();
             carregarIdadesMaximas();
